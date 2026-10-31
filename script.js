@@ -253,8 +253,12 @@ function startDragging(element, event, isNew = false) {
         element.style.position = "absolute";
         element.style.transform = `rotate(${element.dataset.rotation || "0"}deg)`;
     }
-    const initialLeft = isNew || fromTrash ? event.clientX - 80 : parseFloat(element.style.left) || 0;
-    const initialTop = isNew || fromTrash ? event.clientY - 70 : parseFloat(element.style.top) || 0;
+    const initialLeft = isNew || fromTrash
+        ? event.clientX - element.offsetWidth / 2
+        : parseFloat(element.style.left) || 0;
+    const initialTop = isNew || fromTrash
+        ? event.clientY - element.offsetHeight / 2
+        : parseFloat(element.style.top) || 0;
     if (isNew || fromTrash) {
         element.style.left = `${initialLeft}px`;
         element.style.top = `${initialTop}px`;
