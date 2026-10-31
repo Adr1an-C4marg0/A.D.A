@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Caveat:wght@600&family=Special+Elite&family=Rock+Salt&family=Shadows+Into+Light&family=Playfair+Display:ital,wght@0,700;1,400&family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    background: radial-gradient(circle, rgba(0,0,0,0.1) 20%, rgba(0,0,0,0.85) 100%), 
+                url('assets/img/textures/wood-bg.jpg') center/cover no-repeat;
+    background-color: #3b2818;
+    overflow: hidden;
+    user-select: none;
+    font-family: 'Roboto', sans-serif;
+}
+
+#strings-layer { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 5; }
+
+.board-item { 
+    position: absolute; 
+    box-shadow: -10px 15px 20px rgba(0,0,0,0.55); 
+    cursor: grab; 
+    transition: transform 0.1s, box-shadow 0.1s; 
+}
+
+.pin { width: 14px; height: 14px; background: radial-gradient(circle at 30% 30%, #e11d48, #881337); border-radius: 50%; position: absolute; top: -7px; left: 50%; transform: translateX(-50%); box-shadow: -2px 4px 4px rgba(0,0,0,0.6); cursor: pointer; z-index: 20; pointer-events: all; transition: transform 0.2s; }
+.pin:hover { transform: translateX(-50%) scale(1.3); }
+
+/* Bloco de Post-its Limpo */
+.postit-pad {
+    position: absolute;
+    left: 40px;
+    bottom: 40px;
+    width: 140px;
+    height: 140px;
+    background: #fef08a;
+    border-left: 8px solid #ca8a04; 
+    box-shadow: 2px 2px 0 #fde047, 4px 4px 0 #facc15, 6px 6px 0 #eab308, -8px 12px 20px rgba(0,0,0,0.7);
+    transform: rotate(-3deg);
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.1s;
+}
+.postit-pad:active {
+    transform: rotate(-3deg) scale(0.98);
+}
+
+.photo { background: #fdfbf7; padding: 12px 12px 35px 12px; width: 130px; border: 1px solid #ddd; }
+.photo img { width: 100%; height: 110px; object-fit: cover; border: 1px solid #aaa; pointer-events: none; filter: sepia(0.3) contrast(1.1); }
+
+.post-it { width: 160px; min-height: 140px; padding: 25px 15px 15px 15px; position: relative;}
+.drag-tape { position: absolute; top: -8px; left: 50%; transform: translateX(-50%); width: 45px; height: 20px; background: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 1px 2px rgba(0,0,0,0.1); cursor: grab; z-index: 15; backdrop-filter: blur(2px); }
+.post-it [contenteditable] { outline: none; cursor: text; min-height: 80px;}
+
+/* Placeholder Automático para as notas do jogador */
+.post-it [contenteditable]:empty::before {
+    content: attr(data-placeholder);
+    color: rgba(0,0,0,0.4);
+    pointer-events: none;
+    display: block;
+}
+
+.note-player { background: #fef08a; font-family: 'Permanent Marker', cursive; font-size: 1rem; color: #1e3a8a; }
+.note-helper { background: #bae6fd; font-family: 'Caveat', cursive; font-size: 1.3rem; color: #082f49; }
+.note-larper { background: #bbf7d0; font-family: 'Rock Salt', cursive; font-size: 0.7rem; color: #064e3b; line-height: 1.6;}
+
+/* Assassino Sutil: A Ata Oficial da A.D.A. */
+.note-killer { 
+    background: #fdfdfc; 
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 500; 
+    font-size: 0.75rem; 
+    color: #171717; 
+    padding: 50px 15px 15px 15px; 
+    box-shadow: -5px 8px 10px rgba(0,0,0,0.4); 
+    border: 1px solid #d1d5db;
+    border-radius: 2px;
+    text-align: justify;
+    line-height: 1.5;
+}
+
+.note-killer::before { 
+    content: "ASSOCIAÇÃO DE DETETIVES ANÔNIMOS\a Ata de Registro Interno"; 
+    white-space: pre;
+    position: absolute; 
+    top: 12px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    text-align: center;
+    font-size: 0.55rem; 
+    color: #0f172a; 
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #0f172a;
+    padding-bottom: 5px;
+    line-height: 1.3;
+    text-transform: uppercase;
+}
+
+/* Adiciona um carimbo virtual ou linha de rodapé elegante na ata */
+.note-killer::after {
+    content: "Uso Exclusivo - Diretoria";
+    display: block;
+    margin-top: 10px;
+    text-align: right;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.5rem;
+    color: #64748b;
+    border-top: 1px dashed #cbd5e1;
+    padding-top: 3px;
+}
+
+.newspaper { background: #efece5; width: 300px; padding: 15px; border: 1px solid #bba; color: #222; font-family: 'Playfair Display', serif; box-shadow: -6px 10px 15px rgba(0,0,0,0.6); }
+.news-header { text-align: center; font-weight: bold; border-bottom: 3px double #333; padding-bottom: 5px; margin-bottom: 12px; font-size: 1.2rem; text-transform: uppercase; }
+.news-title { font-weight: bold; font-size: 1.3rem; text-align: center; line-height: 1.1; margin-bottom: 10px; }
+.news-body { font-size: 0.85rem; font-family: 'Roboto', sans-serif; text-align: justify; line-height: 1.4; color: #333;}
+
+.clipboard { display: none; background: #d1bfae; width: 260px; padding: 25px 20px 20px 20px; border-radius: 5px; box-shadow: -8px 12px 20px rgba(0,0,0,0.6); font-family: 'Special Elite', monospace; position: relative; border: 1px solid #a38d7a;}
+.clipboard-clip { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 25px; background: #6b7280; border-radius: 5px; border: 2px solid #4b5563; box-shadow: 0 4px 6px rgba(0,0,0,0.3);}
+.clipboard-paper { background: #f9f9f9; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: 1px solid #ddd;}
+
+.dossier { background: #fdf8eb; border: 1px solid #dcd3be; width: 250px; padding: 25px 15px 15px 15px; font-family: 'Special Elite', monospace; font-size: 0.85rem; line-height: 1.3; color: #1c1917;}
+.dossier-stamp { border: 3px solid; transform: rotate(-8deg); display: inline-block; font-weight: bold; padding: 2px 8px; margin: 10px 0; text-transform: uppercase; font-size: 0.75rem; }
+.dossier-success { border-color: #15803d; color: #15803d; }
+.dossier-fail { border-color: #b91c1c; color: #b91c1c; }
+
+.trash-bin-img {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    width: 90px;
+    height: auto;
+    cursor: pointer;
+    z-index: 40;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.2s;
+    filter: drop-shadow(-8px 12px 6px rgba(0,0,0,0.7));
+}
+.trash-bin-img:hover { filter: brightness(1.2) drop-shadow(-10px 15px 8px rgba(0,0,0,0.8)); }
+
+#trash-panel-content .board-item {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: scale(0.7) !important;
+    margin: -15px; 
+    box-shadow: 2px 4px 8px rgba(0,0,0,0.5);
+    z-index: 1 !important;
+}
+
+.trash-eat { animation: shrinkToTrash 0.4s ease-in forwards; pointer-events: none; }
+@keyframes shrinkToTrash { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0.1) translate(0, 100px); opacity: 0; } }
+
+#night-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #030303; opacity: 0; pointer-events: none; z-index: 999999; transition: opacity 2s ease-in-out; }
+.lights-out { opacity: 1 !important; pointer-events: all !important; }

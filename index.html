@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesa da A.D.A. - O Caso 404</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="h-screen w-screen relative">
+
+    <div id="night-overlay"></div>
+    <svg id="strings-layer"></svg>
+
+    <!-- LIXEIRA FÍSICA -->
+    <img id="trash-bin" src="assets/img/textures/trash.png" alt="Lixeira" class="trash-bin-img" title="Arquivos descartados">
+
+    <!-- PAINEL DE ARQUIVOS DESCARTADOS (Translúcido, Escuro e sem 'X') -->
+    <div id="trash-panel" class="hidden absolute bottom-28 right-6 w-96 max-h-[500px] bg-black/80 border border-gray-700/50 rounded-lg p-5 overflow-y-auto shadow-2xl backdrop-blur-md" style="z-index: 99999;">
+        <h3 class="text-gray-300 font-bold mb-4 border-b border-gray-600/50 pb-2 text-center font-['Roboto'] tracking-widest text-sm">
+            REGISTRO DE DESCARTE
+        </h3>
+        <p id="trash-empty-msg" class="text-gray-500 text-xs text-center mt-10 mb-10 font-['Special_Elite']">A lixeira está vazia.</p>
+        <div id="trash-panel-content" class="flex flex-wrap gap-4 justify-center pb-4"></div>
+    </div>
+
+    <!-- UI Inferior (Apenas o botão Dormir restou) -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-50">
+        <button id="btn-end-day" class="bg-slate-900/90 hover:bg-slate-800 text-gray-300 font-bold py-2 px-8 rounded shadow-2xl border border-slate-700 transition-colors tracking-widest text-sm backdrop-blur-sm">ENCERRAR DIA (<span id="day-counter">1</span>)</button>
+    </div>
+
+    <!-- O BLOCO DE POST-IT FÍSICO NA MESA -->
+    <div id="postit-pad" class="postit-pad" title="Arraste para pegar um post-it"></div>
+
+    <!-- Restante da Mesa... -->
+    <div id="daily-news" class="board-item newspaper" style="left: 40px; top: 40px; transform: rotate(-1deg); z-index: 10;">
+        <div class="news-header">O CORREIO DIÁRIO</div>
+        <div id="news-title" class="news-title">CORPO ENCONTRADO NO BECO DO CORVO</div>
+        <div id="news-body" class="news-body">Na madrugada de ontem, a polícia isolou a viela atrás do bar 'O Corvo'...</div>
+    </div>
+
+    <div id="request-form" class="board-item clipboard" style="left: 40px; top: 380px; transform: rotate(2deg); z-index: 10;">
+        <div class="clipboard-clip"></div>
+        <div class="clipboard-paper">
+            <h3 class="text-center font-bold border-b border-black mb-3 text-sm">REQUISIÇÃO DE ARQUIVOS</h3>
+            <p class="text-xs mb-3 text-gray-700">Insira o nome do Alvo para solicitar o background.</p>
+            <input type="text" id="req-input" class="w-full bg-transparent border-b-2 border-gray-400 outline-none text-sm mb-3 font-bold text-blue-900" placeholder="Nome do alvo...">
+            <button id="btn-request" class="w-full bg-gray-800 text-white text-xs py-2 hover:bg-gray-700">CARIMBAR SOLICITAÇÃO</button>
+            <p id="req-status" class="text-xs text-red-600 mt-2 font-bold text-center h-4"></p>
+        </div>
+    </div>
+
+    <div id="suspect1" class="board-item photo" style="left: 400px; top: 150px; transform: rotate(3deg); z-index: 10;">
+        <div class="pin"></div>
+        <img src="assets/img/suspects/silva.jpg" alt="Foto Homem">
+        <div class="text-center font-bold mt-2 text-sm text-black">Sr. Silva</div>
+    </div>
+
+    <div id="suspect2" class="board-item photo" style="left: 700px; top: 180px; transform: rotate(-2deg); z-index: 10;">
+        <div class="pin"></div>
+        <img src="assets/img/suspects/ana.jpg" alt="Foto Mulher">
+        <div class="text-center font-bold mt-2 text-sm text-black">Ana C.</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
