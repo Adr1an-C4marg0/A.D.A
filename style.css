@@ -64,6 +64,7 @@ button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
     cursor: grab; 
     transition: transform 0.1s, box-shadow 0.1s; 
 }
+.board-item img { pointer-events: none; user-select: none; }
 
 .pin { width: 14px; height: 14px; background: radial-gradient(circle at 30% 30%, #e11d48, #881337); border-radius: 50%; position: absolute; top: -7px; left: 50%; transform: translateX(-50%); box-shadow: -2px 4px 4px rgba(0,0,0,0.6); cursor: pointer; z-index: 20; pointer-events: all; transition: transform 0.2s; }
 .pin:hover { transform: translateX(-50%) scale(1.3); }

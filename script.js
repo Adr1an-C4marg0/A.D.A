@@ -182,6 +182,7 @@ function createNote(roleKey, content, x, y, isDossier = false, savedId = null) {
         const image = document.createElement("img");
         image.src = "assets/img/ada-welcome.svg";
         image.alt = "Emblema da Associação de Detetives Anônimos";
+        image.draggable = false;
         const heading = document.createElement("h2");
         heading.textContent = "ASSOCIAÇÃO DE DETETIVES";
         const subheading = document.createElement("h3");
@@ -319,6 +320,7 @@ function makeDraggable(element) {
     element.addEventListener("mousedown", (event) => {
         if (event.target.hasAttribute("contenteditable") || event.target.classList.contains("pin") ||
             ["INPUT", "BUTTON"].includes(event.target.tagName)) return;
+        event.preventDefault();
         startDragging(element, event);
     });
     element.addEventListener("keydown", (event) => {
