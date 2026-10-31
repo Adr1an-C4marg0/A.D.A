@@ -255,10 +255,10 @@ function startDragging(element, event, isNew = false) {
     }
     const initialLeft = isNew || fromTrash ? event.clientX - 80 : parseFloat(element.style.left) || 0;
     const initialTop = isNew || fromTrash ? event.clientY - 70 : parseFloat(element.style.top) || 0;
-    if (isNew) {
+    if (isNew || fromTrash) {
         element.style.left = `${initialLeft}px`;
         element.style.top = `${initialTop}px`;
-        element.style.opacity = "0.5";
+        if (isNew) element.style.opacity = "0.5";
     } else {
         element.style.boxShadow = "-15px 22px 30px rgba(0,0,0,0.65)";
     }
@@ -278,18 +278,19 @@ function startDragging(element, event, isNew = false) {
         if (!STATIC_IDS.has(element.id) && element.parentElement !== trashContent &&
             itemRect.right > trashRect.left && itemRect.left < trashRect.right &&
             itemRect.bottom > trashRect.top && itemRect.top < trashRect.bottom) {
-            element.classList.add("trash-eat");
             playFeedback(120, 0.12);
             connections = connections.filter((connection) => connection.from !== element && connection.to !== element);
-            element.style.left = "auto";
-            element.style.top = "auto";
-            element.style.position = "relative";
-            element.style.transform = "scale(0.7)";
-            trashContent.appendChild(element);
+            element.classList.add("trash-eat");
+            element.offsetWidth;
             checkTrashEmpty();
             saveGame();
             setTimeout(() => {
                 element.classList.remove("trash-eat");
+                element.style.left = "auto";
+                element.style.top = "auto";
+                element.style.position = "relative";
+                element.style.transform = "scale(0.7)";
+                trashContent.appendChild(element);
                 checkTrashEmpty();
                 saveGame();
                 drawStrings();

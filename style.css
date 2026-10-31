@@ -205,13 +205,16 @@ button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
     position: relative !important;
     left: auto !important;
     top: auto !important;
-    transform: scale(0.7) !important;
+    transform: scale(0.7);
     margin: -15px; 
     box-shadow: 2px 4px 8px rgba(0,0,0,0.5);
     z-index: 1 !important;
 }
 
-.trash-eat { animation: shrinkToTrash 0.4s ease-in forwards; pointer-events: none; }
+.trash-eat {
+    animation: shrinkToTrash 0.4s ease-in forwards;
+    pointer-events: none;
+}
 @keyframes shrinkToTrash { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0.1) translate(0, 100px); opacity: 0; } }
 
 #night-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #030303; opacity: 0; pointer-events: none; z-index: 999999; transition: opacity 1.2s ease-in-out; }
