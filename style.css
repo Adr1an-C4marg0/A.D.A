@@ -9,6 +9,53 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+button, input, [tabindex] { outline: none; }
+button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
+    outline: 3px solid #facc15;
+    outline-offset: 3px;
+}
+
+.bottom-controls { display: flex; align-items: center; gap: 0.75rem; }
+.reset-button {
+    padding: 0.5rem 0.75rem;
+    color: #cbd5e1;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid #475569;
+    border-radius: 0.25rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+}
+.reset-button:hover { background: rgba(30, 41, 59, 0.95); }
+.connection-source { transform: translateX(-50%) scale(1.35) !important; box-shadow: 0 0 0 4px rgba(250, 204, 21, 0.65); }
+.completion-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000000;
+    display: grid;
+    place-items: center;
+    background: rgba(3, 7, 18, 0.78);
+    padding: 1rem;
+}
+.completion-card {
+    width: min(28rem, 100%);
+    padding: 2rem;
+    color: #172033;
+    background: #fdf8eb;
+    border: 1px solid #dcd3be;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.5);
+    text-align: center;
+    font-family: 'Special Elite', monospace;
+}
+.completion-modal.hidden { display: none; }
+.completion-card h2 { margin: 0 0 1rem; font-family: 'Playfair Display', serif; }
+.completion-card p { margin-bottom: 1.5rem; }
+.completion-card button {
+    padding: .65rem 1rem;
+    color: #fff;
+    background: #172033;
+    border: 0;
+}
+
 #strings-layer { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 5; }
 
 .board-item { 
@@ -59,14 +106,17 @@ body {
 .note-helper { background: #bae6fd; font-family: 'Caveat', cursive; font-size: 1.3rem; color: #082f49; }
 .note-larper { background: #bbf7d0; font-family: 'Rock Salt', cursive; font-size: 0.7rem; color: #064e3b; line-height: 1.6;}
 
-/* Assassino Sutil: A Ata Oficial da A.D.A. */
-.note-killer { 
+/* Ata oficial da A.D.A., em papel separado dos post-its. */
+.official-record {
+    position: absolute;
+    width: 300px;
+    min-height: 255px;
+    padding: 50px 24px 20px;
     background: #fdfdfc; 
     font-family: 'Roboto', sans-serif; 
     font-weight: 500; 
     font-size: 0.75rem; 
     color: #171717; 
-    padding: 50px 15px 15px 15px; 
     box-shadow: -5px 8px 10px rgba(0,0,0,0.4); 
     border: 1px solid #d1d5db;
     border-radius: 2px;
@@ -74,38 +124,54 @@ body {
     line-height: 1.5;
 }
 
-.note-killer::before { 
-    content: "ASSOCIAÇÃO DE DETETIVES ANÔNIMOS\a Ata de Registro Interno"; 
+.official-record::before {
+    content: "ASSOCIAÇÃO DE DETETIVES ANÔNIMOS\a ATA DE REGISTRO INTERNO";
     white-space: pre;
-    position: absolute; 
-    top: 12px; 
+    position: absolute;
+    top: 14px;
     left: 50%;
     transform: translateX(-50%);
-    width: 85%;
+    width: 88%;
     text-align: center;
-    font-size: 0.55rem; 
-    color: #0f172a; 
+    font-size: 0.64rem;
+    color: #0f172a;
     font-family: 'Playfair Display', serif;
     font-weight: 900;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
     border-bottom: 2px solid #0f172a;
-    padding-bottom: 5px;
-    line-height: 1.3;
+    padding-bottom: 7px;
+    line-height: 1.35;
     text-transform: uppercase;
 }
-
-/* Adiciona um carimbo virtual ou linha de rodapé elegante na ata */
-.note-killer::after {
+.official-record::after {
     content: "Uso Exclusivo - Diretoria";
     display: block;
-    margin-top: 10px;
+    margin-top: 12px;
     text-align: right;
     font-family: 'Special Elite', monospace;
-    font-size: 0.5rem;
+    font-size: 0.55rem;
     color: #64748b;
     border-top: 1px dashed #cbd5e1;
-    padding-top: 3px;
+    padding-top: 4px;
 }
+
+.welcome-letter {
+    width: 360px;
+    min-height: 430px;
+    padding: 28px 25px 24px;
+    background: #f3ead4;
+    border: 1px solid #bca982;
+    color: #27364d;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    box-shadow: -8px 14px 20px rgba(0,0,0,0.55);
+}
+.welcome-letter .pin { background: radial-gradient(circle at 30% 30%, #b91c1c, #450a0a); }
+.welcome-letter h2 { margin: 0 0 4px; font-size: 1.2rem; letter-spacing: .08em; }
+.welcome-letter h3 { margin: 0 0 18px; font-size: .75rem; font-weight: normal; letter-spacing: .2em; }
+.welcome-letter img { display: block; width: 100%; height: 145px; margin: 0 auto 20px; object-fit: cover; border: 1px solid #9d8b69; }
+.welcome-letter p { margin: 0 0 14px; font-size: .9rem; line-height: 1.55; text-align: left; }
+.welcome-letter .signature { margin-top: 20px; font-family: 'Caveat', cursive; font-size: 1.35rem; text-align: right; }
 
 .newspaper { background: #efece5; width: 300px; padding: 15px; border: 1px solid #bba; color: #222; font-family: 'Playfair Display', serif; box-shadow: -6px 10px 15px rgba(0,0,0,0.6); }
 .news-header { text-align: center; font-weight: bold; border-bottom: 3px double #333; padding-bottom: 5px; margin-bottom: 12px; font-size: 1.2rem; text-transform: uppercase; }
@@ -147,5 +213,21 @@ body {
 .trash-eat { animation: shrinkToTrash 0.4s ease-in forwards; pointer-events: none; }
 @keyframes shrinkToTrash { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0.1) translate(0, 100px); opacity: 0; } }
 
-#night-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #030303; opacity: 0; pointer-events: none; z-index: 999999; transition: opacity 2s ease-in-out; }
+#night-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #030303; opacity: 0; pointer-events: none; z-index: 999999; transition: opacity 1.2s ease-in-out; }
 .lights-out { opacity: 1 !important; pointer-events: all !important; }
+
+@media (max-width: 700px) {
+    body { overflow: auto; min-height: 100vh; }
+    .board-item { max-width: calc(100vw - 2rem); }
+    .newspaper { width: min(300px, calc(100vw - 2rem)); }
+    .clipboard { width: min(260px, calc(100vw - 2rem)); }
+    .official-record { width: min(300px, calc(100vw - 2rem)); }
+    .photo { width: 115px; }
+    .photo img { height: 95px; }
+    .postit-pad { left: 1rem; bottom: 5.5rem; width: 100px; height: 100px; }
+    .trash-bin-img { right: 1rem; bottom: 5.5rem; width: 65px; }
+    #trash-panel { right: 1rem; left: 1rem; width: auto; bottom: 10rem; }
+    .bottom-controls { bottom: 1rem; width: calc(100% - 2rem); justify-content: center; flex-wrap: wrap; }
+    #btn-end-day { padding-left: 1rem; padding-right: 1rem; }
+    .reset-button { padding: .5rem; }
+}

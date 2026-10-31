@@ -11,9 +11,15 @@
 
     <div id="night-overlay"></div>
     <svg id="strings-layer"></svg>
-
+    <div id="intro-modal" class="completion-modal" role="dialog" aria-modal="true" aria-labelledby="intro-title">
+        <div class="completion-card">
+            <h2 id="intro-title">O CASO 404</h2>
+            <p>Investigue as pistas, escreva suas próprias notas, conecte evidências e encerre cada dia para receber novas informações.</p>
+            <button id="btn-start-case" type="button">ABRIR O QUADRO</button>
+        </div>
+    </div>
     <!-- LIXEIRA FÍSICA -->
-    <img id="trash-bin" src="assets/img/textures/trash.png" alt="Lixeira" class="trash-bin-img" title="Arquivos descartados">
+    <img id="trash-bin" src="assets/img/textures/trash.png" alt="Lixeira; clique para abrir os arquivos descartados" class="trash-bin-img" title="Arquivos descartados" tabindex="0" role="button">
 
     <!-- PAINEL DE ARQUIVOS DESCARTADOS (Translúcido, Escuro e sem 'X') -->
     <div id="trash-panel" class="hidden absolute bottom-28 right-6 w-96 max-h-[500px] bg-black/80 border border-gray-700/50 rounded-lg p-5 overflow-y-auto shadow-2xl backdrop-blur-md" style="z-index: 99999;">
@@ -25,8 +31,9 @@
     </div>
 
     <!-- UI Inferior (Apenas o botão Dormir restou) -->
-    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-50">
+    <div class="bottom-controls absolute bottom-6 left-1/2 -translate-x-1/2 z-50">
         <button id="btn-end-day" class="bg-slate-900/90 hover:bg-slate-800 text-gray-300 font-bold py-2 px-8 rounded shadow-2xl border border-slate-700 transition-colors tracking-widest text-sm backdrop-blur-sm">ENCERRAR DIA (<span id="day-counter">1</span>)</button>
+        <button id="btn-reset-case" type="button" class="reset-button" aria-label="Reiniciar investigação">REINICIAR CASO</button>
     </div>
 
     <!-- O BLOCO DE POST-IT FÍSICO NA MESA -->
