@@ -55,30 +55,34 @@
             <button id="btn-request" class="w-full bg-gray-800 text-white text-xs py-2 hover:bg-gray-700">CARIMBAR SOLICITAÇÃO</button>
             <p id="req-status" class="text-xs text-red-600 mt-2 font-bold text-center h-4"></p>
         </div>
-
-        <div id="interview-panel" class="completion-modal hidden" role="dialog" aria-modal="true" aria-labelledby="interview-title">
-            <div class="completion-card interview-card">
-                <h2 id="interview-title">ENTREVISTAS</h2>
-                <p>Escreva uma pergunta para cada pessoa. A resposta chegará no próximo dia.</p>
-                <label for="interview-person">Pessoa</label>
-                <select id="interview-person"></select>
-                <label for="interview-question">Pergunta</label>
-                <textarea id="interview-question" rows="4" placeholder="O que você quer perguntar?"></textarea>
-                <div class="interview-actions">
-                    <button id="btn-send-interview" type="button">ENVIAR PERGUNTA</button>
-                    <button id="btn-close-interview" type="button">FECHAR</button>
-                </div>
-                <p id="interview-status" class="form-status" role="status"></p>
-            </div>
-        </div>
+    </div>
 
         <div id="conclusion-panel" class="completion-modal hidden" role="dialog" aria-modal="true" aria-labelledby="conclusion-title">
             <div class="completion-card conclusion-card">
+                <div id="conclusion-attempts" class="attempt-markers hidden" aria-label="Tentativas restantes">
+                    <span class="ada-logo intact">A.D.A.</span>
+                    <span class="ada-logo intact">A.D.A.</span>
+                    <span class="ada-logo intact">A.D.A.</span>
+                </div>
                 <h2 id="conclusion-title">CONCLUSÃO DO CASO</h2>
-                <label for="conclusion-culprit">Responsável pela morte</label>
-                <select id="conclusion-culprit"></select>
-                <label for="conclusion-accomplice">Responsável pelo encobrimento</label>
-                <select id="conclusion-accomplice"></select>
+                <fieldset class="checklist-field">
+                    <legend>Existe um culpado?</legend>
+                    <label><input type="radio" name="has-culprit" value="yes"> Sim</label>
+                    <label><input type="radio" name="has-culprit" value="no"> Não</label>
+                </fieldset>
+                <div id="culprit-field" class="conditional-field hidden">
+                    <label for="conclusion-culprit">Responsável pela morte</label>
+                    <select id="conclusion-culprit"></select>
+                </div>
+                <fieldset class="checklist-field">
+                    <legend>Houve encobrimento?</legend>
+                    <label><input type="radio" name="has-coverup" value="yes"> Sim</label>
+                    <label><input type="radio" name="has-coverup" value="no"> Não</label>
+                </fieldset>
+                <div id="accomplice-field" class="conditional-field hidden">
+                    <label for="conclusion-accomplice">Responsável pelo encobrimento</label>
+                    <select id="conclusion-accomplice"></select>
+                </div>
                 <label for="conclusion-method">O que aconteceu?</label>
                 <textarea id="conclusion-method" rows="4" placeholder="Descreva sua conclusão..."></textarea>
                 <div class="interview-actions">
@@ -89,10 +93,24 @@
             </div>
         </div>
 
-        <button id="btn-interviews" class="feature-button hidden" type="button">ABRIR ENTREVISTAS</button>
-        <button id="btn-conclude" class="feature-button hidden" type="button">CONCLUIR CASO</button>
-    </div>
+        <div id="dismissal-overlay" class="dismissal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="dismissal-title">
+            <article id="dismissal-document" class="dismissal-document">
+                <div class="dismissal-stamp">CONFIDENCIAL</div>
+                <p class="dismissal-kicker">AGÊNCIA DE DETETIVES ANÔNIMOS / DIRETORIA</p>
+                <h2 id="dismissal-title">COMUNICAÇÃO DE DESLIGAMENTO</h2>
+                <p>Após a perda das três tentativas de conclusão, a Diretoria determina o encerramento da sua participação no caso.</p>
+                <p class="dismissal-copy">O acesso aos arquivos, à mesa de investigação e aos recursos da A.D.A. será revogado imediatamente.</p>
+                <div class="dismissal-signature">
+                    <label for="dismissal-signature-input">Assinatura do investigador</label>
+                    <input id="dismissal-signature-input" type="text" autocomplete="off" placeholder="assine aqui">
+                    <span class="signature-line"></span>
+                </div>
+                <button id="btn-sign-dismissal" type="button" disabled>ASSINAR E ENCERRAR</button>
+            </article>
+        </div>
 
+        <button id="btn-make-interview" class="mystery-button hidden" type="button">FAZER ENTREVISTA</button>
+        <button id="btn-conclude" class="feature-button hidden" type="button">CONCLUIR CASO</button>
     <div id="suspect1" class="board-item photo" style="left: 400px; top: 150px; transform: rotate(3deg); z-index: 10;">
         <div class="pin"></div>
         <img src="assets/img/suspects/silva.jpg" alt="Foto Homem">

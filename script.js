@@ -6,12 +6,12 @@ const casesDB = [{
     title: "A QUEDA DO QUARTO 304",
     victim: {
         id: "elisa_moura", name: "Elisa Moura", role: "vítima",
-        photo: "assets/img/suspects/ana.jpg",
+        photo: "assets/img/cases/quarto-304/elisa-moura.jpg",
         desc: "Arquivista do Hospital Municipal Santa Augusta. Encontrada morta após uma queda no Hotel Mirante."
     },
     witness: {
         id: "renata_moura", name: "Renata Moura", role: "familiar",
-        photo: "assets/img/suspects/silva.jpg",
+        photo: "assets/img/cases/quarto-304/renata-moura.jpg",
         desc: "Irmã de Elisa. Sabia que ela investigava alterações em documentos hospitalares."
     },
     newspapers: {
@@ -22,24 +22,52 @@ const casesDB = [{
         5: { title: "A INVESTIGAÇÃO DA A.D.A. CONTINUA", body: "Novas informações contradizem a hipótese inicial de acidente. A Agência de Detetives Anônimos ainda não divulgou sua conclusão." }
     },
     characters: [
-        { id: "elisa_moura", name: "Elisa Moura", role: "vítima" },
-        { id: "augusto_vale", name: "Augusto Vale", role: "gerente do hotel" },
-        { id: "renata_moura", name: "Renata Moura", role: "familiar" },
-        { id: "daniel_ferraz", name: "Daniel Ferraz", role: "suspeito" },
-        { id: "livia_campos", name: "Lívia Campos", role: "jornalista / predecessor" },
-        { id: "marcelo_nunes", name: "Marcelo Nunes", role: "policial" }
+        { id: "elisa_moura", name: "Elisa Moura", role: "vítima", photo: "assets/img/cases/quarto-304/elisa-moura.jpg" },
+        { id: "augusto_vale", name: "Augusto Vale", role: "gerente do hotel", photo: "assets/img/cases/quarto-304/augusto-vale.jpg" },
+        { id: "renata_moura", name: "Renata Moura", role: "familiar", photo: "assets/img/cases/quarto-304/renata-moura.jpg" },
+        { id: "daniel_ferraz", name: "Daniel Ferraz", role: "suspeito", photo: "assets/img/cases/quarto-304/daniel-ferraz.jpg" },
+        { id: "livia_campos", name: "Lívia Campos", role: "jornalista / predecessor", photo: "assets/img/cases/quarto-304/livia-campos.jpg" },
+        { id: "marcelo_nunes", name: "Marcelo Nunes", role: "policial", photo: "assets/img/cases/quarto-304/marcelo-nunes.jpg" }
     ],
     dayNotes: {
         2: [
-            { role: "helper", text: "A senhora Moura chegou sozinha. Não conversei com ela na recepção e permaneci no balcão durante o apagão. — Augusto Vale" },
-            { role: "helper", text: "Minha irmã estava nervosa há semanas. Ela dizia que alguém estava mexendo nos arquivos do hospital. Elisa não bebia. — Renata Moura" },
-            { role: "helper", text: "Elisa estava obcecada por um erro no sistema de arquivos. Não sei por que foi ao Hotel Mirante. — Daniel Ferraz" },
-            { role: "killer", text: "Não havia sinais claros de luta no quarto. A vítima apresentava álcool no sangue. Não encontramos motivo para suspeitar de homicídio. — Marcelo Nunes" },
-            { role: "predecessor", text: "Não comece pela garrafa. Comece pelo corrimão. Procure o registro da manutenção do hotel. Não peça o arquivo com meu nome." }
+            { role: "helper", senderId: "augusto_vale", text: "A senhora Moura chegou sozinha. Não conversei com ela na recepção e permaneci no balcão durante o apagão. — Augusto Vale" },
+            { role: "helper", senderId: "renata_moura", text: "Minha irmã estava nervosa há semanas. Ela dizia que alguém estava mexendo nos arquivos do hospital. Elisa não bebia. — Renata Moura" },
+            { role: "helper", senderId: "daniel_ferraz", text: "Elisa estava obcecada por um erro no sistema de arquivos. Não sei por que foi ao Hotel Mirante. — Daniel Ferraz" },
+            { role: "killer", senderId: "marcelo_nunes", text: "Não havia sinais claros de luta no quarto. A vítima apresentava álcool no sangue. Não encontramos motivo para suspeitar de homicídio. — Marcelo Nunes" },
+            { role: "predecessor", senderId: "livia_campos", text: "Não comece pela garrafa. Comece pelo corrimão. Procure o registro da manutenção do hotel. Não peça o arquivo com meu nome." }
         ],
         4: [
-            { role: "predecessor", text: "Você já encontrou a marca no corrimão. Agora procure quem tinha acesso aos arquivos de Elisa e às câmeras do hotel. Uma pessoa está mentindo sobre onde estava. Outra está mentindo sobre o que sabia." }
+            { role: "predecessor", senderId: "livia_campos", text: "Você já encontrou a marca no corrimão. Agora procure quem tinha acesso aos arquivos de Elisa e às câmeras do hotel. Uma pessoa está mentindo sobre onde estava. Outra está mentindo sobre o que sabia." }
         ]
+    },
+    evidence: {
+        1: [
+            { id: "corrimao", title: "ESCADA DE EMERGÊNCIA", description: "Marca de impacto no corrimão. A superfície foi raspada recentemente.", image: "assets/img/cases/quarto-304/escada-emergencia.jpg" },
+            { id: "quarto-304", title: "QUARTO 304", description: "A garrafa foi encontrada sobre a mesa, mas não havia copo próximo.", image: "assets/img/cases/quarto-304/quarto-304.jpg" },
+        ],
+        2: [
+            { id: "camera", title: "CÂMERA DO TERCEIRO ANDAR", description: "A câmera ficou desligada por onze minutos durante o apagão.", image: "assets/img/cases/quarto-304/camera-corredor.jpg" }
+        ],
+        3: [
+            { id: "pagina-azul", title: "PÁGINA ARRANCADA", description: "Uma página azul foi removida do caderno de Elisa. Renata afirma que ela era importante.", image: "assets/img/cases/quarto-304/mesa-elisa.jpg" }
+        ]
+    },
+    documents: {
+        5: {
+            id: "planilha-entrevistas",
+            title: "PLANILHA DE ENTREVISTAS — CASO 01",
+            subtitle: "Agência de Detetives Anônimos / Diretoria",
+            body: "Registre uma pergunta para cada pessoa relacionada ao caso. As respostas serão anexadas ao quadro no próximo dia.",
+            unlocks: "interviews"
+        },
+        7: {
+            id: "documento-conclusao",
+            title: "DOCUMENTO DE ENCERRAMENTO — CASO 01",
+            subtitle: "Agência de Detetives Anônimos / Diretoria",
+            body: "A investigação atingiu a etapa de encerramento. Registre quem causou a morte, quem participou do encobrimento e como os fatos aconteceram.",
+            unlocks: "conclusion"
+        }
     },
     files: {
         elisa_moura: { heading: "ARQUIVO: ELISA MOURA", stamp: "VÍTIMA", body: "O arquivo original desapareceu três vezes. A versão digital sempre retorna corrigida." },
@@ -64,9 +92,18 @@ const paperColors = [
     { bg: "#bae6fd", color: "#082f49" },
     { bg: "#bbf7d0", color: "#064e3b" },
     { bg: "#f5f5f5", color: "#171717", border: "1px solid #ccc" },
-    { bg: "#fef08a", color: "#854d0e" }
+    { bg: "#fef08a", color: "#854d0e" },
+    { bg: "#fed7aa", color: "#7c2d12" },
+    { bg: "#e9d5ff", color: "#581c87" }
 ];
-const fonts = ["'Caveat', cursive", "'Rock Salt', cursive", "'Special Elite', monospace", "'Shadows Into Light', cursive"];
+const characterProfiles = {
+    augusto_vale: { color: paperColors[0], font: "'Special Elite', monospace" },
+    renata_moura: { color: paperColors[1], font: "'Caveat', cursive" },
+    daniel_ferraz: { color: paperColors[2], font: "'Shadows Into Light', cursive" },
+    livia_campos: { color: paperColors[3], font: "'Rock Salt', cursive" },
+    marcelo_nunes: { color: paperColors[4], font: "'Permanent Marker', cursive" },
+    elisa_moura: { color: paperColors[5], font: "'Playfair Display', serif" }
+};
 const STORAGE_KEY = "ada-case-progress-v2";
 const STATIC_IDS = new Set(["daily-news", "request-form", "suspect1", "suspect2"]);
 
@@ -79,7 +116,7 @@ function shuffle(array) {
 }
 
 const shuffledColors = shuffle([...paperColors]);
-const shuffledFonts = shuffle([...fonts]);
+const shuffledFonts = shuffle(["'Caveat', cursive", "'Rock Salt', cursive", "'Special Elite', monospace", "'Shadows Into Light', cursive"]);
 const adaProfiles = {
     helper: { color: shuffledColors[0], font: shuffledFonts[0] },
     larper: { color: shuffledColors[1], font: shuffledFonts[1] },
@@ -102,6 +139,8 @@ let connections = [];
 let day = 1;
 let pendingRequest = null;
 let pendingInterviews = [];
+let conclusionAttempts = 3;
+let failureSequenceActive = false;
 let tempLine = null;
 let startPin = null;
 let selectedItem = null;
@@ -113,9 +152,6 @@ const trashPanel = document.getElementById("trash-panel");
 const trashContent = document.getElementById("trash-panel-content");
 
 function applyVocalTic(role, text) {
-    if (role === "helper") return text.toLowerCase();
-    if (role === "larper") return text.toUpperCase();
-    if (role === "predecessor") return text.replace(/a/g, "e").replace(/o/g, "u");
     return text;
 }
 
@@ -136,8 +172,8 @@ function playFeedback(frequency = 440, duration = 0.06) {
 }
 
 function getRandomPosition(noteType = "post-it") {
-    const noteWidth = noteType === "official" ? 300 : 180;
-    const noteHeight = noteType === "official" ? 260 : 180;
+    const noteWidth = noteType === "official" ? 300 : noteType === "evidence" ? 250 : noteType === "official-document" ? 430 : 180;
+    const noteHeight = noteType === "official" ? 260 : noteType === "evidence" ? 250 : noteType === "official-document" ? 390 : 180;
     const minX = 16;
     const maxX = Math.max(minX, window.innerWidth - noteWidth - 16);
     const minY = 80;
@@ -149,6 +185,7 @@ function saveGame() {
     const notes = [...document.querySelectorAll(".dynamic-note")].map((note) => ({
         id: note.dataset.noteId,
         role: note.dataset.role,
+        senderId: note.dataset.senderId || null,
         content: note.dataset.role === "player" ? note.querySelector("[contenteditable]")?.textContent || "" :
             note.dataset.role === "dossier" ? JSON.parse(note.dataset.content) : note.dataset.content || "",
         x: parseFloat(note.style.left) || 0,
@@ -160,8 +197,21 @@ function saveGame() {
     const connectionIds = connections
         .filter((connection) => connection.from.dataset.noteId && connection.to.dataset.noteId)
         .map((connection) => [connection.from.dataset.noteId, connection.to.dataset.noteId]);
+    const interviewSheet = document.querySelector('[data-document-id="planilha-entrevistas"]');
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        caseId: currentCase.id, day, pendingRequest, pendingInterviews, highestZ, notes, connections: connectionIds
+        caseId: currentCase.id,
+        day,
+        pendingRequest,
+        pendingInterviews,
+        conclusionAttempts,
+        interviewSheet: interviewSheet ? {
+            authorNoteId: interviewSheet.querySelector("[data-interview-slot='author']")?.dataset.interviewNoteId || null,
+            topicNoteId: interviewSheet.querySelector("[data-interview-slot='topic']")?.dataset.interviewNoteId || null,
+            scheduled: interviewSheet.dataset.interviewScheduled === "true"
+        } : null,
+        highestZ,
+        notes,
+        connections: connectionIds
     }));
 }
 
@@ -192,17 +242,18 @@ function createPin(isKiller = false) {
     return pin;
 }
 
-function createNote(roleKey, content, x, y, isDossier = false, savedId = null) {
+function createNote(roleKey, content, x, y, isDossier = false, savedId = null, senderId = null) {
     highestZ++;
     const note = document.createElement("div");
     const id = savedId || `note-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     note.dataset.noteId = id;
     note.dataset.role = roleKey;
+    if (senderId) note.dataset.senderId = senderId;
     note.dataset.content = isDossier ? JSON.stringify(content) : content;
     note.dataset.rotation = roleKey === "killer" || isDossier ? "0" : String(Math.floor(Math.random() * 8) - 4);
     note.className = `board-item dynamic-note ${
         isDossier ? "dossier" : roleKey === "welcome" ? "welcome-letter" :
-            roleKey === "killer" ? "official-record" : "post-it"
+            "post-it"
     }`;
     note.style.left = `${x}px`;
     note.style.top = `${y}px`;
@@ -251,27 +302,50 @@ function createNote(roleKey, content, x, y, isDossier = false, savedId = null) {
         body.textContent = content.body;
         note.append(heading, stamp, body);
     } else {
-        const profile = adaProfiles[roleKey];
+        const profile = characterProfiles[senderId] || adaProfiles[roleKey] || adaProfiles.helper;
         note.style.backgroundColor = profile.color.bg;
         note.style.color = profile.color.color;
-        note.style.fontFamily = roleKey === "killer" ? "'Roboto', sans-serif" : profile.font;
-        if (roleKey === "killer") note.style.fontWeight = "500";
+        note.style.fontFamily = profile.font;
         if (profile.color.border) note.style.border = profile.color.border;
         const body = document.createElement("div");
         body.textContent = applyVocalTic(roleKey, content);
-        const pin = createPin(roleKey === "killer");
-        if (roleKey === "killer") {
-            note.append(pin, body);
-        } else {
-            const tape = document.createElement("div");
-            tape.className = "drag-tape";
-            note.append(tape, pin, body);
-        }
+        const pin = createPin();
+        const tape = document.createElement("div");
+        tape.className = "drag-tape";
+        note.append(tape, pin, body);
+
     }
     document.body.appendChild(note);
     makeDraggable(note);
     initPins();
     return note;
+}
+
+function createEvidenceCard(evidence, x, y, savedId = null) {
+    highestZ++;
+    const card = document.createElement("article");
+    card.className = "board-item dynamic-note evidence-card";
+    card.dataset.noteId = savedId || `evidence-${evidence.id}`;
+    card.dataset.role = "evidence";
+    card.dataset.content = JSON.stringify(evidence);
+    card.style.left = `${x}px`;
+    card.style.top = `${y}px`;
+    card.style.zIndex = highestZ;
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("aria-label", `Prova: ${evidence.title}`);
+    const pin = createPin();
+    const image = document.createElement("img");
+    image.src = evidence.image;
+    image.alt = `Imagem da prova: ${evidence.title.toLowerCase()}`;
+    const title = document.createElement("strong");
+    title.textContent = evidence.title;
+    const description = document.createElement("p");
+    description.textContent = evidence.description;
+    card.append(pin, image, title, description);
+    document.body.appendChild(card);
+    makeDraggable(card);
+    initPins();
+    return card;
 }
 
 function startDragging(element, event, isNew = false) {
@@ -315,6 +389,12 @@ function startDragging(element, event, isNew = false) {
         const trash = document.getElementById("trash-bin");
         const itemRect = element.getBoundingClientRect();
         const trashRect = trash.getBoundingClientRect();
+        if (element.dataset.role !== "official-document" && assignInterviewNote(element)) {
+            saveGame();
+            drawStrings();
+            return;
+        }
+        clearInterviewNoteAssignment(element);
         if (!STATIC_IDS.has(element.id) && element.parentElement !== trashContent &&
             itemRect.right > trashRect.left && itemRect.left < trashRect.right &&
             itemRect.bottom > trashRect.top && itemRect.top < trashRect.bottom) {
@@ -338,6 +418,7 @@ function startDragging(element, event, isNew = false) {
         } else {
             saveGame();
         }
+
         drawStrings();
     };
     document.addEventListener("mousemove", onMouseMove);
@@ -355,12 +436,116 @@ function moveWithKeyboard(element, key) {
     return true;
 }
 
+function getInterviewItemContent(item) {
+    if (item.dataset.role === "player") {
+        return item.querySelector("[contenteditable]")?.textContent.trim() || "";
+    }
+    if (item.dataset.content) return item.dataset.content;
+    return item.querySelector("strong")?.textContent.trim() ||
+        item.querySelector(".text-black")?.textContent.trim() ||
+        item.getAttribute("aria-label") || "";
+}
+
+function isInterviewSelectable(item) {
+    if (!item || item.dataset.role === "official-document") return false;
+    if (item.classList.contains("drag-tape") || item.closest(".drag-tape")) return false;
+    if (item.id === "postit-pad" || item.id === "trash-bin") return false;
+    return item.classList.contains("dynamic-note") ||
+        item.classList.contains("photo") ||
+        item.classList.contains("evidence-card");
+}
+
+function clearInterviewNoteAssignment(item) {
+    const documentElement = document.querySelector('[data-document-id="planilha-entrevistas"]');
+    if (!documentElement) return;
+    documentElement.querySelectorAll("[data-interview-slot]").forEach((zone) => {
+        if (zone.dataset.interviewNoteId !== item.dataset.noteId) return;
+        delete zone.dataset.interviewNoteId;
+        delete zone.dataset.interviewSenderId;
+        delete zone.dataset.interviewContent;
+    });
+    item.classList.remove("interview-selected-note");
+    updateInterviewSheetState(documentElement);
+}
+
+function assignInterviewNote(note) {
+    if (!isInterviewSelectable(note)) return false;
+    const documentElement = document.querySelector('[data-document-id="planilha-entrevistas"]');
+    if (!documentElement) return false;
+    const authorZone = documentElement.querySelector("[data-interview-slot='author']");
+    const topicZone = documentElement.querySelector("[data-interview-slot='topic']");
+    const noteRect = note.getBoundingClientRect();
+    const contains = (zone) => {
+        const zoneRect = zone.getBoundingClientRect();
+        return noteRect.left < zoneRect.right && noteRect.right > zoneRect.left &&
+            noteRect.top < zoneRect.bottom && noteRect.bottom > zoneRect.top;
+    };
+    const targetZone = contains(authorZone) ? authorZone : contains(topicZone) ? topicZone : null;
+    if (!targetZone) return false;
+    const content = getInterviewItemContent(note);
+    if (targetZone === authorZone && !note.dataset.senderId) return false;
+    if (!content) return false;
+    documentElement.querySelectorAll("[data-interview-slot]").forEach((zone) => {
+        if (zone !== targetZone && zone.dataset.interviewNoteId === note.dataset.noteId) {
+            delete zone.dataset.interviewNoteId;
+            delete zone.dataset.interviewSenderId;
+            delete zone.dataset.interviewContent;
+        }
+    });
+    if (targetZone.dataset.interviewNoteId && targetZone.dataset.interviewNoteId !== note.dataset.noteId) {
+        const previous = document.querySelector(`[data-note-id="${targetZone.dataset.interviewNoteId}"]`);
+        previous?.classList.remove("interview-selected-note");
+    }
+    targetZone.dataset.interviewNoteId = note.dataset.noteId;
+    targetZone.dataset.interviewSenderId = note.dataset.senderId || "";
+    targetZone.dataset.interviewContent = content;
+    note.classList.add("interview-selected-note");
+    updateInterviewSheetState(documentElement);
+    return true;
+}
+
+function updateInterviewSheetState(documentElement) {
+    const globalButton = document.getElementById("btn-make-interview");
+    if (!globalButton) return;
+    if (!documentElement) {
+        globalButton.classList.add("hidden");
+        return;
+    }
+    const authorZone = documentElement.querySelector("[data-interview-slot='author']");
+    const topicZone = documentElement.querySelector("[data-interview-slot='topic']");
+    if (!authorZone || !topicZone) return;
+    const ready = authorZone.dataset.interviewSenderId && topicZone.dataset.interviewContent &&
+        !documentElement.dataset.interviewScheduled;
+    globalButton.classList.toggle("hidden", !ready);
+}
+
+function restoreInterviewSheet(savedSheet) {
+    if (!savedSheet) return;
+    const documentElement = document.querySelector('[data-document-id="planilha-entrevistas"]');
+    if (!documentElement) return;
+    const byId = new Map([...document.querySelectorAll(".dynamic-note")].map((note) => [note.dataset.noteId, note]));
+    const assignSaved = (slot, noteId) => {
+        const note = byId.get(noteId);
+        const zone = documentElement.querySelector(`[data-interview-slot="${slot}"]`);
+        if (!note || !zone) return;
+        zone.dataset.interviewNoteId = note.dataset.noteId;
+        zone.dataset.interviewSenderId = note.dataset.senderId || "";
+        zone.dataset.interviewContent = note.dataset.role === "player"
+            ? note.querySelector("[contenteditable]")?.textContent.trim() || ""
+            : note.dataset.content || "";
+        note.classList.add("interview-selected-note");
+    };
+    assignSaved("author", savedSheet.authorNoteId);
+    assignSaved("topic", savedSheet.topicNoteId);
+    updateInterviewSheetState(documentElement);
+}
+
 function makeDraggable(element) {
     if (element.dataset.draggable === "true") return;
     element.dataset.draggable = "true";
     element.addEventListener("mousedown", (event) => {
         if (event.target.hasAttribute("contenteditable") || event.target.classList.contains("pin") ||
-            ["INPUT", "BUTTON"].includes(event.target.tagName)) return;
+            ["INPUT", "BUTTON", "SELECT", "TEXTAREA"].includes(event.target.tagName)) return;
         event.preventDefault();
         startDragging(element, event);
     });
@@ -468,8 +653,12 @@ function updateCaseView() {
     setText("news-body", newspaper.body);
     setText("day-counter", day);
     document.getElementById("request-form").style.display = day >= 3 ? "block" : "none";
-    document.getElementById("btn-interviews").classList.toggle("hidden", day < 5);
-    document.getElementById("btn-conclude").classList.toggle("hidden", day < 5);
+    updateInterviewSheetState(document.querySelector('[data-document-id="planilha-entrevistas"]'));
+    document.getElementById("btn-conclude").classList.toggle("hidden", !hasDeliveredDocument("documento-conclusao"));
+}
+
+function hasDeliveredDocument(documentId) {
+    return Boolean(document.querySelector(`[data-document-id="${documentId}"]`));
 }
 
 function showDossier(query) {
@@ -489,8 +678,301 @@ function showDossier(query) {
 function deliverNotesForDay(dayNumber) {
     (currentCase.dayNotes[dayNumber] || []).forEach((item) => {
         const position = getRandomPosition(item.role === "killer" ? "official" : "post-it");
-        createNote(item.role, item.text, position.x, position.y);
+        createNote(item.role, item.text, position.x, position.y, false, null, item.senderId);
     });
+}
+
+function deliverEvidenceForDay(dayNumber) {
+    (currentCase.evidence[dayNumber] || []).forEach((evidence) => {
+        if (document.querySelector(`[data-evidence-id="${evidence.id}"]`)) return;
+        const position = getRandomPosition("evidence");
+        const card = createEvidenceCard(evidence, position.x, position.y);
+        card.dataset.evidenceId = evidence.id;
+    });
+}
+
+function createOfficialDocument(documentData, x, y, savedId = null) {
+    highestZ++;
+    const documentElement = document.createElement("article");
+    documentElement.className = "board-item dynamic-note official-document";
+    documentElement.dataset.noteId = savedId || `document-${documentData.id}`;
+    documentElement.dataset.role = "official-document";
+    documentElement.dataset.documentId = documentData.id;
+    documentElement.dataset.content = JSON.stringify(documentData);
+    documentElement.style.left = `${x}px`;
+    documentElement.style.top = `${y}px`;
+    documentElement.style.zIndex = highestZ;
+    documentElement.setAttribute("tabindex", "0");
+    documentElement.setAttribute("role", "article");
+    documentElement.setAttribute("aria-label", `Documento oficial: ${documentData.title}`);
+
+    const pin = createPin(true);
+    const heading = document.createElement("h3");
+    heading.textContent = documentData.title;
+    const subtitle = document.createElement("div");
+    subtitle.className = "official-document-subtitle";
+    subtitle.textContent = documentData.subtitle;
+    const body = document.createElement("p");
+    body.textContent = documentData.body;
+    documentElement.append(pin, heading, subtitle, body);
+    if (documentData.id === "documento-conclusao") {
+        const checklist = document.createElement("div");
+        checklist.className = "official-checklist";
+        const documentAttempts = createAttemptMarkers("document");
+        checklist.appendChild(documentAttempts);
+        checklist.append(
+            createConclusionChoice("Existe um culpado?", "document-has-culprit", "culprit"),
+            createConclusionPersonField("culprit", "Responsável pela morte"),
+            createConclusionChoice("Houve encobrimento?", "document-has-coverup", "coverup"),
+            createConclusionPersonField("accomplice", "Responsável pelo encobrimento")
+        );
+        const methodLabel = document.createElement("label");
+        methodLabel.textContent = "Reconstrução dos acontecimentos";
+        const method = document.createElement("textarea");
+        method.dataset.conclusionMethod = "document";
+        method.rows = 3;
+        method.placeholder = "Descreva o que aconteceu...";
+        methodLabel.appendChild(method);
+        const submit = document.createElement("button");
+        submit.type = "button";
+        submit.dataset.conclusionSubmit = "document";
+        submit.textContent = "ENTREGAR CONCLUSÃO";
+        const status = document.createElement("p");
+        status.className = "official-checklist-status";
+        status.dataset.conclusionStatus = "document";
+        checklist.append(methodLabel, submit, status);
+        documentElement.appendChild(checklist);
+        submit.addEventListener("click", () => {
+            syncConclusionControls(documentElement);
+            submitConclusion(status);
+        });
+    } else if (documentData.rows) {
+        const table = document.createElement("div");
+        table.className = "spreadsheet-table";
+        documentData.rows.forEach((row, rowIndex) => {
+            row.forEach((cell) => {
+                const cellElement = document.createElement(rowIndex === 0 ? "strong" : "span");
+                cellElement.textContent = cell;
+                table.appendChild(cellElement);
+            });
+        });
+        documentElement.appendChild(table);
+    }
+    if (documentData.id === "planilha-entrevistas") {
+        const instructions = document.createElement("p");
+        instructions.className = "interview-sheet-instructions";
+        instructions.textContent = "Arraste a nota do autor para a marca à esquerda e a nota sobre o tema para a marca à direita.";
+        const slots = document.createElement("div");
+        slots.className = "interview-sheet-slots";
+        const authorZone = document.createElement("div");
+        authorZone.dataset.interviewSlot = "author";
+        authorZone.textContent = "NOTA DO AUTOR";
+        const topicZone = document.createElement("div");
+        topicZone.dataset.interviewSlot = "topic";
+        topicZone.textContent = "NOTA DO TEMA";
+        slots.append(authorZone, topicZone);
+        documentElement.append(instructions, slots);
+    }
+    document.body.appendChild(documentElement);
+    makeDraggable(documentElement);
+    initPins();
+    return documentElement;
+}
+
+function createConclusionChoice(labelText, name, field) {
+    const fieldset = document.createElement("fieldset");
+    fieldset.dataset.conclusionField = field;
+    const legend = document.createElement("legend");
+    legend.textContent = labelText;
+    fieldset.appendChild(legend);
+    ["yes", "no"].forEach((value) => {
+        const label = document.createElement("label");
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = name;
+        input.value = value;
+        input.dataset.conclusionChoice = field;
+        label.append(input, value === "yes" ? " Sim" : " Não");
+        fieldset.appendChild(label);
+    });
+    return fieldset;
+}
+
+function createAttemptMarkers(scope) {
+    const markers = document.createElement("div");
+    markers.className = `attempt-markers attempt-markers-${scope}${scope === "document" ? "" : " hidden"}`;
+    markers.setAttribute("aria-label", "3 tentativas restantes");
+    for (let index = 0; index < 3; index += 1) {
+        const marker = document.createElement("span");
+        marker.className = "ada-logo intact";
+        marker.textContent = "A.D.A.";
+        markers.appendChild(marker);
+    }
+    return markers;
+}
+
+function createConclusionPersonField(field, labelText) {
+    const wrapper = document.createElement("label");
+    wrapper.dataset.conclusionPersonField = field;
+    wrapper.classList.add("hidden");
+    wrapper.textContent = labelText;
+    const select = document.createElement("select");
+    select.dataset.conclusionPerson = field;
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Selecione uma pessoa";
+    select.appendChild(placeholder);
+    currentCase.characters
+        .filter((character) => character.id !== "elisa_moura")
+        .forEach((character) => {
+            const option = document.createElement("option");
+            option.value = character.id;
+            option.textContent = character.name;
+            select.appendChild(option);
+        });
+    wrapper.appendChild(select);
+    return wrapper;
+}
+
+function deliverDocumentsForDay(dayNumber) {
+    const documentData = currentCase.documents[dayNumber];
+    if (!documentData || hasDeliveredDocument(documentData.id)) return;
+    const position = getRandomPosition("official-document");
+    createOfficialDocument(documentData, position.x, position.y);
+}
+
+function getCurrentDocumentById(documentId, fallback) {
+    const documentDay = Object.keys(currentCase.documents).find((dayNumber) =>
+        currentCase.documents[dayNumber].id === documentId
+    );
+    return documentDay ? currentCase.documents[documentDay] : fallback;
+}
+
+function getConclusionState(source = document) {
+    const root = source === document ? document : source;
+    const culpritChoice = root.querySelector("input[data-conclusion-choice='culprit']:checked, input[name='has-culprit']:checked");
+    const coverupChoice = root.querySelector("input[data-conclusion-choice='coverup']:checked, input[name='has-coverup']:checked");
+    return {
+        hasCulprit: culpritChoice?.value || "",
+        hasCoverup: coverupChoice?.value || "",
+        culprit: root.querySelector("[data-conclusion-person='culprit'], #conclusion-culprit")?.value || "",
+        accomplice: root.querySelector("[data-conclusion-person='accomplice'], #conclusion-accomplice")?.value || "",
+        method: root.querySelector("[data-conclusion-method='document'], #conclusion-method")?.value || ""
+    };
+}
+
+function updateConclusionVisibility(root, state) {
+    root.querySelector("[data-conclusion-person-field='culprit'], #culprit-field")
+        ?.classList.toggle("hidden", state.hasCulprit !== "yes");
+    root.querySelector("[data-conclusion-person-field='accomplice'], #accomplice-field")
+        ?.classList.toggle("hidden", state.hasCoverup !== "yes");
+}
+
+function syncConclusionControls(source) {
+    const state = getConclusionState(source);
+    const modal = document.getElementById("conclusion-panel");
+    const documentElement = document.querySelector("[data-document-id='documento-conclusao']");
+    if (source !== modal && modal) {
+        const modalCulprit = modal.querySelector(`input[name='has-culprit'][value='${state.hasCulprit}']`);
+        const modalCoverup = modal.querySelector(`input[name='has-coverup'][value='${state.hasCoverup}']`);
+        if (modalCulprit) modalCulprit.checked = true;
+        if (modalCoverup) modalCoverup.checked = true;
+        document.getElementById("conclusion-culprit").value = state.culprit;
+        document.getElementById("conclusion-accomplice").value = state.accomplice;
+        document.getElementById("conclusion-method").value = state.method;
+        updateConclusionVisibility(modal, state);
+    }
+    if (source === modal && documentElement) {
+        const documentCulprit = documentElement.querySelector(`input[data-conclusion-choice='culprit'][value='${state.hasCulprit}']`);
+        const documentCoverup = documentElement.querySelector(`input[data-conclusion-choice='coverup'][value='${state.hasCoverup}']`);
+        if (documentCulprit) documentCulprit.checked = true;
+        if (documentCoverup) documentCoverup.checked = true;
+        documentElement.querySelector("[data-conclusion-person='culprit']").value = state.culprit;
+        documentElement.querySelector("[data-conclusion-person='accomplice']").value = state.accomplice;
+        documentElement.querySelector("[data-conclusion-method='document']").value = state.method;
+        updateConclusionVisibility(documentElement, state);
+    }
+    if (documentElement) updateConclusionVisibility(documentElement, state);
+}
+
+function submitConclusion(result) {
+    const state = getConclusionState(document.getElementById("conclusion-panel"));
+    if (!state.hasCulprit || !state.hasCoverup ||
+        (state.hasCulprit === "yes" && !state.culprit) ||
+        (state.hasCoverup === "yes" && !state.accomplice)) {
+        result.textContent = "Complete o checklist e selecione as pessoas indicadas antes de entregar.";
+        result.style.color = "#991b1b";
+        return;
+    }
+    const correct = state.hasCulprit === "yes" &&
+        state.culprit === currentCase.solution.culprit &&
+        state.hasCoverup === "yes" &&
+        state.accomplice === currentCase.solution.accomplice;
+    if (!correct) {
+        conclusionAttempts = Math.max(0, conclusionAttempts - 1);
+        updateAttemptMarkers();
+        saveGame();
+    }
+    result.textContent = correct
+        ? "Conclusão aceita. Daniel Ferraz causou a morte e Augusto Vale ajudou no encobrimento."
+        : conclusionAttempts
+            ? `Conclusão incorreta. Você perdeu uma tentativa. Restam ${conclusionAttempts}.`
+            : "Conclusão incorreta. As três tentativas foram perdidas.";
+    result.style.color = correct ? "#166534" : "#92400e";
+    if (!correct && conclusionAttempts === 0) {
+        document.querySelectorAll("#btn-submit-conclusion, [data-conclusion-submit='document']")
+            .forEach((button) => { button.disabled = true; });
+        beginFailureSequence();
+    }
+}
+
+function updateAttemptMarkers() {
+    const markerGroups = document.querySelectorAll("#conclusion-attempts, .attempt-markers-document");
+    markerGroups.forEach((markers) => {
+        markers.classList.remove("hidden");
+        [...markers.children].forEach((marker, index) => {
+            marker.classList.toggle("intact", index < conclusionAttempts);
+            marker.classList.toggle("cracked", index === conclusionAttempts);
+            marker.classList.toggle("lost", index > conclusionAttempts);
+        });
+        markers.setAttribute("aria-label", `${conclusionAttempts} tentativas restantes`);
+    });
+}
+
+function beginFailureSequence() {
+    if (failureSequenceActive) return;
+    failureSequenceActive = true;
+    document.getElementById("conclusion-panel")?.classList.add("hidden");
+    const items = [...document.querySelectorAll(
+        ".dynamic-note, #daily-news, #request-form, #suspect1, #suspect2, #postit-pad, #trash-bin, #trash-panel, .bottom-controls, #strings-layer"
+    )].reverse();
+    items.forEach((item, index) => {
+        setTimeout(() => item.classList.add("dismissal-exit"), index * 180);
+        setTimeout(() => item.remove(), index * 180 + 1250);
+    });
+    const exitDuration = Math.max(1200, items.length * 180 + 1200);
+    setTimeout(() => {
+        const overlay = document.getElementById("dismissal-overlay");
+        overlay.classList.remove("hidden");
+        requestAnimationFrame(() => overlay.classList.add("reveal"));
+        setTimeout(() => {
+            overlay.classList.add("button-ready");
+        }, 3000);
+    }, exitDuration);
+}
+
+function restartAfterDismissal() {
+    const overlay = document.getElementById("dismissal-overlay");
+    const documentElement = document.getElementById("dismissal-document");
+    const signature = document.getElementById("dismissal-signature-input").value.trim();
+    if (!signature) return;
+    documentElement.classList.add("signed");
+    document.getElementById("btn-sign-dismissal").textContent = "ASSINATURA REGISTRADA";
+    overlay.classList.add("blackout");
+    setTimeout(() => {
+        localStorage.removeItem(STORAGE_KEY);
+        window.location.reload();
+    }, 2200);
 }
 
 function deliverInterviewAnswers() {
@@ -498,7 +980,7 @@ function deliverInterviewAnswers() {
         const character = currentCase.characters.find((item) => item.id === request.characterId);
         const response = currentCase.interviews[request.characterId] || "A pessoa não respondeu à pergunta.";
         const position = getRandomPosition();
-        createNote("helper", `RESPOSTA DE ${character.name.toUpperCase()}\n\nPERGUNTA: ${request.question}\n\n${response}`, position.x, position.y);
+        createNote("helper", `RESPOSTA DE ${character.name.toUpperCase()}\n\n${response}`, position.x, position.y, false, null, request.characterId);
     });
     pendingInterviews = [];
 }
@@ -512,12 +994,15 @@ function advanceDay() {
         day++;
         updateCaseView();
         deliverNotesForDay(day);
+        deliverEvidenceForDay(day);
+        deliverDocumentsForDay(day);
         deliverInterviewAnswers();
         if (pendingRequest) {
             showDossier(pendingRequest);
             pendingRequest = null;
         }
         saveGame();
+        updateCaseView();
         drawStrings();
         setTimeout(() => {
             document.getElementById("night-overlay").classList.remove("lights-out");
@@ -534,15 +1019,29 @@ function resetGame() {
 
 function restoreNotes(saved) {
     saved.notes.forEach((item) => {
-        const note = createNote(item.role, item.content, item.x, item.y, item.role === "dossier", item.id);
+        const note = item.role === "evidence"
+            ? createEvidenceCard(typeof item.content === "string" ? JSON.parse(item.content) : item.content, item.x, item.y, item.id)
+            : item.role === "official-document"
+                ? createOfficialDocument(
+                    (() => {
+                        const savedDocument = typeof item.content === "string" ? JSON.parse(item.content) : item.content;
+                        return getCurrentDocumentById(savedDocument.id, savedDocument);
+                    })(),
+                    item.x,
+                    item.y,
+                    item.id
+                )
+            : createNote(item.role, item.content, item.x, item.y, item.role === "dossier", item.id, item.senderId);
         note.dataset.rotation = item.rotation;
         note.style.transform = `rotate(${item.rotation}deg)`;
         note.style.zIndex = item.z;
+        if (item.role === "evidence") note.dataset.evidenceId = JSON.parse(note.dataset.content).id;
         if (item.inTrash) trashContent.appendChild(note);
     });
     const byId = new Map([...document.querySelectorAll(".dynamic-note")].map((note) => [note.dataset.noteId, note]));
     connections = saved.connections.map(([from, to]) => ({ from: byId.get(from), to: byId.get(to) }))
         .filter((connection) => connection.from && connection.to);
+    restoreInterviewSheet(saved.interviewSheet);
     checkTrashEmpty();
 }
 
@@ -552,22 +1051,32 @@ function init() {
     const suspect2 = document.getElementById("suspect2");
     suspect1.querySelector("img").src = currentCase.victim.photo;
     suspect1.querySelector(".text-black").textContent = currentCase.victim.name;
+    suspect1.dataset.senderId = currentCase.victim.id;
+    suspect1.dataset.content = `Foto de ${currentCase.victim.name}`;
     suspect2.querySelector("img").src = currentCase.witness.photo;
     suspect2.querySelector(".text-black").textContent = currentCase.witness.name;
+    suspect2.dataset.senderId = currentCase.witness.id;
+    suspect2.dataset.content = `Foto de ${currentCase.witness.name}`;
     document.querySelectorAll(".board-item").forEach(makeDraggable);
     initPins();
     createNote("welcome", "Carta de iniciação", Math.min(450, window.innerWidth - 390), 300);
+    deliverEvidenceForDay(1);
 
     const saved = loadGame();
     if (saved) {
         day = saved.day;
         pendingRequest = saved.pendingRequest;
         pendingInterviews = saved.pendingInterviews || [];
+        conclusionAttempts = Number.isInteger(saved.conclusionAttempts)
+            ? Math.max(0, Math.min(3, saved.conclusionAttempts))
+            : 3;
         highestZ = saved.highestZ || highestZ;
         document.querySelectorAll(".dynamic-note").forEach((note) => note.remove());
         restoreNotes(saved);
         updateCaseView();
     }
+    if (conclusionAttempts < 3) updateAttemptMarkers();
+    if (conclusionAttempts === 0) setTimeout(beginFailureSequence, 400);
     document.getElementById("postit-pad").addEventListener("mousedown", (event) => {
         const note = createNote("player", "", 0, 0);
         startDragging(note, event, true);
@@ -599,33 +1108,56 @@ function init() {
     });
     document.getElementById("btn-end-day").addEventListener("click", advanceDay);
     document.getElementById("btn-reset-case").addEventListener("click", resetGame);
-    const interviewPanel = document.getElementById("interview-panel");
-    const interviewPerson = document.getElementById("interview-person");
-    currentCase.characters.filter((item) => item.id !== "elisa_moura").forEach((character) => {
-        const option = document.createElement("option");
-        option.value = character.id;
-        option.textContent = `${character.name} — ${character.role}`;
-        interviewPerson.appendChild(option);
+    const dismissalSignature = document.getElementById("dismissal-signature-input");
+    const dismissalButton = document.getElementById("btn-sign-dismissal");
+    dismissalSignature.addEventListener("input", () => {
+        dismissalButton.disabled = !dismissalSignature.value.trim();
     });
-    document.getElementById("btn-interviews").addEventListener("click", () => interviewPanel.classList.remove("hidden"));
-    document.getElementById("btn-close-interview").addEventListener("click", () => interviewPanel.classList.add("hidden"));
-    document.getElementById("btn-send-interview").addEventListener("click", () => {
-        const question = document.getElementById("interview-question").value.trim();
-        const status = document.getElementById("interview-status");
-        if (!question) {
-            status.textContent = "Escreva uma pergunta antes de enviar.";
-            status.style.color = "#991b1b";
-            return;
-        }
-        pendingInterviews.push({ characterId: interviewPerson.value, question });
-        document.getElementById("interview-question").value = "";
-        status.textContent = "Pergunta registrada. A resposta chegará no próximo dia.";
-        status.style.color = "#166534";
+    dismissalButton.addEventListener("click", restartAfterDismissal);
+    document.getElementById("btn-make-interview").addEventListener("click", () => {
+        const documentElement = document.querySelector('[data-document-id="planilha-entrevistas"]');
+        const authorZone = documentElement?.querySelector("[data-interview-slot='author']");
+        const topicZone = documentElement?.querySelector("[data-interview-slot='topic']");
+        if (!documentElement || !authorZone?.dataset.interviewSenderId || !topicZone?.dataset.interviewContent) return;
+        pendingInterviews.push({
+            characterId: authorZone.dataset.interviewSenderId,
+            question: topicZone.dataset.interviewContent
+        });
+        documentElement.dataset.interviewScheduled = "true";
+        const button = document.getElementById("btn-make-interview");
+        button.textContent = "ENTREVISTA AGENDADA";
+        button.classList.add("scheduled");
+        button.disabled = true;
+        documentElement.querySelectorAll("[data-interview-slot]").forEach((zone) => {
+            const selected = document.querySelector(`[data-note-id="${zone.dataset.interviewNoteId}"]`);
+            selected?.classList.remove("interview-selected-note");
+            delete zone.dataset.interviewNoteId;
+            delete zone.dataset.interviewSenderId;
+            delete zone.dataset.interviewContent;
+        });
         saveGame();
     });
     const conclusionPanel = document.getElementById("conclusion-panel");
     const culprit = document.getElementById("conclusion-culprit");
     const accomplice = document.getElementById("conclusion-accomplice");
+    const culpritField = document.getElementById("culprit-field");
+    const accompliceField = document.getElementById("accomplice-field");
+    const updateConclusionChecklist = (event) => {
+        const source = event?.target.closest("[data-document-id='documento-conclusao']") ||
+            (event?.target.closest("#conclusion-panel") ? conclusionPanel : conclusionPanel);
+        syncConclusionControls(source);
+        const state = getConclusionState(conclusionPanel);
+        updateConclusionVisibility(conclusionPanel, state);
+        if (state.hasCulprit !== "yes") culprit.value = "";
+        if (state.hasCoverup !== "yes") accomplice.value = "";
+    };
+    conclusionPanel.querySelectorAll("input, select, textarea")
+        .forEach((input) => input.addEventListener("change", (event) => updateConclusionChecklist(event)));
+    document.addEventListener("change", (event) => {
+        if (!event.target.closest("[data-document-id='documento-conclusao']")) return;
+        if (!event.target.matches("input, select, textarea")) return;
+        updateConclusionChecklist(event);
+    });
     currentCase.characters.filter((item) => item.id !== "elisa_moura").forEach((character) => {
         [culprit, accomplice].forEach((select) => {
             const option = document.createElement("option");
@@ -637,12 +1169,7 @@ function init() {
     document.getElementById("btn-conclude").addEventListener("click", () => conclusionPanel.classList.remove("hidden"));
     document.getElementById("btn-close-conclusion").addEventListener("click", () => conclusionPanel.classList.add("hidden"));
     document.getElementById("btn-submit-conclusion").addEventListener("click", () => {
-        const result = document.getElementById("conclusion-result");
-        const correct = culprit.value === currentCase.solution.culprit && accomplice.value === currentCase.solution.accomplice;
-        result.textContent = correct
-            ? "Conclusão aceita. Daniel Ferraz causou a morte e Augusto Vale ajudou no encobrimento."
-            : "Conclusão registrada. Algumas relações ainda não correspondem às evidências disponíveis.";
-        result.style.color = correct ? "#166534" : "#92400e";
+        submitConclusion(document.getElementById("conclusion-result"));
     });
     document.getElementById("btn-start-case").addEventListener("click", () => {
     document.getElementById("intro-modal").classList.add("hidden");

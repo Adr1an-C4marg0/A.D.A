@@ -37,6 +37,7 @@ button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
     padding: 1rem;
 }
 .completion-card {
+    position: relative;
     width: min(28rem, 100%);
     padding: 2rem;
     color: #172033;
@@ -47,6 +48,151 @@ button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
     font-family: 'Special Elite', monospace;
 }
 .completion-modal.hidden { display: none; }
+.dismissal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000000;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: rgba(3, 7, 18, .9);
+    opacity: 1;
+    transition: background 2s ease;
+}
+.dismissal-overlay.hidden { display: none; }
+.dismissal-overlay.blackout {
+    background: #000;
+}
+.dismissal-document {
+    position: relative;
+    width: min(440px, calc(100vw - 2rem));
+    padding: 38px 34px 32px;
+    color: #172033;
+    background:
+        linear-gradient(rgba(253,248,235,.96), rgba(253,248,235,.96)),
+        repeating-linear-gradient(0deg, transparent 0 25px, rgba(148,163,184,.12) 26px);
+    box-shadow: 0 2rem 5rem rgba(0,0,0,.7), 0 0 0 1px rgba(253,248,235,.35);
+    font-family: 'Special Elite', monospace;
+    transform: translateY(115vh) rotate(2deg);
+    opacity: 0;
+}
+.dismissal-overlay.reveal .dismissal-document {
+    animation: dismissal-drop 2.8s cubic-bezier(.22,.75,.22,1) forwards;
+}
+@keyframes dismissal-drop {
+    0% { opacity: 0; transform: translateY(115vh) rotate(2deg); }
+    70% { opacity: 1; transform: translateY(-12px) rotate(-1deg); }
+    100% { opacity: 1; transform: translateY(0) rotate(-.35deg); }
+}
+.dismissal-stamp {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    padding: 5px 8px;
+    color: #991b1b;
+    border: 2px solid #991b1b;
+    font: 700 .58rem 'Roboto', sans-serif;
+    letter-spacing: .12em;
+    transform: rotate(8deg);
+}
+.dismissal-kicker {
+    margin: 0 0 28px;
+    color: #64748b;
+    font: 700 .55rem 'Roboto', sans-serif;
+    letter-spacing: .12em;
+}
+.dismissal-document h2 {
+    max-width: 250px;
+    margin: 0 0 22px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #172033;
+    font: 700 1.15rem 'Playfair Display', serif;
+}
+.dismissal-document p {
+    font-size: .78rem;
+    line-height: 1.55;
+}
+.dismissal-copy {
+    margin-top: 20px;
+    color: #475569;
+}
+.dismissal-signature {
+    position: relative;
+    margin-top: 34px;
+    padding-top: 30px;
+}
+.dismissal-signature label {
+    display: block;
+    margin-bottom: 6px;
+    color: #475569;
+    font: .62rem 'Roboto', sans-serif;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+.dismissal-signature input {
+    width: 100%;
+    padding: 6px 2px;
+    color: #172033;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #64748b;
+    outline: none;
+    font: 1.2rem 'Caveat', cursive;
+}
+.dismissal-signature input:focus {
+    border-bottom-color: #991b1b;
+}
+.signature-line {
+    display: block;
+    margin-top: 8px;
+    border-bottom: 1px dashed #94a3b8;
+}
+.dismissal-document button {
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+    padding: 11px;
+    color: #f8fafc;
+    background: #172033;
+    border: 0;
+    font: 700 .68rem 'Roboto', sans-serif;
+    letter-spacing: .1em;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .8s ease, transform .8s ease, background .2s ease;
+}
+.dismissal-overlay.button-ready .dismissal-document button {
+    opacity: 1;
+    transform: translateY(0);
+}
+.dismissal-document button:not(:disabled):hover {
+    background: #991b1b;
+}
+.dismissal-document button:disabled {
+    cursor: not-allowed;
+}
+.dismissal-document.signed .dismissal-signature input {
+    color: #991b1b;
+    font-family: 'Rock Salt', cursive;
+}
+.dismissal-document.signed button {
+    background: #991b1b;
+}
+.board-item.dismissal-exit,
+#postit-pad.dismissal-exit,
+#trash-bin.dismissal-exit,
+#trash-panel.dismissal-exit,
+.bottom-controls.dismissal-exit,
+#strings-layer.dismissal-exit {
+    pointer-events: none;
+    animation: board-item-exit 1.2s cubic-bezier(.55,.05,.68,.19) forwards;
+}
+@keyframes board-item-exit {
+    to {
+        opacity: 0;
+        transform: translate(120vw, -35vh) rotate(18deg);
+    }
+}
 .completion-card h2 { margin: 0 0 1rem; font-family: 'Playfair Display', serif; }
 .completion-card p { margin-bottom: 1.5rem; }
 .completion-card button {
@@ -54,6 +200,141 @@ button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
     color: #fff;
     background: #172033;
     border: 0;
+}
+.conclusion-card {
+    width: min(38rem, 100%);
+    max-height: min(92vh, 48rem);
+    overflow-y: auto;
+    padding: 2.25rem 2.5rem 2rem;
+    background:
+        linear-gradient(rgba(253,248,235,.96), rgba(253,248,235,.96)),
+        repeating-linear-gradient(0deg, transparent 0 25px, rgba(148,163,184,.12) 26px);
+    border: 1px solid #bca982;
+    border-top: 5px solid #172033;
+    box-shadow: 0 1.5rem 4rem rgba(0,0,0,.62), 0 0 0 8px rgba(253,248,235,.08);
+}
+.conclusion-card::before {
+    content: "A.D.A. / DOCUMENTO RESTRITO";
+    display: block;
+    margin-bottom: .85rem;
+    color: #64748b;
+    font: 700 .58rem 'Roboto', sans-serif;
+    letter-spacing: .16em;
+    text-align: left;
+}
+.attempt-markers {
+    position: absolute;
+    top: .8rem;
+    right: 1rem;
+    display: flex;
+    gap: .28rem;
+}
+.attempt-markers.hidden {
+    display: none;
+}
+.ada-logo {
+    display: grid;
+    width: 2.45rem;
+    height: 2.45rem;
+    place-items: center;
+    color: #f8fafc;
+    background: #172033;
+    border: 2px solid #64748b;
+    border-radius: 50%;
+    font: 700 .48rem 'Roboto', sans-serif;
+    letter-spacing: .04em;
+    transform: rotate(-5deg);
+}
+.ada-logo:nth-child(2) {
+    transform: rotate(4deg);
+}
+.ada-logo.cracked {
+    color: #7f1d1d;
+    background: #e7dfcc;
+    border-color: #991b1b;
+    opacity: .8;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+}
+.ada-logo.lost {
+    color: #94a3b8;
+    background: transparent;
+    border-color: #cbd5e1;
+    opacity: .35;
+}
+.ada-logo.cracked::after {
+    content: "";
+    position: absolute;
+    width: 2.8rem;
+    height: 2px;
+    background: #991b1b;
+    transform: rotate(-48deg);
+    box-shadow: 7px 5px 0 -0.5px #991b1b;
+}
+.conclusion-card h2 {
+    padding-bottom: .7rem;
+    border-bottom: 1px solid #bca982;
+    letter-spacing: .06em;
+}
+.conclusion-card .checklist-field {
+    gap: .5rem;
+    margin: .15rem 0;
+    padding: .8rem .9rem;
+    border-color: #c8b995;
+    border-left: 4px solid #64748b;
+    background: rgba(255,255,255,.62);
+}
+.conclusion-card .checklist-field label {
+    padding: .35rem .7rem;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.conclusion-card .checklist-field label:hover {
+    border-color: #bca982;
+    background: #fffdf5;
+}
+.conclusion-card .conditional-field {
+    padding: .15rem .9rem .35rem;
+}
+.conclusion-card .conditional-field label {
+    display: block;
+    color: #475569;
+    font-size: .64rem;
+}
+.conclusion-card textarea {
+    min-height: 7rem;
+    padding: .75rem;
+    background: rgba(255,255,255,.8);
+    border-color: #bca982;
+    line-height: 1.45;
+}
+.conclusion-card .interview-actions {
+    padding-top: .55rem;
+    border-top: 1px solid #dcd3be;
+}
+.conclusion-card .interview-actions button:first-child {
+    background: #172033;
+    box-shadow: 0 3px 0 #64748b;
+}
+.conclusion-card .interview-actions button:first-child:hover {
+    background: #334155;
+}
+.conclusion-card .interview-actions button:last-child {
+    color: #172033;
+    background: transparent;
+    border: 1px solid #bca982;
+}
+.conclusion-card .interview-actions button:last-child:hover {
+    background: #fffdf5;
+}
+.conclusion-card .form-status {
+    padding: .6rem;
+    border-left: 3px solid #991b1b;
+    background: rgba(254,226,226,.45);
+}
+.conclusion-card .form-status:empty {
+    display: none;
 }
 .interview-card,
 .conclusion-card {
@@ -84,6 +365,35 @@ button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
     font: .85rem 'Roboto', sans-serif;
     resize: vertical;
 }
+.checklist-field {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin: .25rem 0;
+    padding: .65rem;
+    border: 1px solid #bca982;
+    background: rgba(255,255,255,.55);
+}
+.checklist-field legend {
+    width: 100%;
+    padding: 0;
+    font: 700 .72rem 'Roboto', sans-serif;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+}
+.checklist-field label {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    font: .8rem 'Roboto', sans-serif;
+    text-transform: none;
+}
+.checklist-field input {
+    accent-color: #172033;
+}
+.conditional-field.hidden {
+    display: none;
+}
 .interview-actions {
     display: flex;
     flex-wrap: wrap;
@@ -110,8 +420,48 @@ button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
     font-weight: 700;
     letter-spacing: .08em;
 }
-#btn-interviews { bottom: 5.2rem; }
 #btn-conclude { bottom: 2rem; }
+.mystery-button {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+    min-width: 290px;
+    padding: 1.25rem 2rem;
+    color: #e2e8f0;
+    background: linear-gradient(135deg, rgba(15, 23, 42, .98), rgba(69, 10, 10, .96));
+    border: 1px solid #991b1b;
+    border-radius: .2rem;
+    box-shadow: 0 0 0 1px rgba(127, 29, 29, .45), 0 0 30px rgba(127, 29, 29, .5), 0 1rem 3rem rgba(0,0,0,.7);
+    transform: translate(-50%, -50%);
+    font: 700 1rem 'Special Elite', monospace;
+    letter-spacing: .16em;
+    text-shadow: 0 0 8px rgba(248, 113, 113, .8);
+    animation: mystery-pulse 1.8s ease-in-out infinite;
+}
+.mystery-button::before,
+.mystery-button::after {
+    position: absolute;
+    color: #dc2626;
+    font: 1.1rem 'Special Elite', monospace;
+}
+.mystery-button::before { content: "◆"; left: .7rem; }
+.mystery-button::after { content: "◆"; right: .7rem; }
+.mystery-button:hover {
+    background: linear-gradient(135deg, rgba(30, 41, 59, .98), rgba(127, 29, 29, .98));
+    transform: translate(-50%, -50%) scale(1.04);
+}
+.mystery-button.scheduled {
+    color: #bbf7d0;
+    background: rgba(20, 83, 45, .96);
+    border-color: #4ade80;
+    animation: none;
+}
+.mystery-button.hidden { display: none; }
+@keyframes mystery-pulse {
+    0%, 100% { opacity: .84; box-shadow: 0 0 0 1px rgba(127,29,29,.45), 0 0 18px rgba(127,29,29,.35), 0 1rem 3rem rgba(0,0,0,.7); }
+    50% { opacity: 1; box-shadow: 0 0 0 1px rgba(248,113,113,.65), 0 0 38px rgba(185,28,28,.75), 0 1rem 3rem rgba(0,0,0,.7); }
+}
 
 #strings-layer { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 5; }
 
@@ -212,6 +562,276 @@ button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
     border-top: 1px dashed #cbd5e1;
     padding-top: 4px;
 }
+.official-document {
+    width: min(430px, calc(100vw - 2rem));
+    min-height: 330px;
+    padding: 22px 18px 18px;
+    color: #172033;
+    background: #f8fafc;
+    border: 1px solid #94a3b8;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: -5px 8px 14px rgba(0,0,0,.4);
+}
+.official-document[data-document-id="documento-conclusao"] {
+    width: min(500px, calc(100vw - 2rem));
+    min-height: 470px;
+    padding-bottom: 20px;
+}
+.official-document[data-document-id="documento-conclusao"] .official-checklist {
+    position: relative;
+    margin-top: 16px;
+    padding: 8px 12px 10px;
+    background:
+        linear-gradient(90deg, rgba(226,232,240,.3), transparent 12%, transparent 88%, rgba(226,232,240,.24)),
+        repeating-linear-gradient(0deg, transparent 0 26px, rgba(100,116,139,.09) 27px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.7), inset 0 -8px 14px rgba(148,163,184,.08);
+    transform: rotate(-.25deg);
+}
+.official-document[data-document-id="documento-conclusao"] .official-checklist::before {
+    content: "FOLHA DE TRABALHO / PREENCHIMENTO MANUAL";
+    display: block;
+    margin: -2px 0 6px;
+    color: #64748b;
+    font: 700 .52rem 'Special Elite', monospace;
+    letter-spacing: .08em;
+    opacity: .8;
+}
+.official-document[data-document-id="documento-conclusao"] .official-checklist .attempt-markers-document {
+    position: static;
+    justify-content: flex-end;
+    margin: -4px 0 10px;
+    padding-bottom: 9px;
+    border-bottom: 1px dashed rgba(100,116,139,.42);
+}
+.official-document[data-document-id="documento-conclusao"] .official-checklist fieldset {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 12px;
+    margin: 0 0 7px;
+    padding: 7px 5px 8px;
+    border: 0;
+    border-bottom: 1px dashed rgba(100,116,139,.42);
+    background: transparent;
+}
+.official-document[data-document-id="documento-conclusao"] .official-checklist legend {
+    width: 100%;
+    margin-bottom: 5px;
+    color: #172033;
+    font: 700 .67rem 'Special Elite', monospace;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+}
+.official-document[data-document-id="documento-conclusao"] .official-checklist fieldset label {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px 3px 2px;
+    border: 0;
+    background: transparent;
+    color: #334155;
+    font-size: .68rem;
+    cursor: pointer;
+}
+.official-document[data-document-id="documento-conclusao"] .official-checklist fieldset label:hover {
+    color: #991b1b;
+    transform: rotate(-1deg);
+}
+.official-document[data-document-id="documento-conclusao"] .official-checklist > label {
+    display: block;
+    margin: 8px 0;
+    padding: 4px 5px 8px;
+    color: #334155;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px dashed rgba(100,116,139,.42);
+    font: 700 .65rem 'Special Elite', monospace;
+    letter-spacing: .02em;
+}
+.official-document[data-document-id="documento-conclusao"] .official-checklist select,
+.official-document[data-document-id="documento-conclusao"] .official-checklist textarea {
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 4px;
+    padding: 5px 4px;
+    border: 0;
+    border-bottom: 1px solid rgba(71,85,105,.55);
+    background: rgba(255,255,255,.28);
+    outline: none;
+    font: .68rem 'Roboto', sans-serif;
+}
+.official-document[data-document-id="documento-conclusao"] .official-checklist select:focus,
+.official-document[data-document-id="documento-conclusao"] .official-checklist textarea:focus {
+    border-bottom-color: #991b1b;
+    box-shadow: 0 2px 0 rgba(153,27,27,.16);
+}
+.official-document[data-document-id="documento-conclusao"] .official-checklist textarea {
+    min-height: 76px;
+    border: 1px solid transparent;
+    border-bottom-color: rgba(71,85,105,.55);
+    background:
+        repeating-linear-gradient(0deg, transparent 0 20px, rgba(100,116,139,.14) 21px);
+    line-height: 20px;
+}
+.official-document[data-document-id="documento-conclusao"] .official-checklist button {
+    display: block;
+    width: 75%;
+    margin: 12px auto 0;
+    padding: 7px 10px;
+    background: #172033;
+    border-radius: 1px;
+    box-shadow: 2px 2px 0 rgba(71,85,105,.35);
+    transform: rotate(.6deg);
+}
+.official-document[data-document-id="documento-conclusao"] .official-checklist-status {
+    margin: 8px 0 0;
+    padding: 5px 2px;
+    background: transparent;
+    font-family: 'Special Elite', monospace;
+}
+.official-document h3 {
+    margin: 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #172033;
+    font-size: .82rem;
+    letter-spacing: .06em;
+}
+.official-document-subtitle {
+    margin: 7px 0 12px;
+    color: #475569;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+.official-document p {
+    margin: 0 0 13px;
+    font-size: .74rem;
+    line-height: 1.4;
+}
+.spreadsheet-table {
+    display: grid;
+    grid-template-columns: minmax(110px, .7fr) minmax(180px, 1.3fr);
+    border-top: 1px solid #94a3b8;
+    border-left: 1px solid #94a3b8;
+    font-size: .68rem;
+}
+.spreadsheet-table > * {
+    min-height: 29px;
+    padding: 6px;
+    border-right: 1px solid #94a3b8;
+    border-bottom: 1px solid #94a3b8;
+}
+.official-checklist {
+    margin-top: 12px;
+    border: 1px solid #94a3b8;
+    background: #f8fafc;
+    font: .72rem 'Roboto', sans-serif;
+}
+.official-checklist .hidden {
+    display: none;
+}
+.official-checklist fieldset,
+.official-checklist label {
+    padding: 10px 8px;
+    border-bottom: 1px solid #cbd5e1;
+}
+.official-checklist fieldset {
+    margin: 0;
+}
+.official-checklist fieldset:last-of-type,
+.official-checklist > p:last-child {
+    border-bottom: 0;
+}
+.official-checklist legend {
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+.official-checklist fieldset label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px 2px 0;
+    border: 0;
+    font-weight: 400;
+    cursor: pointer;
+}
+.official-checklist input {
+    accent-color: #166534;
+}
+.official-checklist > label {
+    display: block;
+    font-weight: 700;
+}
+.official-checklist select,
+.official-checklist textarea {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    padding: 5px;
+    color: #172033;
+    background: #fff;
+    border: 1px solid #94a3b8;
+    font: .68rem 'Roboto', sans-serif;
+}
+.official-checklist textarea {
+    resize: vertical;
+}
+.official-checklist button {
+    width: 100%;
+    margin-top: 9px;
+    padding: 7px;
+    color: #fff;
+    background: #334155;
+    border: 0;
+    font: 700 .62rem 'Roboto', sans-serif;
+    letter-spacing: .05em;
+    cursor: pointer;
+}
+.official-checklist button:hover {
+    background: #166534;
+}
+.official-checklist-status {
+    min-height: 1.8em;
+    margin: 7px 0 0;
+    font-size: .64rem !important;
+}
+.spreadsheet-table strong {
+    color: #fff;
+    background: #334155;
+    font-size: .62rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+.interview-sheet-instructions {
+    padding: 7px;
+    background: #e2e8f0;
+    border-left: 3px solid #475569;
+    font-size: .68rem !important;
+}
+.interview-sheet-slots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 8px 0;
+}
+.interview-sheet-slots > div {
+    min-height: 48px;
+    padding: 10px 6px;
+    border: 2px dashed #64748b;
+    color: #64748b;
+    background: rgba(226, 232, 240, .55);
+    font-size: .62rem;
+    font-weight: 700;
+    text-align: center;
+}
+.interview-sheet-slots > div[data-interview-note-id] {
+    border-color: #166534;
+    color: #166534;
+    background: rgba(220, 252, 231, .8);
+}
+.interview-selected-note {
+    outline: 3px solid rgba(22, 101, 52, .55);
+    outline-offset: 3px;
+}
 
 .welcome-letter {
     width: 360px;
@@ -241,6 +861,35 @@ button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
 .clipboard-paper { background: #f9f9f9; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: 1px solid #ddd;}
 
 .dossier { background: #fdf8eb; border: 1px solid #dcd3be; width: 250px; padding: 25px 15px 15px 15px; font-family: 'Special Elite', monospace; font-size: 0.85rem; line-height: 1.3; color: #1c1917;}
+.evidence-card {
+    width: 250px;
+    min-height: 250px;
+    padding: 18px 14px 14px;
+    background: #f4f0e5;
+    border: 1px solid #b8aa8d;
+    color: #27231d;
+    font-family: 'Roboto', sans-serif;
+}
+.evidence-card img {
+    display: block;
+    width: 100%;
+    height: 145px;
+    margin-bottom: 10px;
+    object-fit: cover;
+    border: 1px solid #8b8170;
+    filter: sepia(.12) contrast(1.05);
+}
+.evidence-card strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: .75rem;
+    letter-spacing: .04em;
+}
+.evidence-card p {
+    margin: 0;
+    font-size: .72rem;
+    line-height: 1.35;
+}
 .dossier-stamp { border: 3px solid; transform: rotate(-8deg); display: inline-block; font-weight: bold; padding: 2px 8px; margin: 10px 0; text-transform: uppercase; font-size: 0.75rem; }
 .dossier-success { border-color: #15803d; color: #15803d; }
 .dossier-fail { border-color: #b91c1c; color: #b91c1c; }

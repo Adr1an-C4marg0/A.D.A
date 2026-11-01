@@ -79,6 +79,7 @@
 ### Dia 1 — Fotografias e versão oficial
 
 - [x] Criar jornal “Arquivista morre após queda em hotel durante apagão”.
+- [x] Entregar imagens-placeholder do corrimão e da garrafa sem copo.
 - [ ] Criar foto do corpo no pátio interno.
 - [ ] Criar foto da escada de emergência.
 - [ ] Criar foto do quarto 304.
@@ -102,6 +103,7 @@
 - [ ] Marcar quais trechos são verdadeiros, incompletos ou mentirosos.
 - [ ] Criar jornal “Polícia mantém hipótese de acidente”.
 - [ ] Entregar as notas sem revelar imediatamente seus remetentes.
+- [x] Entregar imagem-placeholder da câmera desligada durante o apagão.
 
 ### Dia 3 — Arquivos e requisições
 
@@ -114,6 +116,7 @@
 - [ ] Criar arquivo de Lívia com a mensagem recebida antes da divulgação oficial.
 - [ ] Criar arquivo de Marcelo com as limitações da investigação.
 - [ ] Criar arquivo de manutenção do Hotel Mirante.
+- [x] Entregar imagem-placeholder da página azul arrancada do caderno.
 - [ ] Exibir erro explícito para nomes inexistentes.
 - [ ] Diferenciar arquivo inexistente, arquivo bloqueado e arquivo já requisitado.
 
@@ -130,7 +133,11 @@
 
 ### Dia 5 — Entrevistas
 
-- [ ] Liberar o painel de Entrevistas.
+- [x] Entregar planilha oficial com perguntas no Dia 5.
+- [x] Liberar o painel de Entrevistas somente após a planilha ser entregue.
+- [x] Permitir montar uma entrevista arrastando a nota do autor e a nota do tema para as marcações da planilha.
+- [x] Exibir um botão global, grande e misterioso para fazer a entrevista.
+- [x] Fazer o botão global agendar a entrevista para o autor da nota sobre o tema da outra nota.
 - [ ] Criar entrevista de Augusto sobre a recepção e o quadro de energia.
 - [ ] Criar entrevista de Renata sobre a “página azul”.
 - [ ] Criar entrevista de Daniel sobre mensagens, hotel e arquivos.
@@ -166,6 +173,9 @@
 
 ## Prioridade 5 — Evidências e conclusão
 
+- [x] Entregar documento oficial de encerramento no Dia 7.
+- [x] Liberar o formulário de conclusão somente após o documento de encerramento ser entregue.
+- [x] Tornar o checklist do documento de encerramento interativo no próprio documento.
 - [ ] Criar registro interno de evidências descobertas.
 - [ ] Associar evidências a fotos, notas, arquivos e entrevistas.
 - [ ] Diferenciar evidência observada de hipótese escrita pelo jogador.
@@ -173,7 +183,7 @@
 - [ ] Criar solução de encobrimento com Augusto como cúmplice.
 - [ ] Verificar se a conclusão pode ser alcançada sem descobrir o predecessor.
 - [ ] Criar conclusão opcional identificando Lívia como predecessor.
-- [ ] Criar tela de conclusão do caso.
+- [x] Criar tela de conclusão do caso.
 - [ ] Mostrar evidências encontradas e evidências ausentes.
 - [ ] Permitir voltar ao quadro após concluir.
 - [ ] Permitir reiniciar o caso sem apagar dados incompatíveis de outros casos.
@@ -193,17 +203,17 @@
 
 ## Prioridade 7 — Imagens e assets
 
-- [ ] Adicionar foto final de Elisa Moura; atualmente há um placeholder reutilizado.
-- [ ] Adicionar foto de Augusto Vale.
-- [ ] Adicionar foto de Renata Moura.
-- [ ] Adicionar foto de Daniel Ferraz.
-- [ ] Adicionar foto de Lívia Campos.
-- [ ] Adicionar foto de Marcelo Nunes.
-- [ ] Adicionar foto do pátio interno.
-- [ ] Adicionar foto da escada de emergência.
-- [ ] Adicionar foto do quarto 304.
-- [ ] Adicionar foto da mesa de Elisa.
-- [ ] Adicionar foto do corredor e da câmera.
+- [x] Adicionar foto final de Elisa Moura.
+- [x] Adicionar foto de Augusto Vale.
+- [x] Adicionar foto de Renata Moura.
+- [x] Adicionar foto de Daniel Ferraz.
+- [x] Adicionar foto de Lívia Campos.
+- [x] Adicionar foto de Marcelo Nunes.
+- [x] Adicionar foto do pátio interno.
+- [x] Adicionar foto da escada de emergência.
+- [x] Adicionar foto do quarto 304.
+- [x] Adicionar foto da mesa de Elisa.
+- [x] Adicionar foto do corredor e da câmera.
 - [ ] Adicionar texto alternativo descritivo para todas as imagens.
 - [ ] Manter placeholders funcionais enquanto os assets finais não existirem.
 
@@ -239,6 +249,8 @@
 - [ ] Testar teclado e foco nas novas interações.
 - [ ] Testar persistência após recarregar a página.
 - [ ] Testar reinício completo do caso.
+- [x] Criar sequência de falha após três tentativas, com retirada dos documentos e documento de desligamento.
+- [x] Reiniciar o caso após assinatura do documento de desligamento.
 - [ ] Executar lint, testes e validação manual no navegador.
 
 ## Critérios de pronto do Caso 01

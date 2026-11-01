@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="210" viewBox="0 0 320 210">
+  <rect width="320" height="210" fill="#e8e0ce"/>
+  <rect y="155" width="320" height="55" fill="#9d8061"/>
+  <path d="M142 155 L142 77 Q142 62 151 55 L151 28 L169 28 L169 55 Q178 62 178 77 L178 155Z" fill="#9b6045" stroke="#40251d" stroke-width="3"/>
+  <path d="M151 28 L169 28" stroke="#40251d" stroke-width="5"/>
+  <text x="16" y="24" font-family="Arial" font-size="15" font-weight="bold" fill="#202020">FOTO DE PERÍCIA — QUARTO 304</text>
+  <text x="16" y="45" font-family="Arial" font-size="12" fill="#202020">GARRAFA SEM COPO PRÓXIMO</text>
+</svg>

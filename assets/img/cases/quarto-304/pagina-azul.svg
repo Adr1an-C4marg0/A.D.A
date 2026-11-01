@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="210" viewBox="0 0 320 210">
+  <rect width="320" height="210" fill="#b9d5e8"/>
+  <path d="M38 40 Q160 23 282 40 L272 174 Q160 157 48 174Z" fill="#86b5d2" stroke="#274c67" stroke-width="3"/>
+  <path d="M75 79 Q160 64 246 78 M72 106 Q160 91 250 104 M71 133 Q155 119 239 130" fill="none" stroke="#31566e" stroke-width="3"/>
+  <text x="16" y="24" font-family="Arial" font-size="15" font-weight="bold" fill="#172033">FRAGMENTO DO CADERNO DE ELISA</text>
+  <text x="16" y="198" font-family="Arial" font-size="12" fill="#172033">PÁGINA AZUL — ORIGINAL AUSENTE</text>
+</svg>

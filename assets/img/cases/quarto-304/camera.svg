@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="210" viewBox="0 0 320 210">
+  <rect width="320" height="210" fill="#c8cbd0"/>
+  <rect x="55" y="58" width="210" height="105" rx="8" fill="#333842"/>
+  <circle cx="160" cy="110" r="42" fill="#111827" stroke="#858b96" stroke-width="8"/>
+  <circle cx="160" cy="110" r="18" fill="#050505"/>
+  <circle cx="238" cy="75" r="8" fill="#5b1010"/>
+  <text x="16" y="24" font-family="Arial" font-size="15" font-weight="bold" fill="#202020">REGISTRO FOTOGRÁFICO — 22H03</text>
+  <text x="16" y="190" font-family="Arial" font-size="12" fill="#202020">CÂMERA DESLIGADA POR 11 MINUTOS</text>
+</svg>
