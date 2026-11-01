@@ -39,7 +39,27 @@ const casesDB = [{
         ],
         4: [
             { role: "predecessor", senderId: "livia_campos", text: "Você já encontrou a marca no corrimão. Agora procure quem tinha acesso aos arquivos de Elisa e às câmeras do hotel. Uma pessoa está mentindo sobre onde estava. Outra está mentindo sobre o que sabia." }
+        ],
+        3: [
+            { role: "helper", senderId: "marcelo_nunes", text: "O laudo preliminar foi fechado antes da perícia do corrimão. A ordem veio de cima e eu não registrei a contestação. — Marcelo Nunes" },
+            { role: "helper", senderId: "renata_moura", text: "Elisa guardava cópias fora de casa. Ela repetia que o nome de Daniel aparecia onde não deveria. — Renata Moura" }
+        ],
+        5: [
+            { role: "helper", senderId: "augusto_vale", text: "A manutenção do hotel não é assunto da agência. O registro foi cancelado porque o reparo não era urgente. — Augusto Vale" },
+            { role: "helper", senderId: "livia_campos", text: "A mensagem anônima chegou antes da notícia. Quem escreveu já sabia que a queda seria tratada como acidente. — Lívia Campos" }
+        ],
+        6: [
+            { role: "helper", senderId: "daniel_ferraz", text: "Elisa não entendia o risco do que estava fazendo. Eu tentei impedir que ela espalhasse aqueles arquivos. — Daniel Ferraz" }
         ]
+    },
+    objectives: {
+        1: "Examine as evidências da escada e do quarto 304.",
+        2: "Compare os depoimentos com o apagão e as câmeras.",
+        3: "Solicite os arquivos de quem tinha acesso aos documentos.",
+        4: "Procure contradições nos horários e na manutenção.",
+        5: "Monte uma pergunta e agende uma entrevista.",
+        6: "Use as respostas para reconstruir a sequência da noite.",
+        7: "Preencha o documento de encerramento."
     },
     evidence: {
         1: [
@@ -51,6 +71,9 @@ const casesDB = [{
         ],
         3: [
             { id: "pagina-azul", title: "PÁGINA ARRANCADA", description: "Uma página azul foi removida do caderno de Elisa. Renata afirma que ela era importante.", image: "assets/img/cases/quarto-304/mesa-elisa.jpg" }
+        ],
+        4: [
+            { id: "patio-hotel", title: "PÁTIO DO HOTEL", description: "A rota entre o quadro de energia e a escada passa por uma porta sem registro de acesso.", image: "assets/img/cases/quarto-304/patio-hotel.jpg" }
         ]
     },
     documents: {
@@ -60,6 +83,21 @@ const casesDB = [{
             subtitle: "Agência de Detetives Anônimos / Diretoria",
             body: "Registre uma pergunta para cada pessoa relacionada ao caso. As respostas serão anexadas ao quadro no próximo dia.",
             unlocks: "interviews"
+        },
+        4: {
+            id: "linha-do-tempo",
+            title: "LINHA DO TEMPO — NOITE DA QUEDA",
+            subtitle: "Agência de Detetives Anônimos / Análise cronológica",
+            body: "Organize os horários conhecidos e compare-os com os depoimentos. Os intervalos sem registro são parte da investigação.",
+            rows: [
+                ["HORÁRIO", "EVENTO"],
+                ["22:06", "Recepção faz uma ligação interna."],
+                ["22:22", "Lívia recebe a mensagem sobre a queda."],
+                ["22:41", "Elisa chega ao Hotel Mirante."],
+                ["22:48–22:59", "Câmera do terceiro andar permanece desligada."],
+                ["23:10", "A morte é divulgada à imprensa."]
+            ],
+            unlocks: "timeline"
         },
         7: {
             id: "documento-conclusao",
@@ -84,7 +122,29 @@ const casesDB = [{
         livia_campos: "Recebi uma mensagem de um número descartável. Não sabia se era verdade, mas publiquei a informação.",
         marcelo_nunes: "A cena parecia um acidente. Admito que não investigamos o suficiente o corrimão."
     },
-    solution: { culprit: "daniel_ferraz", accomplice: "augusto_vale" },
+    interviewQuestions: {
+        augusto_vale: [
+            "Onde você estava durante o apagão?",
+            "Quem tinha acesso ao terceiro andar?",
+            "Por que o reparo do corrimão foi cancelado?"
+        ],
+        daniel_ferraz: [
+            "Qual era sua relação com os arquivos de Elisa?",
+            "Quando você viu Elisa pela última vez?",
+            "Por que tentou impedir que ela divulgasse os documentos?"
+        ],
+        renata_moura: [
+            "O que havia na página azul?",
+            "Elisa mencionou alguém pelo nome?",
+            "Por que ela foi ao Hotel Mirante?"
+        ]
+    },
+    contradictions: [
+        { title: "CONTRADIÇÃO: HORÁRIO DA MENSAGEM", body: "Augusto afirma que nada sabia sobre a morte, mas Lívia recebeu a mensagem “Ela se matou” antes da divulgação oficial.", related: ["augusto_vale", "livia_campos"] },
+        { title: "CONTRADIÇÃO: ACESSO À ESCADA", body: "Augusto nega ter motivo para ir ao terceiro andar, embora o registro de manutenção tenha sido cancelado por sua ordem.", related: ["augusto_vale", "corrimao"] },
+        { title: "CONTRADIÇÃO: ARQUIVOS DE ELISA", body: "Daniel diz que não conhecia o conteúdo dos arquivos, mas Renata afirma que o nome dele aparecia nas cópias guardadas por Elisa.", related: ["daniel_ferraz", "pagina-azul"] }
+    ],
+    solution: { culprit: "daniel_ferraz", accomplice: "augusto_vale", evidence: ["corrimao", "camera", "pagina-azul"] },
     predecessorId: "livia_campos"
 }];
 
@@ -141,11 +201,18 @@ let pendingRequest = null;
 let pendingInterviews = [];
 let conclusionAttempts = 3;
 let failureSequenceActive = false;
+let gameSettings = {
+    sfx: true,
+    music: true,
+    reducedMotion: false
+};
+let ambientTimer = null;
 let tempLine = null;
 let startPin = null;
 let selectedItem = null;
 let endDayTimer = null;
 let audioContext = null;
+let dragSound = null;
 let isTransitioning = false;
 const svgLayer = document.getElementById("strings-layer");
 const trashPanel = document.getElementById("trash-panel");
@@ -156,6 +223,7 @@ function applyVocalTic(role, text) {
 }
 
 function playFeedback(frequency = 440, duration = 0.06) {
+    if (!gameSettings.sfx) return;
     try {
         if (!audioContext) audioContext = new AudioContext();
         const oscillator = audioContext.createOscillator();
@@ -169,6 +237,117 @@ function playFeedback(frequency = 440, duration = 0.06) {
     } catch (error) {
         console.warn("Feedback sonoro indisponível neste navegador.", error);
     }
+}
+
+function startDragSound() {
+    if (!gameSettings.sfx || dragSound) return;
+    try {
+        if (!audioContext) audioContext = new AudioContext();
+        const bufferSize = audioContext.sampleRate * 2;
+        const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let index = 0; index < bufferSize; index += 1) {
+            data[index] = (Math.random() * 2 - 1) * 0.45;
+        }
+        const source = audioContext.createBufferSource();
+        const filter = audioContext.createBiquadFilter();
+        const gain = audioContext.createGain();
+        source.buffer = buffer;
+        source.loop = true;
+        filter.type = "bandpass";
+        filter.frequency.value = 900;
+        filter.Q.value = 0.7;
+        gain.gain.value = 0.0001;
+        source.connect(filter).connect(gain).connect(audioContext.destination);
+        source.start();
+        dragSound = { source, filter, gain };
+    } catch (error) {
+        console.warn("Som de arrasto indisponível neste navegador.", error);
+    }
+}
+
+function updateDragSound(movementSpeed, element) {
+    if (!dragSound || !audioContext) return;
+    const intensity = Math.min(1, movementSpeed / 1.2);
+    const area = Math.max(1, element.offsetWidth * element.offsetHeight);
+    const referenceArea = 180 * 180;
+    const weight = Math.min(1.7, Math.max(0.65, Math.sqrt(area / referenceArea)));
+    const now = audioContext.currentTime;
+    const volume = 0.0001 + intensity * 0.014 * weight;
+    const frequency = 1200 - weight * 260 + intensity * 760;
+    dragSound.gain.gain.cancelScheduledValues(now);
+    dragSound.gain.gain.linearRampToValueAtTime(volume, now + 0.04);
+    dragSound.filter.frequency.cancelScheduledValues(now);
+    dragSound.filter.frequency.linearRampToValueAtTime(frequency, now + 0.06);
+}
+
+function stopDragSound() {
+    if (!dragSound) return;
+    const sound = dragSound;
+    dragSound = null;
+    try {
+        sound.gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.06);
+        sound.source.stop(audioContext.currentTime + 0.07);
+    } catch (error) {
+        console.warn("Não foi possível encerrar o som de arrasto.", error);
+    }
+}
+
+function startAmbientSound() {
+    if (!gameSettings.music || ambientTimer) return;
+    try {
+        if (!audioContext) audioContext = new AudioContext();
+        const progression = [
+            [73.42, 110, 146.83],
+            [65.41, 98, 130.81],
+            [77.78, 116.54, 155.56],
+            [58.27, 87.31, 116.54]
+        ];
+        let chordIndex = 0;
+        const playAmbientChord = () => {
+            if (!gameSettings.music || !audioContext) return;
+            const now = audioContext.currentTime;
+            const chord = progression[chordIndex++ % progression.length];
+            chord.forEach((frequency, index) => {
+                const oscillator = audioContext.createOscillator();
+                const filter = audioContext.createBiquadFilter();
+                const gain = audioContext.createGain();
+                oscillator.type = index === 0 ? "sine" : "triangle";
+                oscillator.frequency.setValueAtTime(frequency, now);
+                oscillator.detune.value = index === 2 ? -4 : 0;
+                filter.type = "lowpass";
+                filter.frequency.value = index === 0 ? 420 : 760;
+                filter.Q.value = 0.35;
+                gain.gain.setValueAtTime(0.0001, now);
+                gain.gain.exponentialRampToValueAtTime(index === 0 ? 0.022 : 0.009, now + 2.2);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + 8.5);
+                oscillator.connect(filter).connect(gain).connect(audioContext.destination);
+                oscillator.start(now + index * 0.18);
+                oscillator.stop(now + 8.7);
+            });
+        };
+        playAmbientChord();
+        ambientTimer = setInterval(playAmbientChord, 8200);
+    } catch (error) {
+        console.warn("Música ambiente indisponível neste navegador.", error);
+    }
+}
+
+function stopAmbientSound() {
+        if (ambientTimer) clearInterval(ambientTimer);
+        ambientTimer = null;
+    }
+
+function applySettings(startAudio = false) {
+        document.body.classList.toggle("reduced-motion", gameSettings.reducedMotion);
+        const sfx = document.getElementById("setting-sfx");
+        const music = document.getElementById("setting-music");
+        const reducedMotion = document.getElementById("setting-reduced-motion");
+        if (sfx) sfx.checked = gameSettings.sfx;
+        if (music) music.checked = gameSettings.music;
+        if (reducedMotion) reducedMotion.checked = gameSettings.reducedMotion;
+        if (startAudio && gameSettings.music) startAmbientSound();
+        else if (!gameSettings.music) stopAmbientSound();
 }
 
 function getRandomPosition(noteType = "post-it") {
@@ -204,6 +383,7 @@ function saveGame() {
         pendingRequest,
         pendingInterviews,
         conclusionAttempts,
+        settings: gameSettings,
         interviewSheet: interviewSheet ? {
             authorNoteId: interviewSheet.querySelector("[data-interview-slot='author']")?.dataset.interviewNoteId || null,
             topicNoteId: interviewSheet.querySelector("[data-interview-slot='topic']")?.dataset.interviewNoteId || null,
@@ -350,11 +530,15 @@ function createEvidenceCard(evidence, x, y, savedId = null) {
 
 function startDragging(element, event, isNew = false) {
     playFeedback(300, 0.04);
+    startDragSound();
     highestZ++;
     element.style.zIndex = highestZ;
     selectedItem = element;
     const startX = event.clientX;
     const startY = event.clientY;
+    let lastX = startX;
+    let lastY = startY;
+    let lastMoveTime = performance.now();
     const fromTrash = element.parentElement === trashContent;
     if (fromTrash) {
         document.body.appendChild(element);
@@ -377,11 +561,19 @@ function startDragging(element, event, isNew = false) {
         element.style.boxShadow = "-15px 22px 30px rgba(0,0,0,0.65)";
     }
     const onMouseMove = (moveEvent) => {
+        const now = performance.now();
+        const elapsed = Math.max(1, now - lastMoveTime);
+        const distance = Math.hypot(moveEvent.clientX - lastX, moveEvent.clientY - lastY);
+        updateDragSound(distance / elapsed, element);
+        lastX = moveEvent.clientX;
+        lastY = moveEvent.clientY;
+        lastMoveTime = now;
         element.style.left = `${initialLeft + moveEvent.clientX - startX}px`;
         element.style.top = `${initialTop + moveEvent.clientY - startY}px`;
         drawStrings();
     };
     const onMouseUp = () => {
+        stopDragSound();
         document.removeEventListener("mousemove", onMouseMove);
         document.removeEventListener("mouseup", onMouseUp);
         element.style.opacity = "1";
@@ -505,18 +697,62 @@ function assignInterviewNote(note) {
 }
 
 function updateInterviewSheetState(documentElement) {
-    const globalButton = document.getElementById("btn-make-interview");
-    if (!globalButton) return;
     if (!documentElement) {
-        globalButton.classList.add("hidden");
         return;
     }
+    const interviewButton = documentElement.querySelector("[data-make-interview]");
     const authorZone = documentElement.querySelector("[data-interview-slot='author']");
     const topicZone = documentElement.querySelector("[data-interview-slot='topic']");
-    if (!authorZone || !topicZone) return;
+    if (!interviewButton || !authorZone || !topicZone) return;
+    const questionSelect = documentElement.querySelector("[data-interview-question]");
+    if (questionSelect) {
+        const questions = currentCase.interviewQuestions?.[authorZone.dataset.interviewSenderId] || [];
+        const previous = questionSelect.value;
+        questionSelect.replaceChildren();
+        questions.forEach((question) => {
+            const option = document.createElement("option");
+            option.value = question;
+            option.textContent = question;
+            questionSelect.appendChild(option);
+        });
+        if (!questions.length) {
+            const option = document.createElement("option");
+            option.value = "";
+            option.textContent = "Nenhuma pergunta alternativa disponível";
+            questionSelect.appendChild(option);
+        } else if (questions.includes(previous)) {
+            questionSelect.value = previous;
+        }
+    }
     const ready = authorZone.dataset.interviewSenderId && topicZone.dataset.interviewContent &&
         !documentElement.dataset.interviewScheduled;
-    globalButton.classList.toggle("hidden", !ready);
+    const scheduled = documentElement.dataset.interviewScheduled === "true";
+    interviewButton.classList.toggle("hidden", !ready && !scheduled);
+    interviewButton.classList.toggle("scheduled", scheduled);
+    interviewButton.disabled = scheduled;
+    interviewButton.textContent = scheduled ? "ENTREVISTA AGENDADA" : "FAZER ENTREVISTA";
+}
+
+function scheduleInterview(documentElement) {
+    const authorZone = documentElement?.querySelector("[data-interview-slot='author']");
+    const topicZone = documentElement?.querySelector("[data-interview-slot='topic']");
+    if (!documentElement || !authorZone?.dataset.interviewSenderId || !topicZone?.dataset.interviewContent) return;
+    const questionSelect = documentElement.querySelector("[data-interview-question]");
+    pendingInterviews.push({
+        characterId: authorZone.dataset.interviewSenderId,
+        question: questionSelect?.value || topicZone.dataset.interviewContent
+    });
+    documentElement.dataset.interviewScheduled = "true";
+    documentElement.querySelectorAll("[data-interview-slot]").forEach((zone) => {
+        const selected = document.querySelector(`[data-note-id="${zone.dataset.interviewNoteId}"]`);
+        selected?.classList.remove("interview-selected-note");
+        delete zone.dataset.interviewNoteId;
+        delete zone.dataset.interviewSenderId;
+        delete zone.dataset.interviewContent;
+    });
+    if (questionSelect) questionSelect.value = "";
+    updateInterviewSheetState(documentElement);
+    saveGame();
 }
 
 function restoreInterviewSheet(savedSheet) {
@@ -643,6 +879,9 @@ function drawStrings() {
         line.setAttribute("stroke", "#a00");
         line.setAttribute("stroke-width", "3");
         line.setAttribute("opacity", "0.85");
+        const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+        title.textContent = `Relação: ${getInterviewItemContent(connection.from).slice(0, 60)} ↔ ${getInterviewItemContent(connection.to).slice(0, 60)}`;
+        line.appendChild(title);
         svgLayer.appendChild(line);
     });
 }
@@ -653,6 +892,10 @@ function updateCaseView() {
     setText("news-body", newspaper.body);
     setText("day-counter", day);
     document.getElementById("request-form").style.display = day >= 3 ? "block" : "none";
+    Object.keys(currentCase.documents)
+        .filter((documentDay) => Number(documentDay) <= day)
+        .forEach((documentDay) => deliverDocumentsForDay(Number(documentDay)));
+    deliverContradictionsForDay(day);
     updateInterviewSheetState(document.querySelector('[data-document-id="planilha-entrevistas"]'));
     document.getElementById("btn-conclude").classList.toggle("hidden", !hasDeliveredDocument("documento-conclusao"));
 }
@@ -679,6 +922,17 @@ function deliverNotesForDay(dayNumber) {
     (currentCase.dayNotes[dayNumber] || []).forEach((item) => {
         const position = getRandomPosition(item.role === "killer" ? "official" : "post-it");
         createNote(item.role, item.text, position.x, position.y, false, null, item.senderId);
+    });
+}
+
+function deliverContradictionsForDay(dayNumber) {
+    if (dayNumber < 4) return;
+    (currentCase.contradictions || []).forEach((item, index) => {
+        const noteId = `contradiction-${index + 1}`;
+        if (document.querySelector(`[data-note-id="${noteId}"]`)) return;
+        const position = getRandomPosition("official");
+        const note = createNote("helper", `${item.title}\n\n${item.body}`, position.x, position.y, false, noteId);
+        note.dataset.contradiction = "true";
     });
 }
 
@@ -726,6 +980,7 @@ function createOfficialDocument(documentData, x, y, savedId = null) {
             createConclusionChoice("Houve encobrimento?", "document-has-coverup", "coverup"),
             createConclusionPersonField("accomplice", "Responsável pelo encobrimento")
         );
+        checklist.appendChild(createEvidenceChecklist());
         const methodLabel = document.createElement("label");
         methodLabel.textContent = "Reconstrução dos acontecimentos";
         const method = document.createElement("textarea");
@@ -744,7 +999,7 @@ function createOfficialDocument(documentData, x, y, savedId = null) {
         documentElement.appendChild(checklist);
         submit.addEventListener("click", () => {
             syncConclusionControls(documentElement);
-            submitConclusion(status);
+            submitConclusion(status, documentElement);
         });
     } else if (documentData.rows) {
         const table = document.createElement("div");
@@ -771,7 +1026,24 @@ function createOfficialDocument(documentData, x, y, savedId = null) {
         topicZone.dataset.interviewSlot = "topic";
         topicZone.textContent = "NOTA DO TEMA";
         slots.append(authorZone, topicZone);
-        documentElement.append(instructions, slots);
+        const interviewButton = document.createElement("button");
+        interviewButton.type = "button";
+        interviewButton.className = "mystery-button hidden";
+        interviewButton.dataset.makeInterview = "true";
+        interviewButton.textContent = "FAZER ENTREVISTA";
+        interviewButton.addEventListener("click", () => scheduleInterview(documentElement));
+        const questionLabel = document.createElement("label");
+        questionLabel.className = "interview-question-label";
+        questionLabel.textContent = "PERGUNTA PARA A ENTREVISTA";
+        const questionSelect = document.createElement("select");
+        questionSelect.dataset.interviewQuestion = "true";
+        const placeholder = document.createElement("option");
+        placeholder.value = "";
+        placeholder.textContent = "Escolha uma pergunta depois de selecionar o autor";
+        questionSelect.appendChild(placeholder);
+        questionLabel.appendChild(questionSelect);
+        documentElement.append(instructions, slots, questionLabel, interviewButton);
+        updateInterviewSheetState(documentElement);
     }
     document.body.appendChild(documentElement);
     makeDraggable(documentElement);
@@ -793,6 +1065,28 @@ function createConclusionChoice(labelText, name, field) {
         input.value = value;
         input.dataset.conclusionChoice = field;
         label.append(input, value === "yes" ? " Sim" : " Não");
+        fieldset.appendChild(label);
+    });
+    return fieldset;
+}
+
+function createEvidenceChecklist() {
+    const fieldset = document.createElement("fieldset");
+    fieldset.className = "evidence-checklist";
+    const legend = document.createElement("legend");
+    legend.textContent = "Quais evidências sustentam sua conclusão?";
+    fieldset.appendChild(legend);
+    [
+        ["corrimao", "Marca no corrimão"],
+        ["camera", "Câmera desligada"],
+        ["pagina-azul", "Página azul"]
+    ].forEach(([value, labelText]) => {
+        const label = document.createElement("label");
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.dataset.conclusionEvidence = "true";
+        input.value = value;
+        label.append(input, ` ${labelText}`);
         fieldset.appendChild(label);
     });
     return fieldset;
@@ -857,7 +1151,8 @@ function getConclusionState(source = document) {
         hasCoverup: coverupChoice?.value || "",
         culprit: root.querySelector("[data-conclusion-person='culprit'], #conclusion-culprit")?.value || "",
         accomplice: root.querySelector("[data-conclusion-person='accomplice'], #conclusion-accomplice")?.value || "",
-        method: root.querySelector("[data-conclusion-method='document'], #conclusion-method")?.value || ""
+        method: root.querySelector("[data-conclusion-method='document'], #conclusion-method")?.value || "",
+        evidence: [...root.querySelectorAll("[data-conclusion-evidence]:checked")].map((input) => input.value)
     };
 }
 
@@ -880,6 +1175,9 @@ function syncConclusionControls(source) {
         document.getElementById("conclusion-culprit").value = state.culprit;
         document.getElementById("conclusion-accomplice").value = state.accomplice;
         document.getElementById("conclusion-method").value = state.method;
+        modal.querySelectorAll("[data-conclusion-evidence]").forEach((input) => {
+            input.checked = state.evidence.includes(input.value);
+        });
         updateConclusionVisibility(modal, state);
     }
     if (source === modal && documentElement) {
@@ -890,16 +1188,20 @@ function syncConclusionControls(source) {
         documentElement.querySelector("[data-conclusion-person='culprit']").value = state.culprit;
         documentElement.querySelector("[data-conclusion-person='accomplice']").value = state.accomplice;
         documentElement.querySelector("[data-conclusion-method='document']").value = state.method;
+        documentElement.querySelectorAll("[data-conclusion-evidence]").forEach((input) => {
+            input.checked = state.evidence.includes(input.value);
+        });
         updateConclusionVisibility(documentElement, state);
     }
     if (documentElement) updateConclusionVisibility(documentElement, state);
 }
 
-function submitConclusion(result) {
-    const state = getConclusionState(document.getElementById("conclusion-panel"));
+function submitConclusion(result, source = document.getElementById("conclusion-panel")) {
+    const state = getConclusionState(source);
     if (!state.hasCulprit || !state.hasCoverup ||
         (state.hasCulprit === "yes" && !state.culprit) ||
-        (state.hasCoverup === "yes" && !state.accomplice)) {
+        (state.hasCoverup === "yes" && !state.accomplice) ||
+        state.evidence.length < 2) {
         result.textContent = "Complete o checklist e selecione as pessoas indicadas antes de entregar.";
         result.style.color = "#991b1b";
         return;
@@ -908,18 +1210,20 @@ function submitConclusion(result) {
         state.culprit === currentCase.solution.culprit &&
         state.hasCoverup === "yes" &&
         state.accomplice === currentCase.solution.accomplice;
-    if (!correct) {
+    const evidenceCorrect = currentCase.solution.evidence.every((id) => state.evidence.includes(id));
+    if (!correct || !evidenceCorrect) {
         conclusionAttempts = Math.max(0, conclusionAttempts - 1);
         updateAttemptMarkers();
         saveGame();
     }
-    result.textContent = correct
+    const accepted = correct && evidenceCorrect;
+    result.textContent = accepted
         ? "Conclusão aceita. Daniel Ferraz causou a morte e Augusto Vale ajudou no encobrimento."
         : conclusionAttempts
             ? `Conclusão incorreta. Você perdeu uma tentativa. Restam ${conclusionAttempts}.`
             : "Conclusão incorreta. As três tentativas foram perdidas.";
-    result.style.color = correct ? "#166534" : "#92400e";
-    if (!correct && conclusionAttempts === 0) {
+    result.style.color = accepted ? "#166534" : "#92400e";
+    if (!accepted && conclusionAttempts === 0) {
         document.querySelectorAll("#btn-submit-conclusion, [data-conclusion-submit='document']")
             .forEach((button) => { button.disabled = true; });
         beginFailureSequence();
@@ -978,11 +1282,31 @@ function restartAfterDismissal() {
 function deliverInterviewAnswers() {
     pendingInterviews.forEach((request) => {
         const character = currentCase.characters.find((item) => item.id === request.characterId);
-        const response = currentCase.interviews[request.characterId] || "A pessoa não respondeu à pergunta.";
+        const response = getInterviewResponse(request);
         const position = getRandomPosition();
         createNote("helper", `RESPOSTA DE ${character.name.toUpperCase()}\n\n${response}`, position.x, position.y, false, null, request.characterId);
     });
     pendingInterviews = [];
+}
+
+function getInterviewResponse(request) {
+    const responses = {
+        "augusto_vale": {
+            "Quem tinha acesso ao terceiro andar?": "Apenas a gerência e a manutenção. Eu não controlava cada chave.",
+            "Por que o reparo do corrimão foi cancelado?": "O reparo não era urgente. Foi uma decisão administrativa, não minha."
+        },
+        "daniel_ferraz": {
+            "Quando você viu Elisa pela última vez?": "Na saída do hospital. Ela estava com uma pasta azul e parecia decidida a falar.",
+            "Por que tentou impedir que ela divulgasse os documentos?": "Eu tentei impedir um escândalo, não a verdade. Ela não entendia as consequências."
+        },
+        "renata_moura": {
+            "Elisa mencionou alguém pelo nome?": "Ela disse que Daniel aparecia nos registros, mas pediu que eu não o confrontasse.",
+            "Por que ela foi ao Hotel Mirante?": "Acreditava que encontraria ali a pessoa que estava alterando os arquivos."
+        }
+    };
+    return responses[request.characterId]?.[request.question] ||
+        currentCase.interviews[request.characterId] ||
+        "A pessoa não respondeu à pergunta.";
 }
 
 function advanceDay() {
@@ -994,6 +1318,7 @@ function advanceDay() {
         day++;
         updateCaseView();
         deliverNotesForDay(day);
+        deliverContradictionsForDay(day);
         deliverEvidenceForDay(day);
         deliverDocumentsForDay(day);
         deliverInterviewAnswers();
@@ -1045,6 +1370,18 @@ function restoreNotes(saved) {
     checkTrashEmpty();
 }
 
+function togglePauseMenu() {
+    const menu = document.getElementById("pause-menu");
+    const dismissal = document.getElementById("dismissal-overlay");
+    if (!menu || dismissal && !dismissal.classList.contains("hidden")) return;
+    menu.classList.toggle("hidden");
+    if (!menu.classList.contains("hidden")) document.getElementById("btn-resume-game").focus();
+}
+
+function closePauseMenu() {
+    document.getElementById("pause-menu")?.classList.add("hidden");
+}
+
 function init() {
     updateCaseView();
     const suspect1 = document.getElementById("suspect1");
@@ -1070,11 +1407,13 @@ function init() {
         conclusionAttempts = Number.isInteger(saved.conclusionAttempts)
             ? Math.max(0, Math.min(3, saved.conclusionAttempts))
             : 3;
+        gameSettings = { ...gameSettings, ...(saved.settings || {}) };
         highestZ = saved.highestZ || highestZ;
         document.querySelectorAll(".dynamic-note").forEach((note) => note.remove());
         restoreNotes(saved);
         updateCaseView();
     }
+    applySettings();
     if (conclusionAttempts < 3) updateAttemptMarkers();
     if (conclusionAttempts === 0) setTimeout(beginFailureSequence, 400);
     document.getElementById("postit-pad").addEventListener("mousedown", (event) => {
@@ -1107,36 +1446,17 @@ function init() {
         saveGame();
     });
     document.getElementById("btn-end-day").addEventListener("click", advanceDay);
-    document.getElementById("btn-reset-case").addEventListener("click", resetGame);
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") togglePauseMenu();
+    });
+    document.getElementById("btn-resume-game").addEventListener("click", closePauseMenu);
+    document.getElementById("btn-close-pause-menu").addEventListener("click", closePauseMenu);
     const dismissalSignature = document.getElementById("dismissal-signature-input");
     const dismissalButton = document.getElementById("btn-sign-dismissal");
     dismissalSignature.addEventListener("input", () => {
         dismissalButton.disabled = !dismissalSignature.value.trim();
     });
     dismissalButton.addEventListener("click", restartAfterDismissal);
-    document.getElementById("btn-make-interview").addEventListener("click", () => {
-        const documentElement = document.querySelector('[data-document-id="planilha-entrevistas"]');
-        const authorZone = documentElement?.querySelector("[data-interview-slot='author']");
-        const topicZone = documentElement?.querySelector("[data-interview-slot='topic']");
-        if (!documentElement || !authorZone?.dataset.interviewSenderId || !topicZone?.dataset.interviewContent) return;
-        pendingInterviews.push({
-            characterId: authorZone.dataset.interviewSenderId,
-            question: topicZone.dataset.interviewContent
-        });
-        documentElement.dataset.interviewScheduled = "true";
-        const button = document.getElementById("btn-make-interview");
-        button.textContent = "ENTREVISTA AGENDADA";
-        button.classList.add("scheduled");
-        button.disabled = true;
-        documentElement.querySelectorAll("[data-interview-slot]").forEach((zone) => {
-            const selected = document.querySelector(`[data-note-id="${zone.dataset.interviewNoteId}"]`);
-            selected?.classList.remove("interview-selected-note");
-            delete zone.dataset.interviewNoteId;
-            delete zone.dataset.interviewSenderId;
-            delete zone.dataset.interviewContent;
-        });
-        saveGame();
-    });
     const conclusionPanel = document.getElementById("conclusion-panel");
     const culprit = document.getElementById("conclusion-culprit");
     const accomplice = document.getElementById("conclusion-accomplice");
@@ -1173,8 +1493,10 @@ function init() {
     });
     document.getElementById("btn-start-case").addEventListener("click", () => {
     document.getElementById("intro-modal").classList.add("hidden");
+    applySettings(true);
     playFeedback(520, 0.08);
     });
+    document.addEventListener("pointerdown", () => startAmbientSound(), { once: true });
     window.addEventListener("resize", drawStrings);
     checkTrashEmpty();
     drawStrings();

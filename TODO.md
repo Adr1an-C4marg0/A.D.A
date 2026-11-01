@@ -27,6 +27,9 @@
 - [x] Adicionar suporte inicial a teclado, foco e descrições acessíveis.
 - [x] Adicionar tratamento básico para estado salvo inválido.
 - [x] Adicionar feedback sonoro e visual.
+- [x] Adicionar música ambiente procedural e feedback sonoro contextual.
+- [x] Manter o quadro principal como interface de investigação, sem lupa auxiliar.
+- [x] Remover o menu superior, o arquivo separado e o painel de depoimentos da interface final.
 - [x] Substituir o conteúdo genérico do protótipo pelo Caso 01.
 - [x] Implementar entrevistas.
 - [x] Implementar conclusão principal.
