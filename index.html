@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesa da A.D.A. - O Caso 404</title>
+    <title>Mesa da A.D.A. - A Queda do Quarto 304</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -55,6 +55,42 @@
             <button id="btn-request" class="w-full bg-gray-800 text-white text-xs py-2 hover:bg-gray-700">CARIMBAR SOLICITAÇÃO</button>
             <p id="req-status" class="text-xs text-red-600 mt-2 font-bold text-center h-4"></p>
         </div>
+
+        <div id="interview-panel" class="completion-modal hidden" role="dialog" aria-modal="true" aria-labelledby="interview-title">
+            <div class="completion-card interview-card">
+                <h2 id="interview-title">ENTREVISTAS</h2>
+                <p>Escreva uma pergunta para cada pessoa. A resposta chegará no próximo dia.</p>
+                <label for="interview-person">Pessoa</label>
+                <select id="interview-person"></select>
+                <label for="interview-question">Pergunta</label>
+                <textarea id="interview-question" rows="4" placeholder="O que você quer perguntar?"></textarea>
+                <div class="interview-actions">
+                    <button id="btn-send-interview" type="button">ENVIAR PERGUNTA</button>
+                    <button id="btn-close-interview" type="button">FECHAR</button>
+                </div>
+                <p id="interview-status" class="form-status" role="status"></p>
+            </div>
+        </div>
+
+        <div id="conclusion-panel" class="completion-modal hidden" role="dialog" aria-modal="true" aria-labelledby="conclusion-title">
+            <div class="completion-card conclusion-card">
+                <h2 id="conclusion-title">CONCLUSÃO DO CASO</h2>
+                <label for="conclusion-culprit">Responsável pela morte</label>
+                <select id="conclusion-culprit"></select>
+                <label for="conclusion-accomplice">Responsável pelo encobrimento</label>
+                <select id="conclusion-accomplice"></select>
+                <label for="conclusion-method">O que aconteceu?</label>
+                <textarea id="conclusion-method" rows="4" placeholder="Descreva sua conclusão..."></textarea>
+                <div class="interview-actions">
+                    <button id="btn-submit-conclusion" type="button">ENTREGAR CONCLUSÃO</button>
+                    <button id="btn-close-conclusion" type="button">VOLTAR AO QUADRO</button>
+                </div>
+                <p id="conclusion-result" class="form-status" role="status"></p>
+            </div>
+        </div>
+
+        <button id="btn-interviews" class="feature-button hidden" type="button">ABRIR ENTREVISTAS</button>
+        <button id="btn-conclude" class="feature-button hidden" type="button">CONCLUIR CASO</button>
     </div>
 
     <div id="suspect1" class="board-item photo" style="left: 400px; top: 150px; transform: rotate(3deg); z-index: 10;">

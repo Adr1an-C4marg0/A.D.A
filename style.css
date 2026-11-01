@@ -55,6 +55,63 @@ button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
     background: #172033;
     border: 0;
 }
+.interview-card,
+.conclusion-card {
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+    text-align: left;
+}
+.interview-card h2,
+.conclusion-card h2 {
+    text-align: center;
+}
+.interview-card label,
+.conclusion-card label {
+    font: 700 .72rem 'Roboto', sans-serif;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+}
+.interview-card select,
+.interview-card textarea,
+.conclusion-card select,
+.conclusion-card textarea {
+    width: 100%;
+    padding: .55rem;
+    color: #172033;
+    background: #fff;
+    border: 1px solid #bca982;
+    font: .85rem 'Roboto', sans-serif;
+    resize: vertical;
+}
+.interview-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    justify-content: center;
+    margin-top: .5rem;
+}
+.form-status {
+    min-height: 1.2rem;
+    margin: .25rem 0 0;
+    font: .75rem 'Roboto', sans-serif;
+    text-align: center;
+}
+.feature-button {
+    position: fixed;
+    right: 1.5rem;
+    z-index: 50;
+    padding: .55rem .8rem;
+    color: #e2e8f0;
+    background: rgba(15, 23, 42, .94);
+    border: 1px solid #475569;
+    border-radius: .25rem;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+}
+#btn-interviews { bottom: 5.2rem; }
+#btn-conclude { bottom: 2rem; }
 
 #strings-layer { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 5; }
 
@@ -126,7 +183,7 @@ button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
 }
 
 .official-record::before {
-    content: "ASSOCIAÇÃO DE DETETIVES ANÔNIMOS\a ATA DE REGISTRO INTERNO";
+    content: "AGÊNCIA DE DETETIVES ANÔNIMOS\a ATA DE REGISTRO INTERNO";
     white-space: pre;
     position: absolute;
     top: 14px;

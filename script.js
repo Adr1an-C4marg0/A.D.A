@@ -1,30 +1,64 @@
 // ==========================================================================
 // DADOS DOS CASOS
 // ==========================================================================
-const casesDB = [
-    {
-        id: "caso_corvo",
-        title: "MORTE NO BECO DO CORVO",
-        victim: { name: "Roberto Silva", photo: "assets/img/suspects/silva.jpg", desc: "Contador. Morto no beco. Tinha dívidas." },
-        witness: { name: "Ana C.", photo: "assets/img/suspects/ana.jpg", desc: "Garçonete. Viu a vítima com um homem de sobretudo." },
-        weapon: "faca",
-        newsDay1: "Um homem não identificado foi encontrado sem vida atrás do bar 'O Corvo'. A A.D.A. assumiu a análise dos dados.",
-        newsDay2: "A polícia confirmou: o corpo é de Roberto Silva, contador local. Uma garçonete, Ana C., prestou depoimento.",
-        newsDay3: "Uma faca encontrada na cena sumiu misteriosamente da sala de evidências da polícia. A plataforma liberou consultas a antecedentes.",
-        killerClue: "agiotas locais"
+const casesDB = [{
+    id: "caso_quarto_304",
+    title: "A QUEDA DO QUARTO 304",
+    victim: {
+        id: "elisa_moura", name: "Elisa Moura", role: "vítima",
+        photo: "assets/img/suspects/ana.jpg",
+        desc: "Arquivista do Hospital Municipal Santa Augusta. Encontrada morta após uma queda no Hotel Mirante."
     },
-    {
-        id: "caso_estacao",
-        title: "O ECO DA ESTAÇÃO",
-        victim: { name: "Lia Martins", photo: "assets/img/suspects/ana.jpg", desc: "Arquivista. Encontrada na plataforma desativada. Investigava contratos antigos." },
-        witness: { name: "Sr. Silva", photo: "assets/img/suspects/silva.jpg", desc: "Vigia noturno. Ouviu uma discussão perto da sala de controle." },
-        weapon: "lanterna",
-        newsDay1: "A plataforma desativada amanheceu isolada. A A.D.A. foi chamada para reconstruir os últimos passos da vítima.",
-        newsDay2: "A vítima foi identificada como Lia Martins, arquivista municipal. O vigia prestou depoimento.",
-        newsDay3: "A sala de controle foi arrombada e uma lanterna sumiu da perícia. Consultas de antecedentes foram liberadas.",
-        killerClue: "contratos municipais"
-    }
-];
+    witness: {
+        id: "renata_moura", name: "Renata Moura", role: "familiar",
+        photo: "assets/img/suspects/silva.jpg",
+        desc: "Irmã de Elisa. Sabia que ela investigava alterações em documentos hospitalares."
+    },
+    newspapers: {
+        1: { title: "ARQUIVISTA MORRE APÓS QUEDA EM HOTEL", body: "Elisa Moura, de 31 anos, morreu após cair da escada de emergência do Hotel Mirante durante um apagão. A polícia trabalha com a hipótese de acidente." },
+        2: { title: "POLÍCIA MANTÉM HIPÓTESE DE ACIDENTE", body: "A família contesta a versão oficial e afirma que Elisa investigava irregularidades em documentos hospitalares. O hotel confirma que as câmeras ficaram desligadas por onze minutos." },
+        3: { title: "DOCUMENTOS HOSPITALARES PODEM ESTAR LIGADOS À MORTE", body: "Pessoas próximas afirmam que Elisa vinha investigando alterações em arquivos. A direção do hospital declarou não haver indícios de fraude." },
+        4: { title: "FUNCIONÁRIO DO HOSPITAL NEGA ENVOLVIMENTO", body: "Daniel Ferraz nega ter conhecido Elisa fora do trabalho. Registros indicam que os dois trocaram mensagens na noite anterior à morte." },
+        5: { title: "A INVESTIGAÇÃO DA A.D.A. CONTINUA", body: "Novas informações contradizem a hipótese inicial de acidente. A Agência de Detetives Anônimos ainda não divulgou sua conclusão." }
+    },
+    characters: [
+        { id: "elisa_moura", name: "Elisa Moura", role: "vítima" },
+        { id: "augusto_vale", name: "Augusto Vale", role: "gerente do hotel" },
+        { id: "renata_moura", name: "Renata Moura", role: "familiar" },
+        { id: "daniel_ferraz", name: "Daniel Ferraz", role: "suspeito" },
+        { id: "livia_campos", name: "Lívia Campos", role: "jornalista / predecessor" },
+        { id: "marcelo_nunes", name: "Marcelo Nunes", role: "policial" }
+    ],
+    dayNotes: {
+        2: [
+            { role: "helper", text: "A senhora Moura chegou sozinha. Não conversei com ela na recepção e permaneci no balcão durante o apagão. — Augusto Vale" },
+            { role: "helper", text: "Minha irmã estava nervosa há semanas. Ela dizia que alguém estava mexendo nos arquivos do hospital. Elisa não bebia. — Renata Moura" },
+            { role: "helper", text: "Elisa estava obcecada por um erro no sistema de arquivos. Não sei por que foi ao Hotel Mirante. — Daniel Ferraz" },
+            { role: "killer", text: "Não havia sinais claros de luta no quarto. A vítima apresentava álcool no sangue. Não encontramos motivo para suspeitar de homicídio. — Marcelo Nunes" },
+            { role: "predecessor", text: "Não comece pela garrafa. Comece pelo corrimão. Procure o registro da manutenção do hotel. Não peça o arquivo com meu nome." }
+        ],
+        4: [
+            { role: "predecessor", text: "Você já encontrou a marca no corrimão. Agora procure quem tinha acesso aos arquivos de Elisa e às câmeras do hotel. Uma pessoa está mentindo sobre onde estava. Outra está mentindo sobre o que sabia." }
+        ]
+    },
+    files: {
+        elisa_moura: { heading: "ARQUIVO: ELISA MOURA", stamp: "VÍTIMA", body: "O arquivo original desapareceu três vezes. A versão digital sempre retorna corrigida." },
+        daniel_ferraz: { heading: "ARQUIVO: DANIEL FERRAZ", stamp: "SUSPEITO", body: "Responsável pela digitalização. Acessou arquivos fora do horário de trabalho na semana anterior à morte." },
+        augusto_vale: { heading: "ARQUIVO: AUGUSTO VALE", stamp: "HOTEL", body: "O telefone da recepção fez ligações internas às 22h06 e 22h08. Isso contradiz seu depoimento." },
+        livia_campos: { heading: "ARQUIVO: LÍVIA CAMPOS", stamp: "JORNALISTA", body: "Recebeu às 22h22 a mensagem: “Ela se matou. Não procure outra explicação.” A morte só foi divulgada às 23h10." },
+        marcelo_nunes: { heading: "ARQUIVO: MARCELO NUNES", stamp: "POLÍCIA", body: "A investigação não examinou adequadamente o corrimão e sofreu pressão para priorizar outra ocorrência." },
+        manutencao_hotel: { heading: "REGISTRO DE MANUTENÇÃO", stamp: "EVIDÊNCIA", body: "O corrimão tinha uma marca de impacto. O reparo foi cancelado por ordem de Augusto Vale." }
+    },
+    interviews: {
+        augusto_vale: "Eu fui verificar o quadro de energia. O hotel estava cheio. Não tive motivo para ir ao terceiro andar.",
+        renata_moura: "Elisa me disse: “Se eu não voltar, procure a página azul.”",
+        daniel_ferraz: "Ela ia destruir a vida de muita gente por causa de arquivos que nem entendia.",
+        livia_campos: "Recebi uma mensagem de um número descartável. Não sabia se era verdade, mas publiquei a informação.",
+        marcelo_nunes: "A cena parecia um acidente. Admito que não investigamos o suficiente o corrimão."
+    },
+    solution: { culprit: "daniel_ferraz", accomplice: "augusto_vale" },
+    predecessorId: "livia_campos"
+}];
 
 const paperColors = [
     { bg: "#bae6fd", color: "#082f49" },
@@ -33,7 +67,7 @@ const paperColors = [
     { bg: "#fef08a", color: "#854d0e" }
 ];
 const fonts = ["'Caveat', cursive", "'Rock Salt', cursive", "'Special Elite', monospace", "'Shadows Into Light', cursive"];
-const STORAGE_KEY = "ada-caso-404-v1";
+const STORAGE_KEY = "ada-case-progress-v2";
 const STATIC_IDS = new Set(["daily-news", "request-form", "suspect1", "suspect2"]);
 
 function shuffle(array) {
@@ -67,6 +101,7 @@ let highestZ = 100;
 let connections = [];
 let day = 1;
 let pendingRequest = null;
+let pendingInterviews = [];
 let tempLine = null;
 let startPin = null;
 let selectedItem = null;
@@ -126,7 +161,7 @@ function saveGame() {
         .filter((connection) => connection.from.dataset.noteId && connection.to.dataset.noteId)
         .map((connection) => [connection.from.dataset.noteId, connection.to.dataset.noteId]);
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        caseId: currentCase.id, day, pendingRequest, highestZ, notes, connections: connectionIds
+        caseId: currentCase.id, day, pendingRequest, pendingInterviews, highestZ, notes, connections: connectionIds
     }));
 }
 
@@ -219,7 +254,8 @@ function createNote(roleKey, content, x, y, isDossier = false, savedId = null) {
         const profile = adaProfiles[roleKey];
         note.style.backgroundColor = profile.color.bg;
         note.style.color = profile.color.color;
-        note.style.fontFamily = profile.font;
+        note.style.fontFamily = roleKey === "killer" ? "'Roboto', sans-serif" : profile.font;
+        if (roleKey === "killer") note.style.fontWeight = "500";
         if (profile.color.border) note.style.border = profile.color.border;
         const body = document.createElement("div");
         body.textContent = applyVocalTic(roleKey, content);
@@ -427,25 +463,44 @@ function drawStrings() {
 }
 
 function updateCaseView() {
-    const news = day === 1 ? currentCase.newsDay1 : day === 2 ? currentCase.newsDay2 : currentCase.newsDay3;
-    setText("news-title", day === 1 ? currentCase.title : day === 2 ? "VÍTIMA IDENTIFICADA" : "FALHA NA EVIDÊNCIA");
-    setText("news-body", news);
+    const newspaper = currentCase.newspapers[day] || currentCase.newspapers[5];
+    setText("news-title", newspaper.title);
+    setText("news-body", newspaper.body);
     setText("day-counter", day);
     document.getElementById("request-form").style.display = day >= 3 ? "block" : "none";
+    document.getElementById("btn-interviews").classList.toggle("hidden", day < 5);
+    document.getElementById("btn-conclude").classList.toggle("hidden", day < 5);
 }
 
 function showDossier(query) {
-    const normalized = query.toLowerCase();
+    const normalized = query.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
     const position = getRandomPosition("dossier");
-    let data;
-    if (normalized.includes(currentCase.victim.name.toLowerCase().split(" ")[0])) {
-        data = { heading: `ARQUIVO: ${currentCase.victim.name.toUpperCase()}`, stamp: "VÍTIMA", body: currentCase.victim.desc, success: true };
-    } else if (normalized.includes(currentCase.witness.name.toLowerCase().split(" ")[0])) {
-        data = { heading: `ARQUIVO: ${currentCase.witness.name.toUpperCase()}`, stamp: "TESTEMUNHA", body: currentCase.witness.desc, success: true };
-    } else {
-        data = { heading: "A.D.A. SYSTEM", stamp: "INEXISTENTE", body: `ALVO: "${query.toUpperCase()}" não localizado nos arquivos estaduais.`, success: false };
-    }
+    const character = currentCase.characters.find((item) => {
+        const name = item.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        return normalized === name || normalized === name.split(" ")[0] || name.includes(normalized);
+    });
+    const file = character ? currentCase.files[character.id] : currentCase.files[normalized];
+    const data = file
+        ? { ...file, success: true }
+        : { heading: "A.D.A. SYSTEM", stamp: "INEXISTENTE", body: `ALVO: "${query.toUpperCase()}" não localizado nos arquivos da agência.`, success: false };
     createNote("dossier", data, position.x, position.y, true);
+}
+
+function deliverNotesForDay(dayNumber) {
+    (currentCase.dayNotes[dayNumber] || []).forEach((item) => {
+        const position = getRandomPosition(item.role === "killer" ? "official" : "post-it");
+        createNote(item.role, item.text, position.x, position.y);
+    });
+}
+
+function deliverInterviewAnswers() {
+    pendingInterviews.forEach((request) => {
+        const character = currentCase.characters.find((item) => item.id === request.characterId);
+        const response = currentCase.interviews[request.characterId] || "A pessoa não respondeu à pergunta.";
+        const position = getRandomPosition();
+        createNote("helper", `RESPOSTA DE ${character.name.toUpperCase()}\n\nPERGUNTA: ${request.question}\n\n${response}`, position.x, position.y);
+    });
+    pendingInterviews = [];
 }
 
 function advanceDay() {
@@ -456,19 +511,8 @@ function advanceDay() {
     endDayTimer = setTimeout(() => {
         day++;
         updateCaseView();
-        if (day === 2) {
-            const pos = getRandomPosition();
-            createNote("helper", `olá. também peguei esse caso. a testemunha, ${currentCase.witness.name}, parece saber quem fez isso.`, pos.x, pos.y);
-        } else if (day === 3) {
-            const p1 = getRandomPosition();
-            const p2 = getRandomPosition("official");
-            createNote("larper", `A ${currentCase.weapon.toUpperCase()} FOI ROUBADA! O GOVERNO ESTÁ POR TRÁS DISSO! EU TENHO CERTEZA!`, p1.x, p1.y);
-            createNote("killer", `Colegas, a ferramenta de Requisição foi liberada no sistema hoje. Foquem nos ${currentCase.killerClue}.`, p2.x, p2.y);
-        } else if (day === 4) {
-            const p1 = getRandomPosition();
-            createNote("predecessor", "Eles estau manipulandu us dadus de mesa. Nau cuinfe nu sistema uficial.", p1.x, p1.y);
-            if (connections.length) connections.pop();
-        }
+        deliverNotesForDay(day);
+        deliverInterviewAnswers();
         if (pendingRequest) {
             showDossier(pendingRequest);
             pendingRequest = null;
@@ -503,8 +547,7 @@ function restoreNotes(saved) {
 }
 
 function init() {
-    document.getElementById("news-title").textContent = currentCase.title;
-    document.getElementById("news-body").textContent = currentCase.newsDay1;
+    updateCaseView();
     const suspect1 = document.getElementById("suspect1");
     const suspect2 = document.getElementById("suspect2");
     suspect1.querySelector("img").src = currentCase.victim.photo;
@@ -519,6 +562,7 @@ function init() {
     if (saved) {
         day = saved.day;
         pendingRequest = saved.pendingRequest;
+        pendingInterviews = saved.pendingInterviews || [];
         highestZ = saved.highestZ || highestZ;
         document.querySelectorAll(".dynamic-note").forEach((note) => note.remove());
         restoreNotes(saved);
@@ -555,6 +599,51 @@ function init() {
     });
     document.getElementById("btn-end-day").addEventListener("click", advanceDay);
     document.getElementById("btn-reset-case").addEventListener("click", resetGame);
+    const interviewPanel = document.getElementById("interview-panel");
+    const interviewPerson = document.getElementById("interview-person");
+    currentCase.characters.filter((item) => item.id !== "elisa_moura").forEach((character) => {
+        const option = document.createElement("option");
+        option.value = character.id;
+        option.textContent = `${character.name} — ${character.role}`;
+        interviewPerson.appendChild(option);
+    });
+    document.getElementById("btn-interviews").addEventListener("click", () => interviewPanel.classList.remove("hidden"));
+    document.getElementById("btn-close-interview").addEventListener("click", () => interviewPanel.classList.add("hidden"));
+    document.getElementById("btn-send-interview").addEventListener("click", () => {
+        const question = document.getElementById("interview-question").value.trim();
+        const status = document.getElementById("interview-status");
+        if (!question) {
+            status.textContent = "Escreva uma pergunta antes de enviar.";
+            status.style.color = "#991b1b";
+            return;
+        }
+        pendingInterviews.push({ characterId: interviewPerson.value, question });
+        document.getElementById("interview-question").value = "";
+        status.textContent = "Pergunta registrada. A resposta chegará no próximo dia.";
+        status.style.color = "#166534";
+        saveGame();
+    });
+    const conclusionPanel = document.getElementById("conclusion-panel");
+    const culprit = document.getElementById("conclusion-culprit");
+    const accomplice = document.getElementById("conclusion-accomplice");
+    currentCase.characters.filter((item) => item.id !== "elisa_moura").forEach((character) => {
+        [culprit, accomplice].forEach((select) => {
+            const option = document.createElement("option");
+            option.value = character.id;
+            option.textContent = character.name;
+            select.appendChild(option);
+        });
+    });
+    document.getElementById("btn-conclude").addEventListener("click", () => conclusionPanel.classList.remove("hidden"));
+    document.getElementById("btn-close-conclusion").addEventListener("click", () => conclusionPanel.classList.add("hidden"));
+    document.getElementById("btn-submit-conclusion").addEventListener("click", () => {
+        const result = document.getElementById("conclusion-result");
+        const correct = culprit.value === currentCase.solution.culprit && accomplice.value === currentCase.solution.accomplice;
+        result.textContent = correct
+            ? "Conclusão aceita. Daniel Ferraz causou a morte e Augusto Vale ajudou no encobrimento."
+            : "Conclusão registrada. Algumas relações ainda não correspondem às evidências disponíveis.";
+        result.style.color = correct ? "#166534" : "#92400e";
+    });
     document.getElementById("btn-start-case").addEventListener("click", () => {
     document.getElementById("intro-modal").classList.add("hidden");
     playFeedback(520, 0.08);
