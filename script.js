@@ -7,73 +7,68 @@ const casesDB = [{
     victim: {
         id: "elisa_moura", name: "Elisa Moura", role: "vítima",
         photo: "assets/img/cases/quarto-304/elisa-moura.jpg",
-        desc: "Arquivista do Hospital Municipal Santa Augusta. Encontrada morta após uma queda no Hotel Mirante."
+        desc: "Arquivista do Hospital Municipal Santa Augusta. Encontrada morta no pátio interno do Hotel Mirante, depois de uma queda da escada de emergência."
     },
     witness: {
         id: "renata_moura", name: "Renata Moura", role: "familiar",
         photo: "assets/img/cases/quarto-304/renata-moura.jpg",
-        desc: "Irmã de Elisa. Sabia que ela investigava alterações em documentos hospitalares."
+        desc: "Irmã de Elisa. Sabia que ela havia encontrado prontuários que existiam no sistema, mas não nos livros do arquivo."
     },
     newspapers: {
-        1: { title: "ARQUIVISTA MORRE APÓS QUEDA EM HOTEL", body: "Elisa Moura, de 31 anos, morreu após cair da escada de emergência do Hotel Mirante durante um apagão. A polícia trabalha com a hipótese de acidente." },
-        2: { title: "POLÍCIA MANTÉM HIPÓTESE DE ACIDENTE", body: "A família contesta a versão oficial e afirma que Elisa investigava irregularidades em documentos hospitalares. O hotel confirma que as câmeras ficaram desligadas por onze minutos." },
-        3: { title: "DOCUMENTOS HOSPITALARES PODEM ESTAR LIGADOS À MORTE", body: "Pessoas próximas afirmam que Elisa vinha investigando alterações em arquivos. A direção do hospital declarou não haver indícios de fraude." },
-        4: { title: "FUNCIONÁRIO DO HOSPITAL NEGA ENVOLVIMENTO", body: "Daniel Ferraz nega ter conhecido Elisa fora do trabalho. Registros indicam que os dois trocaram mensagens na noite anterior à morte." },
-        5: { title: "A INVESTIGAÇÃO DA A.D.A. CONTINUA", body: "Novas informações contradizem a hipótese inicial de acidente. A Agência de Detetives Anônimos ainda não divulgou sua conclusão." }
+        1: { title: "ARQUIVISTA MORRE APÓS QUEDA EM HOTEL", body: "Elisa Moura, de 31 anos, morreu após cair da escada de emergência do Hotel Mirante durante um apagão. O corpo foi encontrado por um funcionário no pátio interno, pouco depois das 23h. A polícia trabalha com a hipótese de acidente." },
+        2: { title: "POLÍCIA MANTÉM HIPÓTESE DE ACIDENTE", body: "A família contesta a versão oficial e afirma que Elisa investigava irregularidades no arquivo do hospital onde trabalhava. O hotel confirma que a câmera do terceiro andar ficou desligada por onze minutos." },
+        3: { title: "DOCUMENTOS HOSPITALARES PODEM ESTAR LIGADOS À MORTE", body: "Pessoas próximas dizem que Elisa comparava prontuários do arquivo morto com contratos do convênio municipal. A direção do hospital declarou não haver indícios de fraude." },
+        4: { title: "FUNCIONÁRIO DO HOSPITAL NEGA ENVOLVIMENTO", body: "Daniel Ferraz, técnico de digitalização, nega ter conhecido Elisa fora do trabalho. Registros indicam que os dois trocaram mensagens horas antes da morte, mas o conteúdo não foi divulgado." },
+        5: { title: "A INVESTIGAÇÃO DA A.D.A. CONTINUA", body: "Fontes ouvidas pela agência apontam horários que não batem com os depoimentos. A Agência de Detetives Anônimos ainda não divulgou sua conclusão." },
+        6: { title: "VIZINHA DE ELISA TERIA DISCUTIDO COM ELA MESES ANTES", body: "Moradores do prédio relatam brigas entre Elisa e uma vizinha que trabalha no mesmo hospital. A polícia, que encerrou o caso como acidente, não chegou a convocá-la para depor." },
+        7: { title: "A.D.A. PREPARA RELATÓRIO FINAL", body: "A agência reuniu depoimentos, registros e provas do caso do Hotel Mirante. Quem acompanha a investigação diz que, desta vez, os horários podem decidir tudo." }
     },
     characters: [
         { id: "elisa_moura", name: "Elisa Moura", role: "vítima", photo: "assets/img/cases/quarto-304/elisa-moura.jpg" },
         { id: "augusto_vale", name: "Augusto Vale", role: "gerente do hotel", photo: "assets/img/cases/quarto-304/augusto-vale.jpg" },
         { id: "renata_moura", name: "Renata Moura", role: "familiar", photo: "assets/img/cases/quarto-304/renata-moura.jpg" },
-        { id: "daniel_ferraz", name: "Daniel Ferraz", role: "suspeito", photo: "assets/img/cases/quarto-304/daniel-ferraz.jpg" },
+        { id: "daniel_ferraz", name: "Daniel Ferraz", role: "técnico de digitalização", photo: "assets/img/cases/quarto-304/daniel-ferraz.jpg" },
+        { id: "teresa_brandao", name: "Teresa Brandão", role: "vizinha", photo: "assets/img/cases/quarto-304/teresa-brandao.jpg" },
         { id: "livia_campos", name: "Lívia Campos", role: "jornalista / predecessor", photo: "assets/img/cases/quarto-304/livia-campos.jpg" },
         { id: "marcelo_nunes", name: "Marcelo Nunes", role: "policial", photo: "assets/img/cases/quarto-304/marcelo-nunes.jpg" }
     ],
     dayNotes: {
         2: [
-            { role: "helper", senderId: "augusto_vale", text: "A senhora Moura chegou sozinha. Não conversei com ela na recepção e permaneci no balcão durante o apagão. — Augusto Vale" },
-            { role: "helper", senderId: "renata_moura", text: "Minha irmã estava nervosa há semanas. Ela dizia que alguém estava mexendo nos arquivos do hospital. Elisa não bebia. — Renata Moura" },
-            { role: "helper", senderId: "daniel_ferraz", text: "Elisa estava obcecada por um erro no sistema de arquivos. Não sei por que foi ao Hotel Mirante. — Daniel Ferraz" },
-            { role: "killer", senderId: "marcelo_nunes", text: "Não havia sinais claros de luta no quarto. A vítima apresentava álcool no sangue. Não encontramos motivo para suspeitar de homicídio. — Marcelo Nunes" },
-            { role: "predecessor", senderId: "livia_campos", text: "Não comece pela garrafa. Comece pelo corrimão. Procure o registro da manutenção do hotel. Não peça o arquivo com meu nome." }
-        ],
-        4: [
-            { role: "predecessor", senderId: "livia_campos", text: "Você já encontrou a marca no corrimão. Agora procure quem tinha acesso aos arquivos de Elisa e às câmeras do hotel. Uma pessoa está mentindo sobre onde estava. Outra está mentindo sobre o que sabia." }
+            { role: "helper", senderId: "augusto_vale", text: "A senhora Moura fez o check-in sozinha e não conversei com ela. Durante o apagão, fiquei no balcão atendendo os hóspedes. — Augusto Vale" },
+            { role: "helper", senderId: "renata_moura", text: "Minha irmã não bebia, nem em festa. E estava assustada: dizia que alguém no hospital mexia nos arquivos dela. — Renata Moura" },
+            { role: "helper", senderId: "daniel_ferraz", text: "A Elisa se perdeu num erro do sistema de arquivos. Eu a ajudei a conferir, como colega. Naquela noite eu estava em casa. — Daniel Ferraz" },
+            { role: "helper", senderId: "teresa_brandao", text: "Eu e a Elisa nunca nos demos bem: barulho, cachorro, queixa na portaria. Mas naquela noite eu estava em casa, dormindo. — Teresa Brandão" },
+            { role: "helper", senderId: "marcelo_nunes", text: "Sem sinais de luta no quarto e com álcool no sangue. Pela cena, tratamos como acidente. — Marcelo Nunes" },
+            { role: "predecessor", senderId: "livia_campos", text: "Não comece pela garrafa. Comece pelo corrimão. Procure o registro de manutenção do hotel. Não peça o arquivo com meu nome." }
         ],
         3: [
-            { role: "helper", senderId: "marcelo_nunes", text: "O laudo preliminar foi fechado antes da perícia do corrimão. A ordem veio de cima e eu não registrei a contestação. — Marcelo Nunes" },
-            { role: "helper", senderId: "renata_moura", text: "Elisa guardava cópias fora de casa. Ela repetia que o nome de Daniel aparecia onde não deveria. — Renata Moura" }
+            { role: "helper", senderId: "marcelo_nunes", text: "O delegado recebeu uma ligação do hotel antes de a perícia ser pedida. Depois disso, o laudo foi fechado sem exame do corrimão. Eu não registrei a contestação. — Marcelo Nunes" },
+            { role: "helper", senderId: "renata_moura", text: "A Elisa guardava cópias fora de casa. Dizia que o nome do Daniel aparecia onde não devia e que ia conferir tudo no hotel. — Renata Moura" }
+        ],
+        4: [
+            { role: "predecessor", senderId: "livia_campos", text: "Você já viu o corrimão. Agora compare os horários: três pessoas disseram estar em outro lugar naquela noite. Nem todas mentiram pelo mesmo motivo." }
         ],
         5: [
-            { role: "helper", senderId: "augusto_vale", text: "A manutenção do hotel não é assunto da agência. O registro foi cancelado porque o reparo não era urgente. — Augusto Vale" },
-            { role: "helper", senderId: "livia_campos", text: "A mensagem anônima chegou antes da notícia. Quem escreveu já sabia que a queda seria tratada como acidente. — Lívia Campos" }
+            { role: "helper", senderId: "augusto_vale", text: "A manutenção do hotel não é assunto da agência. A ordem de reparo foi cancelada porque o serviço não era urgente. — Augusto Vale" },
+            { role: "helper", senderId: "livia_campos", text: "A mensagem anônima chegou antes de a Elisa entrar no hotel. Quem a escreveu já sabia como a noite terminaria. — Lívia Campos" }
         ],
         6: [
-            { role: "helper", senderId: "daniel_ferraz", text: "Elisa não entendia o risco do que estava fazendo. Eu tentei impedir que ela espalhasse aqueles arquivos. — Daniel Ferraz" }
+            { role: "helper", senderId: "daniel_ferraz", text: "A Elisa não entendia o que estava mexendo. Tentei dissuadi-la por mensagem, nada além disso. — Daniel Ferraz" }
         ]
-    },
-    objectives: {
-        1: "Examine as evidências da escada e do quarto 304.",
-        2: "Compare os depoimentos com o apagão e as câmeras.",
-        3: "Solicite os arquivos de quem tinha acesso aos documentos.",
-        4: "Procure contradições nos horários e na manutenção.",
-        5: "Monte uma pergunta e agende uma entrevista.",
-        6: "Use as respostas para reconstruir a sequência da noite.",
-        7: "Preencha o documento de encerramento."
     },
     evidence: {
         1: [
-            { id: "corrimao", title: "ESCADA DE EMERGÊNCIA", description: "Marca de impacto no corrimão. A superfície foi raspada recentemente.", image: "assets/img/cases/quarto-304/escada-emergencia.jpg" },
-            { id: "quarto-304", title: "QUARTO 304", description: "A garrafa foi encontrada sobre a mesa, mas não havia copo próximo.", image: "assets/img/cases/quarto-304/quarto-304.jpg" },
+            { id: "corrimao", title: "CORRIMÃO DA ESCADA DE EMERGÊNCIA", description: "Marca de impacto na altura do peito. A tinta foi raspada pouco depois da queda: há pó de lixa no degrau abaixo.", image: "assets/img/cases/quarto-304/escada-emergencia.jpg" },
+            { id: "quarto-304", title: "QUARTO 304", description: "Uma garrafa aberta sobre a mesa, sem copo por perto. A cama não foi usada e a mala continua fechada.", image: "assets/img/cases/quarto-304/quarto-304.jpg" }
         ],
         2: [
-            { id: "camera", title: "CÂMERA DO TERCEIRO ANDAR", description: "A câmera ficou desligada por onze minutos durante o apagão.", image: "assets/img/cases/quarto-304/camera-corredor.jpg" }
+            { id: "camera", title: "CÂMERA DO TERCEIRO ANDAR", description: "Ficou desligada por onze minutos, das 22h48 às 22h59. As câmeras do térreo e da recepção funcionaram normalmente.", image: "assets/img/cases/quarto-304/camera-corredor.jpg" }
         ],
         3: [
-            { id: "pagina-azul", title: "PÁGINA ARRANCADA", description: "Uma página azul foi removida do caderno de Elisa. Renata afirma que ela era importante.", image: "assets/img/cases/quarto-304/mesa-elisa.jpg" }
+            { id: "pagina-azul", title: "PÁGINA ARRANCADA", description: "Uma página azul foi arrancada do caderno de Elisa, aberto sobre a mesa do quarto. Segundo Renata, era ali que ela cruzava prontuários e faturas do hotel.", image: "assets/img/cases/quarto-304/mesa-elisa.jpg" }
         ],
         4: [
-            { id: "patio-hotel", title: "PÁTIO DO HOTEL", description: "A rota entre o quadro de energia e a escada passa por uma porta sem registro de acesso.", image: "assets/img/cases/quarto-304/patio-hotel.jpg" }
+            { id: "patio-hotel", title: "PÁTIO DE SERVIÇO", description: "O quadro de energia fica aqui, a poucos metros da escada de emergência. O disjuntor do terceiro andar foi desligado à mão: não houve falha na rede elétrica.", image: "assets/img/cases/quarto-304/patio-hotel.jpg" }
         ]
     },
     documents: {
@@ -81,71 +76,127 @@ const casesDB = [{
             id: "planilha-entrevistas",
             title: "PLANILHA DE ENTREVISTAS — CASO 01",
             subtitle: "Agência de Detetives Anônimos / Diretoria",
-            body: "Registre uma pergunta para cada pessoa relacionada ao caso. As respostas serão anexadas ao quadro no próximo dia.",
-            unlocks: "interviews"
+            body: "Escolha a pessoa e a pergunta. A A.D.A. agenda uma entrevista por dia e a resposta chega ao quadro na manhã seguinte."
         },
         4: {
             id: "linha-do-tempo",
             title: "LINHA DO TEMPO — NOITE DA QUEDA",
             subtitle: "Agência de Detetives Anônimos / Análise cronológica",
-            body: "Organize os horários conhecidos e compare-os com os depoimentos. Os intervalos sem registro são parte da investigação.",
+            body: "Compare os horários com os depoimentos. Os intervalos sem registro também fazem parte da investigação.",
             rows: [
                 ["HORÁRIO", "EVENTO"],
-                ["22:06", "Recepção faz uma ligação interna."],
-                ["22:22", "Lívia recebe a mensagem sobre a queda."],
+                ["22:06", "A recepção liga duas vezes para o mesmo número externo."],
+                ["22:22", "Lívia recebe a mensagem sobre a morte."],
+                ["22:31", "Termina a reunião do salão do térreo; os participantes saem pela porta lateral."],
                 ["22:41", "Elisa chega ao Hotel Mirante."],
-                ["22:48–22:59", "Câmera do terceiro andar permanece desligada."],
+                ["22:48–22:59", "Câmera do terceiro andar desligada."],
                 ["23:10", "A morte é divulgada à imprensa."]
-            ],
-            unlocks: "timeline"
+            ]
         },
         7: {
             id: "documento-conclusao",
             title: "DOCUMENTO DE ENCERRAMENTO — CASO 01",
             subtitle: "Agência de Detetives Anônimos / Diretoria",
-            body: "A investigação atingiu a etapa de encerramento. Registre quem causou a morte, quem participou do encobrimento e como os fatos aconteceram.",
-            unlocks: "conclusion"
+            body: "A investigação chegou ao encerramento. Registre quem causou a morte, quem o ajudou e quais provas sustentam isso. No quadro, ligue as pessoas que, segundo as suas provas, agiram juntas."
         }
     },
     files: {
-        elisa_moura: { heading: "ARQUIVO: ELISA MOURA", stamp: "VÍTIMA", body: "O arquivo original desapareceu três vezes. A versão digital sempre retorna corrigida." },
-        daniel_ferraz: { heading: "ARQUIVO: DANIEL FERRAZ", stamp: "SUSPEITO", body: "Responsável pela digitalização. Acessou arquivos fora do horário de trabalho na semana anterior à morte." },
-        augusto_vale: { heading: "ARQUIVO: AUGUSTO VALE", stamp: "HOTEL", body: "O telefone da recepção fez ligações internas às 22h06 e 22h08. Isso contradiz seu depoimento." },
-        livia_campos: { heading: "ARQUIVO: LÍVIA CAMPOS", stamp: "JORNALISTA", body: "Recebeu às 22h22 a mensagem: “Ela se matou. Não procure outra explicação.” A morte só foi divulgada às 23h10." },
-        marcelo_nunes: { heading: "ARQUIVO: MARCELO NUNES", stamp: "POLÍCIA", body: "A investigação não examinou adequadamente o corrimão e sofreu pressão para priorizar outra ocorrência." },
-        manutencao_hotel: { heading: "REGISTRO DE MANUTENÇÃO", stamp: "EVIDÊNCIA", body: "O corrimão tinha uma marca de impacto. O reparo foi cancelado por ordem de Augusto Vale." }
+        elisa_moura: { aliases: ["elisa"], heading: "ARQUIVO: ELISA MOURA", stamp: "VÍTIMA", body: "Ao digitalizar o arquivo morto, Elisa achou 38 prontuários que existiam no sistema, mas não nos livros físicos. Todos tinham fatura de hospedagem do Hotel Mirante, paga pelo convênio municipal." },
+        daniel_ferraz: { aliases: ["daniel", "ferraz"], heading: "ARQUIVO: DANIEL FERRAZ", stamp: "SUSPEITO", body: "Técnico de digitalização. Criou os 38 prontuários sob o próprio login e acessou o arquivo fora do horário na semana anterior à morte. Quitou um financiamento em fevereiro, sem renda que o explique." },
+        augusto_vale: { aliases: ["augusto", "vale", "gerente"], heading: "ARQUIVO: AUGUSTO VALE", stamp: "HOTEL", body: "Assinou as 38 faturas de hospedagem. A recepção ligou duas vezes, às 22h06 e às 22h08, para um celular em nome de Daniel Ferraz. Entre 22h40 e 23h05 o balcão não registrou nenhuma operação." },
+        renata_moura: { aliases: ["renata"], heading: "ARQUIVO: RENATA MOURA", stamp: "FAMILIAR", body: "Recebeu uma ligação de Elisa às 22h20, a caminho do hotel. Estava em casa, com o marido, a noite inteira. Guarda cópias das páginas que a irmã temia perder." },
+        teresa_brandao: { aliases: ["teresa", "brandao", "vizinha"], heading: "ARQUIVO: TERESA BRANDÃO", stamp: "VIZINHA", body: "Técnica de enfermagem do Santa Augusta, com acesso ao arquivo. Brigou com Elisa por barulho e registrou queixa na portaria em março. A portaria anotou sua saída às 19h10 e o retorno às 23h20, o que contradiz o depoimento." },
+        livia_campos: { aliases: ["livia", "jornalista"], heading: "ARQUIVO: LÍVIA CAMPOS", stamp: "JORNALISTA", body: "Recebeu às 22h22 a mensagem: “Ela se matou. Não procure outra explicação.” Elisa só entrou no hotel às 22h41, e a morte foi divulgada às 23h10. O chip do remetente foi ativado naquela tarde, perto do hospital." },
+        marcelo_nunes: { aliases: ["marcelo", "policial"], heading: "ARQUIVO: MARCELO NUNES", stamp: "POLÍCIA", body: "O delegado recebeu uma ligação do gerente do hotel às 23h50, antes de a perícia ser pedida. Na manhã seguinte, o laudo foi fechado sem exame do corrimão." },
+        manutencao_hotel: { aliases: ["manutencao", "manutencao hotel", "corrimao", "hotel", "ordem de servico"], heading: "REGISTRO DE MANUTENÇÃO", stamp: "EVIDÊNCIA", body: "Às 05h50 do dia seguinte à morte, Augusto Vale abriu uma ordem urgente para lixar e repintar o corrimão da escada de emergência. A ordem foi cancelada às 07h10, quando a polícia voltou ao local, mas parte da tinta já tinha sido raspada." },
+        estacionamento_hotel: { aliases: ["estacionamento", "placa", "carro", "patio", "patio de servico"], heading: "REGISTRO DO ESTACIONAMENTO", stamp: "EVIDÊNCIA", body: "A placa do carro de Daniel Ferraz entrou no estacionamento de serviço às 21h58 e saiu às 23h21. O pátio de serviço dá acesso ao quadro de energia e à escada de emergência." },
+        salao_hotel: { aliases: ["salao", "reuniao", "grupo", "grupo de apoio"], heading: "LISTA DO SALÃO — QUINTA", stamp: "EVIDÊNCIA", body: "Reunião de um grupo de apoio no salão do térreo, das 20h às 22h. Teresa Brandão assinou a entrada às 20h02 e a saída às 22h31. O salão fica no lado oposto da escada, e Elisa só entrou no hotel às 22h41." }
     },
     interviews: {
-        augusto_vale: "Eu fui verificar o quadro de energia. O hotel estava cheio. Não tive motivo para ir ao terceiro andar.",
-        renata_moura: "Elisa me disse: “Se eu não voltar, procure a página azul.”",
+        augusto_vale: "Eu fui verificar o quadro de energia. O hotel estava cheio e alguém precisava resolver o apagão.",
+        renata_moura: "A Elisa me disse: “Se eu não voltar, procure a página azul.”",
         daniel_ferraz: "Ela ia destruir a vida de muita gente por causa de arquivos que nem entendia.",
-        livia_campos: "Recebi uma mensagem de um número descartável. Não sabia se era verdade, mas publiquei a informação.",
-        marcelo_nunes: "A cena parecia um acidente. Admito que não investigamos o suficiente o corrimão."
+        teresa_brandao: "Eu não tive nada a ver com isso. Brigávamos, mas nunca desejei mal a ela.",
+        livia_campos: "Recebi uma mensagem anônima antes de a notícia existir. Não podia ignorar isso.",
+        marcelo_nunes: "A cena parecia um acidente. Admito que não olhamos o corrimão como deveríamos."
     },
     interviewQuestions: {
         augusto_vale: [
             "Onde você estava durante o apagão?",
             "Quem tinha acesso ao terceiro andar?",
-            "Por que o reparo do corrimão foi cancelado?"
+            "Por que o reparo do corrimão foi cancelado?",
+            "Você conhece Daniel Ferraz?"
         ],
         daniel_ferraz: [
             "Qual era sua relação com os arquivos de Elisa?",
             "Quando você viu Elisa pela última vez?",
-            "Por que tentou impedir que ela divulgasse os documentos?"
+            "Por que você tentou convencê-la a não divulgar os documentos?",
+            "Onde você estava naquela noite?"
         ],
         renata_moura: [
             "O que havia na página azul?",
             "Elisa mencionou alguém pelo nome?",
             "Por que ela foi ao Hotel Mirante?"
+        ],
+        teresa_brandao: [
+            "Onde você estava naquela noite?",
+            "Por que você e Elisa brigavam?",
+            "Você viu alguém estranho?"
+        ],
+        livia_campos: [
+            "O que você recebeu antes da notícia?",
+            "Como verificou a mensagem anônima?",
+            "Por que não procurou a polícia?"
+        ],
+        marcelo_nunes: [
+            "Por que a perícia do corrimão foi adiada?",
+            "Quem pressionou a investigação?",
+            "O que faltou na versão oficial?"
         ]
     },
-    contradictions: [
-        { title: "CONTRADIÇÃO: HORÁRIO DA MENSAGEM", body: "Augusto afirma que nada sabia sobre a morte, mas Lívia recebeu a mensagem “Ela se matou” antes da divulgação oficial.", related: ["augusto_vale", "livia_campos"] },
-        { title: "CONTRADIÇÃO: ACESSO À ESCADA", body: "Augusto nega ter motivo para ir ao terceiro andar, embora o registro de manutenção tenha sido cancelado por sua ordem.", related: ["augusto_vale", "corrimao"] },
-        { title: "CONTRADIÇÃO: ARQUIVOS DE ELISA", body: "Daniel diz que não conhecia o conteúdo dos arquivos, mas Renata afirma que o nome dele aparecia nas cópias guardadas por Elisa.", related: ["daniel_ferraz", "pagina-azul"] }
-    ],
-    solution: { culprit: "daniel_ferraz", accomplice: "augusto_vale", evidence: ["corrimao", "camera", "pagina-azul"] },
-    predecessorId: "livia_campos"
+    interviewAnswers: {
+        augusto_vale: {
+            "Onde você estava durante o apagão?": "Fui ao pátio verificar o quadro de energia. O hotel estava cheio e alguém tinha que resolver.",
+            "Quem tinha acesso ao terceiro andar?": "Hóspedes, camareiras e a gerência. Em falta de energia, a escada de emergência fica liberada.",
+            "Por que o reparo do corrimão foi cancelado?": "Não era urgente. Foi manutenção de rotina, nada além disso.",
+            "Você conhece Daniel Ferraz?": "Só de nome. O hospital manda acompanhantes de pacientes para o hotel, mas nunca falei com ele."
+        },
+        daniel_ferraz: {
+            "Qual era sua relação com os arquivos de Elisa?": "Eu cuidava da digitalização e ela revisava os livros originais. Trabalhávamos juntos, só isso.",
+            "Quando você viu Elisa pela última vez?": "Na saída do hospital, na quarta-feira. Ela carregava um caderno azul e parecia decidida a falar.",
+            "Por que você tentou convencê-la a não divulgar os documentos?": "Tentei evitar um escândalo, não a verdade. Ela não entendia o que isso causaria a quem trabalha lá.",
+            "Onde você estava naquela noite?": "Em casa, sozinho. Não tenho testemunha, mas também não tenho nada a esconder."
+        },
+        renata_moura: {
+            "O que havia na página azul?": "Ela cruzava números de prontuários com faturas de hotel. Me disse: “Se eu não voltar, procure a página azul.”",
+            "Elisa mencionou alguém pelo nome?": "O Daniel. Disse que ele aparecia nos registros, mas pediu que eu não o confrontasse.",
+            "Por que ela foi ao Hotel Mirante?": "Foi conferir o livro de hóspedes. As faturas eram de lá, mas ninguém daquelas internações tinha se hospedado de verdade."
+        },
+        teresa_brandao: {
+            "Onde você estava naquela noite?": "Disse que estava em casa porque tenho vergonha. Fui a uma reunião de grupo de apoio no salão do Hotel Mirante e saí às 22h30. Fui direto para casa.",
+            "Por que você e Elisa brigavam?": "Barulho, cachorro, um vazamento. Besteira de vizinho. Eu nunca desejei mal a ela.",
+            "Você viu alguém estranho?": "No pátio de serviço, a caminho do ponto de ônibus, vi o carro do Daniel, do arquivo do hospital. Estranhei: o que um técnico de arquivo faz num hotel?"
+        },
+        livia_campos: {
+            "O que você recebeu antes da notícia?": "Uma mensagem às 22h22: “Ela se matou. Não procure outra explicação.” A Elisa ainda nem tinha entrado no hotel.",
+            "Como verificou a mensagem anônima?": "Não consegui. O número era de um chip descartável, ativado naquela tarde perto do hospital.",
+            "Por que não procurou a polícia?": "Esperei a divulgação oficial. Quando o caso foi fechado rápido demais, comecei a investigar por conta própria."
+        },
+        marcelo_nunes: {
+            "Por que a perícia do corrimão foi adiada?": "O delegado recebeu uma ligação do hotel e mandou encerrar. Voltei às 7h da manhã seguinte e o corrimão já estava sendo lixado.",
+            "Quem pressionou a investigação?": "Pressão direta, nenhuma. Só uma ligação do gerente do hotel para o delegado, na mesma noite. Depois, o prazo encurtou.",
+            "O que faltou na versão oficial?": "Perícia no corrimão, nas câmeras e no painel de energia. Admito: deixei passar."
+        }
+    },
+    solution: {
+        culprit: "daniel_ferraz",
+        accomplice: "augusto_vale",
+        evidence: ["corrimao", "camera", "pagina-azul", "patio-hotel"],
+        connectionPairs: [["augusto_vale", "daniel_ferraz"]],
+        summary: "Daniel Ferraz forjou 38 prontuários para desviar dinheiro do convênio municipal e matou Elisa Moura quando ela descobriu a fraude. Augusto Vale, que assinava as faturas falsas do Hotel Mirante, desligou a energia do terceiro andar e, no dia seguinte, mandou lixar o corrimão."
+    },
+    predecessorId: "livia_campos",
+    requestDay: 3
 }];
 
 const paperColors = [
@@ -160,6 +211,7 @@ const characterProfiles = {
     augusto_vale: { color: paperColors[0], font: "'Special Elite', monospace" },
     renata_moura: { color: paperColors[1], font: "'Caveat', cursive" },
     daniel_ferraz: { color: paperColors[2], font: "'Shadows Into Light', cursive" },
+    teresa_brandao: { color: { bg: "#fbcfe8", color: "#831843" }, font: "'Special Elite', monospace" },
     livia_campos: { color: paperColors[3], font: "'Rock Salt', cursive" },
     marcelo_nunes: { color: paperColors[4], font: "'Permanent Marker', cursive" },
     elisa_moura: { color: paperColors[5], font: "'Playfair Display', serif" }
@@ -180,8 +232,7 @@ const shuffledFonts = shuffle(["'Caveat', cursive", "'Rock Salt', cursive", "'Sp
 const adaProfiles = {
     helper: { color: shuffledColors[0], font: shuffledFonts[0] },
     larper: { color: shuffledColors[1], font: shuffledFonts[1] },
-    predecessor: { color: shuffledColors[2], font: shuffledFonts[2] },
-    killer: { color: shuffledColors[3], font: shuffledFonts[3] }
+    predecessor: { color: shuffledColors[2], font: shuffledFonts[2] }
 };
 
 function getSavedCaseId() {
@@ -200,6 +251,7 @@ let day = 1;
 let pendingRequest = null;
 let pendingInterviews = [];
 let conclusionAttempts = 3;
+let solved = false;
 let failureSequenceActive = false;
 let gameSettings = {
     sfx: true,
@@ -217,10 +269,6 @@ let isTransitioning = false;
 const svgLayer = document.getElementById("strings-layer");
 const trashPanel = document.getElementById("trash-panel");
 const trashContent = document.getElementById("trash-panel-content");
-
-function applyVocalTic(role, text) {
-    return text;
-}
 
 function playFeedback(frequency = 440, duration = 0.06) {
     if (!gameSettings.sfx) return;
@@ -339,13 +387,8 @@ function stopAmbientSound() {
     }
 
 function applySettings(startAudio = false) {
+        gameSettings.reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         document.body.classList.toggle("reduced-motion", gameSettings.reducedMotion);
-        const sfx = document.getElementById("setting-sfx");
-        const music = document.getElementById("setting-music");
-        const reducedMotion = document.getElementById("setting-reduced-motion");
-        if (sfx) sfx.checked = gameSettings.sfx;
-        if (music) music.checked = gameSettings.music;
-        if (reducedMotion) reducedMotion.checked = gameSettings.reducedMotion;
         if (startAudio && gameSettings.music) startAmbientSound();
         else if (!gameSettings.music) stopAmbientSound();
 }
@@ -365,6 +408,7 @@ function saveGame() {
         id: note.dataset.noteId,
         role: note.dataset.role,
         senderId: note.dataset.senderId || null,
+        fileId: note.dataset.fileId || null,
         content: note.dataset.role === "player" ? note.querySelector("[contenteditable]")?.textContent || "" :
             note.dataset.role === "dossier" ? JSON.parse(note.dataset.content) : note.dataset.content || "",
         x: parseFloat(note.style.left) || 0,
@@ -383,6 +427,7 @@ function saveGame() {
         pendingRequest,
         pendingInterviews,
         conclusionAttempts,
+        solved,
         settings: gameSettings,
         interviewSheet: interviewSheet ? {
             authorNoteId: interviewSheet.querySelector("[data-interview-slot='author']")?.dataset.interviewNoteId || null,
@@ -430,7 +475,7 @@ function createNote(roleKey, content, x, y, isDossier = false, savedId = null, s
     note.dataset.role = roleKey;
     if (senderId) note.dataset.senderId = senderId;
     note.dataset.content = isDossier ? JSON.stringify(content) : content;
-    note.dataset.rotation = roleKey === "killer" || isDossier ? "0" : String(Math.floor(Math.random() * 8) - 4);
+    note.dataset.rotation = isDossier ? "0" : String(Math.floor(Math.random() * 8) - 4);
     note.className = `board-item dynamic-note ${
         isDossier ? "dossier" : roleKey === "welcome" ? "welcome-letter" :
             "post-it"
@@ -441,26 +486,28 @@ function createNote(roleKey, content, x, y, isDossier = false, savedId = null, s
     note.style.transform = `rotate(${note.dataset.rotation}deg)`;
     note.setAttribute("tabindex", "0");
     note.setAttribute("role", "article");
-    note.setAttribute("aria-label", isDossier ? "Dossiê de investigação" : roleKey === "player" ? "Anotação do jogador" : roleKey === "welcome" ? "Carta de iniciação da associação" : "Pista da investigação");
+    note.setAttribute("aria-label", isDossier ? "Dossiê de investigação" : roleKey === "player" ? "Anotação do jogador" : roleKey === "welcome" ? "Carta de iniciação da agência" : "Pista da investigação");
 
     if (roleKey === "welcome") {
         const pin = createPin(true);
         const image = document.createElement("img");
         image.src = "assets/img/ada-welcome.svg";
-        image.alt = "Emblema da Associação de Detetives Anônimos";
+        image.alt = "Emblema da Agência de Detetives Anônimos";
         image.draggable = false;
         const heading = document.createElement("h2");
-        heading.textContent = "ASSOCIAÇÃO DE DETETIVES";
+        heading.textContent = "AGÊNCIA DE DETETIVES";
         const subheading = document.createElement("h3");
         subheading.textContent = "ANÔNIMOS";
         const paragraph = document.createElement("p");
         paragraph.textContent = "Se esta carta chegou até você, é porque foi considerado apto a observar o que os outros ignoram.";
         const secondParagraph = document.createElement("p");
-        secondParagraph.textContent = "Reúna evidências, questione versões e registre suas conclusões com discrição.";
+        secondParagraph.textContent = "A polícia encerrou o caso de Elisa Moura como acidente. A A.D.A. não encerra casos por conveniência.";
+        const thirdParagraph = document.createElement("p");
+        thirdParagraph.textContent = "Reúna evidências, compare cada versão com os horários e desconfie de quem se explica antes de ser perguntado.";
         const signature = document.createElement("div");
         signature.className = "signature";
         signature.textContent = "— A Direção da A.D.A.";
-        note.append(pin, image, heading, subheading, paragraph, secondParagraph, signature);
+        note.append(pin, image, heading, subheading, paragraph, secondParagraph, thirdParagraph, signature);
     } else if (roleKey === "player") {
         note.classList.add("note-player");
         const tape = document.createElement("div");
@@ -480,7 +527,7 @@ function createNote(roleKey, content, x, y, isDossier = false, savedId = null, s
         stamp.textContent = content.stamp;
         const body = document.createElement("div");
         body.textContent = content.body;
-        note.append(heading, stamp, body);
+        note.append(createPin(), heading, stamp, body);
     } else {
         const profile = characterProfiles[senderId] || adaProfiles[roleKey] || adaProfiles.helper;
         note.style.backgroundColor = profile.color.bg;
@@ -488,7 +535,7 @@ function createNote(roleKey, content, x, y, isDossier = false, savedId = null, s
         note.style.fontFamily = profile.font;
         if (profile.color.border) note.style.border = profile.color.border;
         const body = document.createElement("div");
-        body.textContent = applyVocalTic(roleKey, content);
+        body.textContent = content;
         const pin = createPin();
         const tape = document.createElement("div");
         tape.className = "drag-tape";
@@ -560,7 +607,7 @@ function startDragging(element, event, isNew = false) {
     } else {
         element.style.boxShadow = "-15px 22px 30px rgba(0,0,0,0.65)";
     }
-    const onMouseMove = (moveEvent) => {
+    const onPointerMove = (moveEvent) => {
         const now = performance.now();
         const elapsed = Math.max(1, now - lastMoveTime);
         const distance = Math.hypot(moveEvent.clientX - lastX, moveEvent.clientY - lastY);
@@ -572,10 +619,10 @@ function startDragging(element, event, isNew = false) {
         element.style.top = `${initialTop + moveEvent.clientY - startY}px`;
         drawStrings();
     };
-    const onMouseUp = () => {
+    const onPointerUp = () => {
         stopDragSound();
-        document.removeEventListener("mousemove", onMouseMove);
-        document.removeEventListener("mouseup", onMouseUp);
+        document.removeEventListener("pointermove", onPointerMove);
+        document.removeEventListener("pointerup", onPointerUp);
         element.style.opacity = "1";
         element.style.boxShadow = "";
         const trash = document.getElementById("trash-bin");
@@ -613,12 +660,12 @@ function startDragging(element, event, isNew = false) {
 
         drawStrings();
     };
-    document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseup", onMouseUp);
+    document.addEventListener("pointermove", onPointerMove);
+    document.addEventListener("pointerup", onPointerUp, { once: true });
 }
 
-function moveWithKeyboard(element, key) {
-    const step = key === "Shift" ? 20 : 8;
+function moveWithKeyboard(element, key, shiftKey = false) {
+    const step = shiftKey ? 20 : 8;
     const delta = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] }[key];
     if (!delta) return false;
     element.style.left = `${Math.max(0, (parseFloat(element.style.left) || 0) + delta[0])}px`;
@@ -631,6 +678,14 @@ function moveWithKeyboard(element, key) {
 function getInterviewItemContent(item) {
     if (item.dataset.role === "player") {
         return item.querySelector("[contenteditable]")?.textContent.trim() || "";
+    }
+    if (item.dataset.role === "evidence" || item.dataset.role === "dossier") {
+        try {
+            const data = JSON.parse(item.dataset.content);
+            return data.title || data.heading || "";
+        } catch (error) {
+            return "";
+        }
     }
     if (item.dataset.content) return item.dataset.content;
     return item.querySelector("strong")?.textContent.trim() ||
@@ -740,7 +795,8 @@ function scheduleInterview(documentElement) {
     const questionSelect = documentElement.querySelector("[data-interview-question]");
     pendingInterviews.push({
         characterId: authorZone.dataset.interviewSenderId,
-        question: questionSelect?.value || topicZone.dataset.interviewContent
+        question: questionSelect?.value || topicZone.dataset.interviewContent,
+        topic: topicZone.dataset.interviewContent
     });
     documentElement.dataset.interviewScheduled = "true";
     documentElement.querySelectorAll("[data-interview-slot]").forEach((zone) => {
@@ -759,7 +815,7 @@ function restoreInterviewSheet(savedSheet) {
     if (!savedSheet) return;
     const documentElement = document.querySelector('[data-document-id="planilha-entrevistas"]');
     if (!documentElement) return;
-    const byId = new Map([...document.querySelectorAll(".dynamic-note")].map((note) => [note.dataset.noteId, note]));
+    const byId = new Map([...document.querySelectorAll("[data-note-id]")].map((note) => [note.dataset.noteId, note]));
     const assignSaved = (slot, noteId) => {
         const note = byId.get(noteId);
         const zone = documentElement.querySelector(`[data-interview-slot="${slot}"]`);
@@ -773,20 +829,22 @@ function restoreInterviewSheet(savedSheet) {
     };
     assignSaved("author", savedSheet.authorNoteId);
     assignSaved("topic", savedSheet.topicNoteId);
+    if (savedSheet.scheduled) documentElement.dataset.interviewScheduled = "true";
     updateInterviewSheetState(documentElement);
 }
 
 function makeDraggable(element) {
     if (element.dataset.draggable === "true") return;
     element.dataset.draggable = "true";
-    element.addEventListener("mousedown", (event) => {
+    element.addEventListener("pointerdown", (event) => {
         if (event.target.hasAttribute("contenteditable") || event.target.classList.contains("pin") ||
             ["INPUT", "BUTTON", "SELECT", "TEXTAREA"].includes(event.target.tagName)) return;
         event.preventDefault();
         startDragging(element, event);
     });
     element.addEventListener("keydown", (event) => {
-        if (moveWithKeyboard(element, event.key)) event.preventDefault();
+        if (event.target !== element) return;
+        if (moveWithKeyboard(element, event.key, event.shiftKey)) event.preventDefault();
         if (event.key === "Enter" && event.target === element) {
             element.querySelector("[contenteditable]")?.focus();
         }
@@ -801,7 +859,7 @@ function initPins() {
     document.querySelectorAll(".pin").forEach((pin) => {
         if (pin.dataset.ready) return;
         pin.dataset.ready = "true";
-        pin.addEventListener("mousedown", (event) => beginConnection(pin, event));
+        pin.addEventListener("pointerdown", (event) => beginConnection(pin, event));
         pin.addEventListener("keydown", (event) => {
             if (event.key !== "Enter" && event.key !== " ") return;
             event.preventDefault();
@@ -845,15 +903,16 @@ function addConnection(fromPin, toPin) {
     saveGame();
 }
 
-window.addEventListener("mousemove", (event) => {
+window.addEventListener("pointermove", (event) => {
     if (tempLine) {
         tempLine.setAttribute("x2", event.clientX);
         tempLine.setAttribute("y2", event.clientY);
     }
 });
-window.addEventListener("mouseup", (event) => {
+window.addEventListener("pointerup", (event) => {
     if (!tempLine || !startPin) return;
-    if (event.target.classList.contains("pin") && event.target !== startPin) addConnection(startPin, event.target);
+    const dropTarget = document.elementFromPoint(event.clientX, event.clientY);
+    if (dropTarget?.classList.contains("pin") && dropTarget !== startPin) addConnection(startPin, dropTarget);
     tempLine.remove();
     tempLine = null;
     startPin.classList.remove("connection-source");
@@ -886,16 +945,28 @@ function drawStrings() {
     });
 }
 
+function getConnectionKey(item) {
+    return item.dataset.fileId || item.dataset.evidenceId || item.dataset.senderId || null;
+}
+
+function hasRequiredConnections() {
+    return (currentCase.solution.connectionPairs || []).every(([first, second]) =>
+        connections.some(({ from, to }) => {
+            const keys = [getConnectionKey(from), getConnectionKey(to)];
+            return keys.includes(first) && keys.includes(second);
+        })
+    );
+}
+
 function updateCaseView() {
     const newspaper = currentCase.newspapers[day] || currentCase.newspapers[5];
     setText("news-title", newspaper.title);
     setText("news-body", newspaper.body);
     setText("day-counter", day);
-    document.getElementById("request-form").style.display = day >= 3 ? "block" : "none";
+    document.getElementById("request-form").style.display = day >= currentCase.requestDay ? "block" : "none";
     Object.keys(currentCase.documents)
         .filter((documentDay) => Number(documentDay) <= day)
         .forEach((documentDay) => deliverDocumentsForDay(Number(documentDay)));
-    deliverContradictionsForDay(day);
     updateInterviewSheetState(document.querySelector('[data-document-id="planilha-entrevistas"]'));
     document.getElementById("btn-conclude").classList.toggle("hidden", !hasDeliveredDocument("documento-conclusao"));
 }
@@ -904,35 +975,53 @@ function hasDeliveredDocument(documentId) {
     return Boolean(document.querySelector(`[data-document-id="${documentId}"]`));
 }
 
-function showDossier(query) {
-    const normalized = query.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
-    const position = getRandomPosition("dossier");
-    const character = currentCase.characters.find((item) => {
-        const name = item.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-        return normalized === name || normalized === name.split(" ")[0] || name.includes(normalized);
+function normalizeText(text) {
+    return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
+
+// Devolve os IDs de arquivo que casam com a busca, sem contar a mesma pessoa duas vezes.
+function resolveFileRequest(query) {
+    const normalized = normalizeText(query);
+    const ids = new Set();
+    if (!normalized) return [];
+    currentCase.characters.forEach((character) => {
+        if (!currentCase.files[character.id]) return;
+        const name = normalizeText(character.name);
+        if (normalized === name || name.split(" ").includes(normalized) ||
+            (normalized.length >= 3 && name.includes(normalized))) {
+            ids.add(character.id);
+        }
     });
-    const file = character ? currentCase.files[character.id] : currentCase.files[normalized];
+    Object.entries(currentCase.files).forEach(([id, item]) => {
+        if (id === normalized || item.aliases?.includes(normalized)) ids.add(id);
+    });
+    return [...ids];
+}
+
+function showDossier(query) {
+    const position = getRandomPosition("dossier");
+    const ids = resolveFileRequest(query);
+    if (ids.length > 1) {
+        createNote("dossier", {
+            heading: "A.D.A. SYSTEM", stamp: "AMBÍGUO",
+            body: `ALVO: "${query.toUpperCase()}" corresponde a mais de um arquivo. Seja mais específico.`,
+            success: false
+        }, position.x, position.y, true);
+        return;
+    }
+    const fileId = ids[0];
+    const file = fileId ? currentCase.files[fileId] : null;
     const data = file
         ? { ...file, success: true }
         : { heading: "A.D.A. SYSTEM", stamp: "INEXISTENTE", body: `ALVO: "${query.toUpperCase()}" não localizado nos arquivos da agência.`, success: false };
-    createNote("dossier", data, position.x, position.y, true);
+    const note = createNote("dossier", data, position.x, position.y, true);
+    if (file) note.dataset.fileId = fileId;
 }
 
 function deliverNotesForDay(dayNumber) {
     (currentCase.dayNotes[dayNumber] || []).forEach((item) => {
-        const position = getRandomPosition(item.role === "killer" ? "official" : "post-it");
+        const position = getRandomPosition("post-it");
         createNote(item.role, item.text, position.x, position.y, false, null, item.senderId);
-    });
-}
-
-function deliverContradictionsForDay(dayNumber) {
-    if (dayNumber < 4) return;
-    (currentCase.contradictions || []).forEach((item, index) => {
-        const noteId = `contradiction-${index + 1}`;
-        if (document.querySelector(`[data-note-id="${noteId}"]`)) return;
-        const position = getRandomPosition("official");
-        const note = createNote("helper", `${item.title}\n\n${item.body}`, position.x, position.y, false, noteId);
-        note.dataset.contradiction = "true";
     });
 }
 
@@ -1076,11 +1165,8 @@ function createEvidenceChecklist() {
     const legend = document.createElement("legend");
     legend.textContent = "Quais evidências sustentam sua conclusão?";
     fieldset.appendChild(legend);
-    [
-        ["corrimao", "Marca no corrimão"],
-        ["camera", "Câmera desligada"],
-        ["pagina-azul", "Página azul"]
-    ].forEach(([value, labelText]) => {
+    Object.values(currentCase.evidence).flat().forEach(({ id: value, title }) => {
+        const labelText = title.toLowerCase();
         const label = document.createElement("label");
         const input = document.createElement("input");
         input.type = "checkbox";
@@ -1117,7 +1203,7 @@ function createConclusionPersonField(field, labelText) {
     placeholder.textContent = "Selecione uma pessoa";
     select.appendChild(placeholder);
     currentCase.characters
-        .filter((character) => character.id !== "elisa_moura")
+        .filter((character) => character.id !== currentCase.victim.id)
         .forEach((character) => {
             const option = document.createElement("option");
             option.value = character.id;
@@ -1196,12 +1282,28 @@ function syncConclusionControls(source) {
     if (documentElement) updateConclusionVisibility(documentElement, state);
 }
 
+function solvedMessage() {
+    if (currentCase.solution.summary) return `Conclusão aceita. ${currentCase.solution.summary}`;
+    const nameOf = (id) => currentCase.characters.find((character) => character.id === id)?.name;
+    return `Conclusão aceita. ${nameOf(currentCase.solution.culprit)} causou a morte e ${nameOf(currentCase.solution.accomplice)} ajudou no encobrimento.`;
+}
+
+function lockSolvedConclusion() {
+    document.querySelectorAll("#btn-submit-conclusion, [data-conclusion-submit='document']")
+        .forEach((button) => { button.disabled = true; });
+    const message = solvedMessage();
+    document.querySelectorAll("#conclusion-result, [data-conclusion-status='document']").forEach((element) => {
+        element.textContent = message;
+        element.style.color = "#166534";
+    });
+}
+
 function submitConclusion(result, source = document.getElementById("conclusion-panel")) {
     const state = getConclusionState(source);
     if (!state.hasCulprit || !state.hasCoverup ||
         (state.hasCulprit === "yes" && !state.culprit) ||
         (state.hasCoverup === "yes" && !state.accomplice) ||
-        state.evidence.length < 2) {
+        state.evidence.length < currentCase.solution.evidence.length) {
         result.textContent = "Complete o checklist e selecione as pessoas indicadas antes de entregar.";
         result.style.color = "#991b1b";
         return;
@@ -1210,19 +1312,25 @@ function submitConclusion(result, source = document.getElementById("conclusion-p
         state.culprit === currentCase.solution.culprit &&
         state.hasCoverup === "yes" &&
         state.accomplice === currentCase.solution.accomplice;
-    const evidenceCorrect = currentCase.solution.evidence.every((id) => state.evidence.includes(id));
-    if (!correct || !evidenceCorrect) {
+    const evidenceCorrect = state.evidence.length === currentCase.solution.evidence.length &&
+        currentCase.solution.evidence.every((id) => state.evidence.includes(id));
+    const connectionsCorrect = hasRequiredConnections();
+    if (!correct || !evidenceCorrect || !connectionsCorrect) {
         conclusionAttempts = Math.max(0, conclusionAttempts - 1);
         updateAttemptMarkers();
         saveGame();
     }
-    const accepted = correct && evidenceCorrect;
-    result.textContent = accepted
-        ? "Conclusão aceita. Daniel Ferraz causou a morte e Augusto Vale ajudou no encobrimento."
-        : conclusionAttempts
-            ? `Conclusão incorreta. Você perdeu uma tentativa. Restam ${conclusionAttempts}.`
-            : "Conclusão incorreta. As três tentativas foram perdidas.";
-    result.style.color = accepted ? "#166534" : "#92400e";
+    const accepted = correct && evidenceCorrect && connectionsCorrect;
+    if (accepted) {
+        solved = true;
+        saveGame();
+        lockSolvedConclusion();
+        return;
+    }
+    result.textContent = conclusionAttempts
+        ? `Conclusão incorreta. Você perdeu uma tentativa. Restam ${conclusionAttempts}.`
+        : "Conclusão incorreta. As três tentativas foram perdidas.";
+    result.style.color = "#92400e";
     if (!accepted && conclusionAttempts === 0) {
         document.querySelectorAll("#btn-submit-conclusion, [data-conclusion-submit='document']")
             .forEach((button) => { button.disabled = true; });
@@ -1284,27 +1392,18 @@ function deliverInterviewAnswers() {
         const character = currentCase.characters.find((item) => item.id === request.characterId);
         const response = getInterviewResponse(request);
         const position = getRandomPosition();
-        createNote("helper", `RESPOSTA DE ${character.name.toUpperCase()}\n\n${response}`, position.x, position.y, false, null, request.characterId);
+        createNote("helper", `RESPOSTA DE ${character.name.toUpperCase()}\n\nTEMA: ${request.topic}\n\n${response}`, position.x, position.y, false, null, request.characterId);
     });
     pendingInterviews = [];
+    const interviewSheet = document.querySelector('[data-document-id="planilha-entrevistas"]');
+    if (interviewSheet) {
+        delete interviewSheet.dataset.interviewScheduled;
+        updateInterviewSheetState(interviewSheet);
+    }
 }
 
 function getInterviewResponse(request) {
-    const responses = {
-        "augusto_vale": {
-            "Quem tinha acesso ao terceiro andar?": "Apenas a gerência e a manutenção. Eu não controlava cada chave.",
-            "Por que o reparo do corrimão foi cancelado?": "O reparo não era urgente. Foi uma decisão administrativa, não minha."
-        },
-        "daniel_ferraz": {
-            "Quando você viu Elisa pela última vez?": "Na saída do hospital. Ela estava com uma pasta azul e parecia decidida a falar.",
-            "Por que tentou impedir que ela divulgasse os documentos?": "Eu tentei impedir um escândalo, não a verdade. Ela não entendia as consequências."
-        },
-        "renata_moura": {
-            "Elisa mencionou alguém pelo nome?": "Ela disse que Daniel aparecia nos registros, mas pediu que eu não o confrontasse.",
-            "Por que ela foi ao Hotel Mirante?": "Acreditava que encontraria ali a pessoa que estava alterando os arquivos."
-        }
-    };
-    return responses[request.characterId]?.[request.question] ||
+    return currentCase.interviewAnswers?.[request.characterId]?.[request.question] ||
         currentCase.interviews[request.characterId] ||
         "A pessoa não respondeu à pergunta.";
 }
@@ -1318,7 +1417,6 @@ function advanceDay() {
         day++;
         updateCaseView();
         deliverNotesForDay(day);
-        deliverContradictionsForDay(day);
         deliverEvidenceForDay(day);
         deliverDocumentsForDay(day);
         deliverInterviewAnswers();
@@ -1343,7 +1441,7 @@ function resetGame() {
 }
 
 function restoreNotes(saved) {
-    saved.notes.forEach((item) => {
+    saved.notes.filter((item) => !item.id?.startsWith("contradiction-")).forEach((item) => {
         const note = item.role === "evidence"
             ? createEvidenceCard(typeof item.content === "string" ? JSON.parse(item.content) : item.content, item.x, item.y, item.id)
             : item.role === "official-document"
@@ -1361,9 +1459,10 @@ function restoreNotes(saved) {
         note.style.transform = `rotate(${item.rotation}deg)`;
         note.style.zIndex = item.z;
         if (item.role === "evidence") note.dataset.evidenceId = JSON.parse(note.dataset.content).id;
+        if (item.fileId) note.dataset.fileId = item.fileId;
         if (item.inTrash) trashContent.appendChild(note);
     });
-    const byId = new Map([...document.querySelectorAll(".dynamic-note")].map((note) => [note.dataset.noteId, note]));
+    const byId = new Map([...document.querySelectorAll("[data-note-id]")].map((note) => [note.dataset.noteId, note]));
     connections = saved.connections.map(([from, to]) => ({ from: byId.get(from), to: byId.get(to) }))
         .filter((connection) => connection.from && connection.to);
     restoreInterviewSheet(saved.interviewSheet);
@@ -1394,6 +1493,8 @@ function init() {
     suspect2.querySelector(".text-black").textContent = currentCase.witness.name;
     suspect2.dataset.senderId = currentCase.witness.id;
     suspect2.dataset.content = `Foto de ${currentCase.witness.name}`;
+    suspect1.dataset.noteId = "photo-victim";
+    suspect2.dataset.noteId = "photo-witness";
     document.querySelectorAll(".board-item").forEach(makeDraggable);
     initPins();
     createNote("welcome", "Carta de iniciação", Math.min(450, window.innerWidth - 390), 300);
@@ -1407,6 +1508,7 @@ function init() {
         conclusionAttempts = Number.isInteger(saved.conclusionAttempts)
             ? Math.max(0, Math.min(3, saved.conclusionAttempts))
             : 3;
+        solved = Boolean(saved.solved);
         gameSettings = { ...gameSettings, ...(saved.settings || {}) };
         highestZ = saved.highestZ || highestZ;
         document.querySelectorAll(".dynamic-note").forEach((note) => note.remove());
@@ -1414,13 +1516,16 @@ function init() {
         updateCaseView();
     }
     applySettings();
+    if (solved) lockSolvedConclusion();
     if (conclusionAttempts < 3) updateAttemptMarkers();
     if (conclusionAttempts === 0) setTimeout(beginFailureSequence, 400);
-    document.getElementById("postit-pad").addEventListener("mousedown", (event) => {
+    const panelChecklist = document.querySelector("#conclusion-panel .evidence-checklist");
+    if (panelChecklist) panelChecklist.replaceWith(createEvidenceChecklist());
+    document.getElementById("postit-pad").addEventListener("pointerdown", (event) => {
         const note = createNote("player", "", 0, 0);
         startDragging(note, event, true);
     });
-    document.getElementById("trash-bin").addEventListener("mousedown", () => {
+    document.getElementById("trash-bin").addEventListener("pointerdown", () => {
         document.getElementById("trash-bin").style.transform = "scale(0.85)";
         setTimeout(() => { document.getElementById("trash-bin").style.transform = ""; }, 150);
         trashPanel.classList.toggle("hidden");
@@ -1450,6 +1555,7 @@ function init() {
         if (event.key === "Escape") togglePauseMenu();
     });
     document.getElementById("btn-resume-game").addEventListener("click", closePauseMenu);
+    document.getElementById("btn-restart-game").addEventListener("click", resetGame);
     document.getElementById("btn-close-pause-menu").addEventListener("click", closePauseMenu);
     const dismissalSignature = document.getElementById("dismissal-signature-input");
     const dismissalButton = document.getElementById("btn-sign-dismissal");
@@ -1478,7 +1584,7 @@ function init() {
         if (!event.target.matches("input, select, textarea")) return;
         updateConclusionChecklist(event);
     });
-    currentCase.characters.filter((item) => item.id !== "elisa_moura").forEach((character) => {
+    currentCase.characters.filter((item) => item.id !== currentCase.victim.id).forEach((character) => {
         [culprit, accomplice].forEach((select) => {
             const option = document.createElement("option");
             option.value = character.id;
